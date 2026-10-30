@@ -1,0 +1,257 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="pl.olejarka.trk702x"
+4    android:versionCode="159"
+5    android:versionName="0.6.146" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-feature
+11-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:4:5-6:35
+12        android:name="android.hardware.bluetooth_le"
+12-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:5:9-53
+13        android:required="true" />
+13-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:6:9-32
+14    <uses-feature
+14-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:7:5-9:35
+15        android:name="android.hardware.bluetooth"
+15-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:8:9-50
+16        android:required="true" />
+16-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:9:9-32
+17
+18    <uses-permission android:name="android.permission.INTERNET" />
+18-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:11:5-67
+18-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:11:22-64
+19
+20    <!-- Android 12+ -->
+21    <uses-permission
+21-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:14:5-16:58
+22        android:name="android.permission.BLUETOOTH_SCAN"
+22-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:15:9-57
+23        android:usesPermissionFlags="neverForLocation" />
+23-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:16:9-55
+24    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+24-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:17:5-76
+24-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:17:22-73
+25
+26    <!-- Lokalizacja (GPS dla Home Assistant) -->
+27    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+27-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:20:5-79
+27-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:20:22-76
+28    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+28-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:21:5-81
+28-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:21:22-78
+29
+30    <!-- Powiadomienia i usługa w tle -->
+31    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+31-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:24:5-77
+31-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:24:22-74
+32    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+32-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:25:5-77
+32-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:25:22-74
+33    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+33-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:26:5-87
+33-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:26:22-84
+34    <uses-permission android:name="android.permission.VIBRATE" />
+34-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:27:5-66
+34-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:27:22-63
+35
+36    <!-- Alarm wypadku: SMS i połączenie alarmowe -->
+37    <uses-permission android:name="android.permission.SEND_SMS" />
+37-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:30:5-67
+37-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:30:22-64
+38    <uses-permission android:name="android.permission.CALL_PHONE" />
+38-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:31:5-69
+38-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:31:22-66
+39
+40    <!-- Android 11 i starsze -->
+41    <uses-permission
+41-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:34:5-36:38
+42        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+42-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:35:9-65
+43        android:maxSdkVersion="28" />
+43-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:36:9-35
+44    <uses-permission
+44-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:37:5-39:38
+45        android:name="android.permission.BLUETOOTH"
+45-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:38:9-52
+46        android:maxSdkVersion="30" />
+46-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:39:9-35
+47    <uses-permission
+47-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:40:5-42:38
+48        android:name="android.permission.BLUETOOTH_ADMIN"
+48-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:41:9-58
+49        android:maxSdkVersion="30" />
+49-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:42:9-35
+50
+51    <!--
+52         Widoczność nawigacji (Android 11+ wymaga <queries>): wykrywanie zainstalowanych
+53         map przez getPackageInfo/resolveActivity oraz systemowe okienko
+54         „Otwórz za pomocą…" przy dotknięciu karty nawigacji.
+55    -->
+56    <queries>
+56-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:47:5-52:15
+57        <package android:name="com.google.android.apps.maps" />
+57-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:48:9-64
+57-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:48:18-61
+58        <package android:name="com.waze" />
+58-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:49:9-44
+58-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:49:18-41
+59        <package android:name="pl.neptis.yanosik.mobi.android" />
+59-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:50:9-66
+59-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:50:18-63
+60        <package android:name="cz.seznam.mapy" />
+60-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:51:9-50
+60-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:51:18-47
+61    </queries>
+62
+63    <permission
+63-->[androidx.core:core:1.16.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\fcb47eb03844648fb80b57ea0fd897a1\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
+64        android:name="pl.olejarka.trk702x.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+64-->[androidx.core:core:1.16.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\fcb47eb03844648fb80b57ea0fd897a1\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
+65        android:protectionLevel="signature" />
+65-->[androidx.core:core:1.16.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\fcb47eb03844648fb80b57ea0fd897a1\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
+66
+67    <uses-permission android:name="pl.olejarka.trk702x.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+67-->[androidx.core:core:1.16.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\fcb47eb03844648fb80b57ea0fd897a1\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
+67-->[androidx.core:core:1.16.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\fcb47eb03844648fb80b57ea0fd897a1\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
+68
+69    <application
+69-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:54:5-89:19
+70        android:allowBackup="true"
+70-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:55:9-35
+71        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+71-->[androidx.core:core:1.16.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\fcb47eb03844648fb80b57ea0fd897a1\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
+72        android:extractNativeLibs="false"
+73        android:icon="@mipmap/ic_launcher"
+73-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:56:9-43
+74        android:label="@string/app_name"
+74-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:57:9-41
+75        android:roundIcon="@mipmap/ic_launcher_round"
+75-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:58:9-54
+76        android:supportsRtl="true"
+76-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:59:9-35
+77        android:theme="@style/Theme.Olejarka"
+77-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:60:9-46
+78        android:usesCleartextTraffic="false" >
+78-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:61:9-45
+79        <activity
+79-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:63:9-73:20
+80            android:name="pl.olejarka.MainActivity"
+80-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:64:13-41
+81            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+81-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:65:13-87
+82            android:exported="true"
+82-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:68:13-36
+83            android:launchMode="singleTask"
+83-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:66:13-44
+84            android:screenOrientation="sensorLandscape" >
+84-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:67:13-56
+85            <intent-filter>
+85-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:69:13-72:29
+86                <action android:name="android.intent.action.MAIN" />
+86-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:70:17-69
+86-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:70:25-66
+87
+88                <category android:name="android.intent.category.LAUNCHER" />
+88-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:71:17-77
+88-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:71:27-74
+89            </intent-filter>
+90        </activity>
+91
+92        <service
+92-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:75:9-78:56
+93            android:name="pl.olejarka.RideService"
+93-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:76:13-40
+94            android:exported="false"
+94-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:77:13-37
+95            android:foregroundServiceType="dataSync" />
+95-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:78:13-53
+96        <service
+96-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:80:9-88:19
+97            android:name="pl.olejarka.NavNotifyListener"
+97-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:81:13-46
+98            android:exported="false"
+98-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:82:13-37
+99            android:label="Olejarka — podgląd nawigacji"
+99-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:83:13-57
+100            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+100-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:84:13-87
+101            <intent-filter>
+101-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:85:13-87:29
+102                <action android:name="android.service.notification.NotificationListenerService" />
+102-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:86:17-99
+102-->C:\Users\ALA\Desktop\olejarka-android\app\src\main\AndroidManifest.xml:86:25-96
+103            </intent-filter>
+104        </service>
+105
+106        <provider
+106-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+107            android:name="androidx.startup.InitializationProvider"
+107-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+108            android:authorities="pl.olejarka.trk702x.androidx-startup"
+108-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+109            android:exported="false" >
+109-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
+110            <meta-data
+110-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+111                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+111-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+112                android:value="androidx.startup" />
+112-->[androidx.emoji2:emoji2:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b9619153b7a5c15f42b6aadb87f679be\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+113            <meta-data
+113-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\ALA\.gradle\caches\8.11.1\transforms\3249b432ca0264d139dd4feda2f46487\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+114                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+114-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\ALA\.gradle\caches\8.11.1\transforms\3249b432ca0264d139dd4feda2f46487\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+115                android:value="androidx.startup" />
+115-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\ALA\.gradle\caches\8.11.1\transforms\3249b432ca0264d139dd4feda2f46487\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+116            <meta-data
+116-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+117                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+117-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+118                android:value="androidx.startup" />
+118-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+119        </provider>
+120
+121        <receiver
+121-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+122            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+122-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+123            android:directBootAware="false"
+123-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+124            android:enabled="true"
+124-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+125            android:exported="true"
+125-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+126            android:permission="android.permission.DUMP" >
+126-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+127            <intent-filter>
+127-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+128                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+128-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+128-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+129            </intent-filter>
+130            <intent-filter>
+130-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+131                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+131-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+131-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+132            </intent-filter>
+133            <intent-filter>
+133-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+134                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+134-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+134-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+135            </intent-filter>
+136            <intent-filter>
+136-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+137                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+137-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+137-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\ALA\.gradle\caches\8.11.1\transforms\b7e8a96ba6fb4bc7e6fc4d9d7c71e5d3\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+138            </intent-filter>
+139        </receiver>
+140    </application>
+141
+142</manifest>

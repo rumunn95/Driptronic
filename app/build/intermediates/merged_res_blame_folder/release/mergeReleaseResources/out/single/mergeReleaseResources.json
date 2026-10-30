@@ -1,0 +1,174 @@
+[
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_call_decline.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/ic_call_decline.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout-v21_notification_action.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-mdpi-v4_notification_bg_low_pressed.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-mdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_call_answer.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/ic_call_answer.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_notification_bg.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout_ime_base_split_test_activity.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout/ime_base_split_test_activity.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "pl.olejarka.app-main-47:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-mdpi-v4_notification_bg_normal_pressed.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-mdpi-v4/notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout_notification_template_part_chronometer.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_notification_bg_low.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-mdpi-v4_notification_bg_normal.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-mdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_call_answer_video.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/ic_call_answer_video.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-hdpi-v4_notification_bg_normal_pressed.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout-v21_notification_template_custom_big.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout-v21_notification_template_icon_group.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_call_answer_low.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/ic_call_answer_low.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_notification_tile_bg.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "pl.olejarka.app-main-47:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "pl.olejarka.app-main-47:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_launcher_background.xml.flat",
+        "source": "pl.olejarka.app-main-47:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-hdpi-v4_notification_bg_low_normal.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-hdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-xhdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-mdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-xhdpi-v4_notification_bg_normal_pressed.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-hdpi-v4_notification_oversize_large_icon_bg.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-hdpi-v4/notification_oversize_large_icon_bg.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-hdpi-v4_notification_bg_low_pressed.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout_custom_dialog.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-xhdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/color_vector_tint_color.xml.flat",
+        "source": "pl.olejarka.app-ui-release-37:/color/vector_tint_color.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/color_vector_tint_theme_color.xml.flat",
+        "source": "pl.olejarka.app-ui-release-37:/color/vector_tint_theme_color.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_splash_transparent.xml.flat",
+        "source": "pl.olejarka.app-main-47:/drawable/ic_splash_transparent.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout_ime_secondary_split_test_activity.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout/ime_secondary_split_test_activity.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout-v21_notification_action_tombstone.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_call_decline_low.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/ic_call_decline_low.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_ic_call_answer_video_low.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/ic_call_answer_video_low.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-hdpi-v4_notification_bg_normal.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-hdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-v21_notification_action_background.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/layout_notification_template_part_time.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable-xhdpi-v4_notification_bg_low_normal.9.png.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable-xhdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "pl.olejarka.app-release-46:/drawable_notification_icon_background.xml.flat",
+        "source": "pl.olejarka.app-core-1.16.0-39:/drawable/notification_icon_background.xml"
+    }
+]

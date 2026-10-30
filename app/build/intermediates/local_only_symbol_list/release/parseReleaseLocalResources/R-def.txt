@@ -1,0 +1,18 @@
+R_DEF: Internal format may change without notice
+local
+color accent
+color background
+color border
+color card
+color danger
+color hud_blue
+color muted
+color text
+color warn
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable ic_splash_transparent
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.Olejarka

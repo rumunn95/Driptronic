@@ -1,0 +1,3757 @@
+:root {
+  --bg: #0e1117;
+  --card: #161b22;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --border: #21262d;
+  --accent: #3fb950;
+  --accent-soft: rgba(63, 185, 80, 0.16);
+  --hud-blue: #3b82f6;
+  --on: #3fb950;
+  --off: #30363d;
+  --danger: #f85149;
+  --warn: #d29922;
+  --radius: 14px;
+  --header-h: 53px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1b1f24;
+    --muted: #5f6b7a;
+    --border: #e5e7eb;
+    --accent: #1a7f37;
+    --accent-soft: rgba(26, 127, 55, 0.12);
+    --hud-blue: #2563eb;
+    --on: #1a7f37;
+    --off: #cbd5e1;
+    --danger: #d1242f;
+    --warn: #9a6700;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0e1117;
+  --card: #1a2029;
+  --text: #f0f4f8;
+  --muted: #9aa6b2;
+  --border: #2a323d;
+  --accent: #2ee59d;
+  --accent-soft: rgba(46, 229, 157, 0.18);
+  --hud-blue: #4f9cf6;
+  --on: #2ee59d;
+  --off: #343c46;
+  --danger: #ff5d5d;
+  --warn: #f0b429;
+}
+
+:root[data-theme="light"] {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1b1f24;
+  --muted: #5f6b7a;
+  --border: #e5e7eb;
+  --accent: #1a7f37;
+  --accent-soft: rgba(26, 127, 55, 0.12);
+  --hud-blue: #2563eb;
+  --on: #1a7f37;
+  --off: #cbd5e1;
+  --danger: #d1242f;
+  --warn: #9a6700;
+}
+
+:root[data-theme="amoled"] {
+  --bg: #000000;
+  --card: #0d1219;
+  --text: #ffffff;
+  --muted: #b8c2cd;
+  --border: #313a45;
+  --accent: #2ee59d;
+  --accent-soft: rgba(46, 229, 157, 0.22);
+  --hud-blue: #5aa2ff;
+  --on: #2ee59d;
+  --off: #1c232d;
+  --danger: #ff6b61;
+  --warn: #fbbf24;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  max-width: 920px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: var(--header-h);
+  padding: 0 14px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+#headLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--on);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  transition: background 0.2s;
+}
+
+#dot.lost {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px rgba(248, 81, 73, 0.18);
+}
+
+#titles {
+  min-width: 0;
+  line-height: 1.2;
+}
+
+#title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#title .t-in {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#title.scroll .t-in {
+  animation: titleScroll 9s linear infinite;
+}
+
+@keyframes titleScroll {
+  0%, 12% { transform: translateX(0); }
+  88%, 100% { transform: translateX(var(--shift, -80px)); }
+}
+
+#subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Wskaźnik mocy sygnału BT — obok statusu połączenia po lewej */
+#btSig {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 15px;
+  padding: 0 4px;
+  color: var(--accent);
+}
+#btSig[hidden] {
+  display: none;
+}
+#btSig i {
+  width: 3px;
+  border-radius: 1px;
+  background: color-mix(in srgb, currentColor 25%, var(--border));
+}
+#btSig i:nth-child(1) { height: 4px; }
+#btSig i:nth-child(2) { height: 7px; }
+#btSig i:nth-child(3) { height: 10px; }
+#btSig i:nth-child(4) { height: 13px; }
+#btSig[data-bars="1"] i:nth-child(-n+1),
+#btSig[data-bars="2"] i:nth-child(-n+2),
+#btSig[data-bars="3"] i:nth-child(-n+3),
+#btSig[data-bars="4"] i:nth-child(-n+4) { background: currentColor; }
+#btSig[data-grade="weak"] { color: var(--warn); }
+#btSig[data-grade="none"] { color: var(--danger); }
+
+/* Ikonki statusu: GPS i Home Assistant — obok wskaźnika BLE */
+.sig-ic {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--muted);
+  opacity: .72;
+}
+.sig-ic[hidden] { display: none; }
+.sig-ic svg { width: 21px; height: 21px; display: block; }
+.sig-ic.ok { color: var(--accent); opacity: 1; }
+.sig-ic.warn { color: var(--warn); opacity: 1; }
+.sig-ic.err { color: var(--danger); opacity: 1; }
+
+#headActions {
+  flex: none;
+  display: flex;
+  gap: 6px;
+}
+
+/* Trwały status łączenia BLE — środek paska górnego (nie blokuje przycisków) */
+#hdrConn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 21;
+  max-width: 52%;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--danger) 16%, var(--card));
+  color: var(--text);
+  font-size: clamp(11px, 3.2vw, 13px);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+#hdrConn[hidden] {
+  display: none;
+}
+
+#benelli {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 33px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+#benelli svg {
+  flex: none;
+  color: var(--muted);
+}
+
+body.hud #benelli {
+  display: none;
+}
+
+@media (max-width: 430px) {
+  #benelli {
+    height: 32px;
+  }
+}
+
+@media (max-width: 430px) {
+  #title {
+    font-size: 14px;
+  }
+}
+
+/* ---------- Przyciski nagłówka ---------- */
+.hbtn {
+  flex: none;
+  width: 33px;
+  height: 33px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.hbtn:active {
+  transform: scale(0.95);
+}
+
+.hbtn.on {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+@media (max-width: 430px) {
+  .hbtn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* W trybie HUD przyciski nagłówka są prostokątne i szerokie (rękawiczki) */
+body.hud .hbtn {
+  width: 80px;
+  height: 27px;
+  border-radius: 5px;
+}
+
+body.hud #hud .hbtn {
+  width: 80px;
+  height: 27px;
+  border-radius: 5px;
+}
+
+/* ---------- BLE (GATT) ---------- */
+
+#bleBtn {
+  color: var(--muted);
+}
+
+#bleBtn[hidden] {
+  display: none;
+}
+
+/* Kłódka i motyw działają w każdym trybie (WiFi/AP/BLE/HUD), więc są zawsze widoczne.
+   #bleBtn pokazujemy tylko gdy BLE jest dostępne. */
+body:not(.ble-on):not(.hud) #bleBtn {
+  display: none;
+}
+
+/* AP toggle: widoczny tylko w HUD (BLE) */
+#apBtn {
+  display: none;
+  color: var(--muted);
+}
+
+body.ble-on #apBtn {
+  display: flex;
+}
+
+#apBtn[hidden] {
+  display: none;
+}
+
+#hudTheme {
+  display: none;
+  color: var(--muted);
+}
+
+body.ble-on #hudTheme {
+  display: flex;
+}
+
+#hudTheme[hidden] {
+  display: none;
+}
+
+#hudBtn[hidden] {
+  display: none;
+}
+
+#apBtn.on {
+  color: var(--warn);
+  border-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 14%, transparent);
+}
+
+#bleBtn.on {
+  color: #2f81f7;
+  border-color: #2f81f7;
+  background: rgba(47, 129, 247, 0.16);
+}
+
+#bleBtn.busy svg {
+  animation: blePulse 1s ease-in-out infinite;
+}
+
+@keyframes blePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+/* BLE toast — potwierdzenie wysyłki komendy */
+#bleToast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 60;
+  max-width: 92%;
+  padding: 9px 16px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#bleToast.show {
+  opacity: 1;
+}
+
+/* Popup informacji po zmianie trybu dawki — 4 s, dół-środek ekranu */
+#modeToast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(84px + env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(10px);
+  z-index: 90;
+  max-width: 86%;
+  padding: 11px 18px;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+#modeToast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* BLE: po połączeniu wyłącznie HUD — bez ustawień, w każdej orientacji */
+body.ble-on main,
+body.ble-on #ota,
+body.ble-on #footer,
+body.ble-on #headLeft,
+body.ble-on #benelli,
+body.ble-on #lock,
+body.ble-on #theme,
+body.ble-on #hudBtn {
+  display: none !important;
+}
+
+body.ble-on #hud {
+  display: flex;
+}
+
+/* W pionie: prośba o obrócenie telefonu zamiast ciasnego HUD */
+#portraitHint {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 24px;
+}
+
+@media (orientation: portrait) {
+  body.ble-on #hud {
+    display: none;
+  }
+  body.ble-on #portraitHint {
+    display: flex;
+  }
+}
+
+/* ---------- blokada przed przypadkowym resetem / zmianą ---------- */
+
+body.locked .mini,
+body.locked .minus,
+body.locked .plus,
+body.locked .sel,
+body.locked .switch,
+body.locked .act-btn,
+body.locked .stepper input {
+  pointer-events: none;
+  opacity: 0.4;
+  filter: grayscale(0.9);
+}
+
+/* AP-only + locked: Smaruj teraz widoczny, nie szary */
+body.locked.ap-only .pump-btn {
+  pointer-events: auto;
+  opacity: 1;
+  filter: none;
+}
+
+/* AP-only + locked: przycisk trybu jazdy blado-czerwony (nie szary) */
+body.locked.ap-only .act-btn.on {
+  pointer-events: none;
+  opacity: 0.6;
+  filter: grayscale(0.2);
+  color: var(--danger);
+  border-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 8%, transparent);
+}
+
+/* Przyciski resetu widać dopiero po odblokowaniu kłódki */
+body.locked .card.display .mini {
+  display: none;
+}
+
+/* ---------- modal potwierdzenia resetu ---------- */
+
+.confirm {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 24px;
+}
+
+.confirm[hidden] {
+  display: none;
+}
+
+.confirm-box {
+  width: 100%;
+  max-width: 320px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-box p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-actions button {
+  flex: 1;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.confirm-actions button:active {
+  transform: scale(0.96);
+}
+
+#confirmOk {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
+main {
+  padding: 0 12px;
+}
+
+.group-title {
+  margin: 22px 4px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.group-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 760px) {
+  .group-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1150px) {
+  .group-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 13px 14px;
+  min-width: 0;
+}
+
+.card.lp {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  transform: scale(0.985);
+}
+
+.card.lpreset,
+.card.lpreset * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+.card .row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 24px;
+  position: relative;
+  padding-right: 22px;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* Card title centered, but keeps clear of the "?" button (top-right) */
+.card .name {
+  text-align: center;
+  padding: 0 36px;
+  pointer-events: none;
+}
+
+/* Status i Stan group: titles aligned left, still clear of the "?" button */
+section[data-group="Status i Stan"] .card .name {
+  text-align: left;
+  padding: 0 36px 0 0;
+}
+
+/* "?" info button + description popup */
+.info-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 30;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.info-btn:hover,
+.info-btn:focus-visible,
+.info-btn.info-open {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+
+.info-pop {
+  position: absolute;
+  top: 34px;
+  right: 8px;
+  left: 8px;
+  z-index: 40;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  text-align: left;
+}
+
+.info-pop[hidden] {
+  display: none;
+}
+
+/* Sensors / text sensors: grid — nazwa elastyczna, wartość/unit oraz
+   przycisk resetu w stałej kolumnie (zawsze ta sama pozycja) */
+.card.display .row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto 34px;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.card.display .value {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  text-align: right;
+  line-height: 1.1;
+}
+
+.card.display .unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  align-self: end;
+  margin-bottom: 2px;
+}
+
+/* Text sensors: value under the name, wraps nicely */
+.card.display .subvalue {
+  margin-top: 6px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-variant-numeric: tabular-nums;
+}
+
+.card.warn .subvalue {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* Progress bar (percent sensors) */
+.bar {
+  margin-top: 12px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--off);
+  overflow: hidden;
+}
+
+/* Tiny reset button (inside sensor cards) */
+.card.display .mini {
+  width: 30px;
+  height: 30px;
+  justify-self: end;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.card.display .mini:active {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+/* Switch toggle */
+.switch {
+  position: relative;
+  flex: none;
+  width: 52px;
+  height: 32px;
+  margin-left: auto;
+  border: none;
+  border-radius: 16px;
+  background: var(--off);
+  cursor: pointer;
+  transition: background 0.18s;
+  padding: 0;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease;
+}
+
+.switch[aria-checked="true"] {
+  background: var(--on);
+}
+
+.switch[aria-checked="true"]::after {
+  transform: translateX(20px);
+}
+
+.switch:active {
+  opacity: 0.85;
+}
+
+/* Smaruj teraz - big action button with state */
+.card.pump {
+  padding: 0;
+  grid-column: 1 / -1;
+}
+
+.pump-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 64px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.pump-btn svg {
+  color: var(--accent);
+}
+
+.pump-btn:active {
+  transform: scale(0.99);
+}
+
+.pump-btn.pumping {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 28px var(--accent-soft);
+}
+
+.pump-btn.pumping svg {
+  color: #fff;
+  animation: pumpDrop 0.9s ease-in-out infinite;
+}
+
+.pump-btn.pumping .pump-label {
+  letter-spacing: 0.01em;
+}
+
+@keyframes pumpDrop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Akcje (Odpowietrzanie, Tryb jazdy) - obok siebie, łącznie jak przycisk Smaruj teraz */
+.act-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.act-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  height: 64px;
+  padding: 0 10px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.act-btn:active {
+  transform: scale(0.99);
+}
+
+.act-btn.on {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
+/* Buttons (button domain) */
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 12px;
+  height: 46px;
+  border: none;
+  border-radius: 11px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.action:active {
+  filter: brightness(0.9);
+  transform: scale(0.99);
+}
+
+/* Number stepper */
+.stepper {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stepper button {
+  flex: none;
+  width: 48px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.stepper button:active {
+  background: var(--accent-soft);
+}
+
+.stepper input {
+  flex: 1;
+  min-width: 0;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+
+.stepper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Calculated distance hint under number stepper */
+.km-hint {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Select dropdown (e.g. Tryb awaryjny) */
+.sel {
+  display: block;
+  width: 100%;
+  height: 46px;
+  margin-top: 12px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 20px, calc(100% - 13px) 20px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.sel:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* OTA */
+details#ota {
+  margin: 26px 16px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+}
+
+details#ota[hidden] {
+  display: none;
+}
+
+details#ota summary {
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+details#ota summary::before {
+  content: "▸ ";
+  color: var(--muted);
+}
+
+details#ota[open] summary::before {
+  content: "▾ ";
+}
+
+details#ota form {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px 14px;
+}
+
+details#ota input[type="file"] {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+details#ota button {
+  height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 11px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Log panel */
+:root {
+  --log-debug: #6cb6ff;
+  --log-info: #3fb950;
+  --log-warn: #d29922;
+  --log-error: #f85149;
+  --log-config: #bc8cff;
+  --log-other: #e6edf3;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --log-debug: #0969da;
+    --log-info: #1a7f37;
+    --log-warn: #9a6700;
+    --log-error: #cf222e;
+    --log-config: #8250df;
+    --log-other: #1f2328;
+  }
+}
+
+:root[data-theme="dark"] {
+  --log-debug: #6cb6ff;
+  --log-info: #3fb950;
+  --log-warn: #d29922;
+  --log-error: #f85149;
+  --log-config: #bc8cff;
+  --log-other: #e6edf3;
+}
+
+:root[data-theme="light"] {
+  --log-debug: #0969da;
+  --log-info: #1a7f37;
+  --log-warn: #9a6700;
+  --log-error: #cf222e;
+  --log-config: #8250df;
+  --log-other: #1f2328;
+}
+
+#logOverlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  max-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transform: translateY(0);
+  visibility: visible;
+  transition:
+    transform 0.25s ease,
+    visibility 0.25s;
+}
+
+#logOverlay.collapsed {
+  transform: translateY(100%);
+  visibility: hidden;
+}
+
+#logHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+#logTitle {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#logActions {
+  display: flex;
+  gap: 8px;
+}
+
+#logActions button {
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+#logActions button:active {
+  background: var(--accent-soft);
+}
+
+#logBox {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 10px 14px;
+  overflow: auto;
+  font: 12px/1.55 ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--log-other);
+}
+
+#logBox > div {
+  min-height: 1.55em;
+}
+
+.l-0_36,
+.l-0_37 {
+  color: var(--log-debug);
+}
+
+.l-0_32 {
+  color: var(--log-info);
+}
+
+.l-0_33,
+.l-1_33 {
+  color: var(--log-warn);
+}
+
+.l-0_31,
+.l-1_31 {
+  color: var(--log-error);
+}
+
+.l-0_35 {
+  color: var(--log-config);
+}
+
+footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+#sysStat {
+  font-variant-numeric: tabular-nums;
+}
+
+#sysStat.warn {
+  color: var(--warn);
+}
+
+#sysStat.crit {
+  color: var(--danger);
+}
+
+/* ---------- HUD: dashboard horyzontalny ---------- */
+
+#otaProg {
+  margin-top: 12px;
+}
+
+#otaProgBar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--off);
+  overflow: hidden;
+}
+
+#otaProgBar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.15s ease;
+}
+
+#otaProgTxt {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* HUD wyłącza dashboard tylko w landscape */
+@media (orientation: landscape) {
+  body.hud main,
+  body.hud #ota,
+  body.hud #footer,
+  body.hud #headLeft,
+  body.hud #lock {
+    display: none;
+  }
+}
+
+#hud {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 15;
+  display: none;
+  flex-direction: column;
+  padding: 14px 20px calc(16px + env(safe-area-inset-bottom));
+  background: var(--bg);
+}
+
+/* body.hud #hud { display: flex } przeniesione do @media (orientation: landscape) */
+
+#hudVer {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.hud-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  min-height: 0;
+}
+
+.hud-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+
+.hud-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 230px;
+}
+
+.hud-bar-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-bar-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hud-bar-track {
+  flex: 1;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--off);
+  overflow: hidden;
+}
+
+.hud-bar-track i {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--accent);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.hud-bar-val {
+  font-size: 13px;
+  font-weight: 800;
+  min-width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-speed {
+  position: relative;
+  width: 230px;
+  height: 210px;
+  flex: none;
+}
+
+.hud-progress-gauge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hud-progress-track {
+  fill: none;
+  stroke: var(--hud-blue);
+  stroke-width: 16;
+  stroke-linecap: round;
+  opacity: 0.25;
+}
+
+.hud-progress-fill {
+  fill: none;
+  stroke: var(--hud-blue);
+  stroke-width: 16;
+  stroke-linecap: round;
+  stroke-dasharray: 0 100;
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.hud-progress-tag {
+  position: absolute;
+  left: 50%;
+  top: 89%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 3;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--hud-blue);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hud-progress-tag svg {
+  width: 0.9em;
+  height: 0.9em;
+  flex: none;
+}
+
+.hud-speed-gauge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: scale(0.72);
+  transform-origin: center;
+}
+
+.hud-speed-track {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 13;
+  stroke-linecap: round;
+  opacity: 0.25;
+}
+
+.hud-speed-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 13;
+  stroke-linecap: round;
+  stroke-dasharray: 0 100;
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.hud-speed-read {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+#hudSpeed {
+  font-size: 132px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+#hudSpeed.tri {
+  font-size: 92px;
+}
+
+.hud-speed-unit {
+  position: absolute;
+  left: 50%;
+  top: 77%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.hud-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.hud-counts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.hud-counts.hud-obd {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hud-counts.hud-obd .hud-count span {
+  font-size: 22px;
+}
+
+.hud-count {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  text-align: center;
+  min-width: 0;
+}
+
+.hud-count label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hud-count span {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-count small {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.hud-foot {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hud-foot .hud-meta {
+  grid-column: 1 / 3;
+}
+
+.hud-temp {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  font-size: 17px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-temp svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--muted);
+}
+
+.hud-temp[hidden] {
+  display: none;
+}
+
+.hud-meta {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.5;
+  min-width: 0;
+}
+
+#hudAwaryjne {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--danger);
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+#hudAwaryjne[hidden] {
+  display: none;
+}
+
+.hud-pump {
+  grid-column: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 10px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.hud-pump-label {
+  white-space: nowrap;
+}
+
+.hud-pump:active {
+  transform: scale(0.98);
+}
+
+.hud-pump.pumping {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 28px var(--accent-soft);
+}
+
+@media (orientation: landscape) {
+  body.hud #hud {
+    display: flex;
+  }
+  #hud {
+    padding: 8px 22px calc(10px + env(safe-area-inset-bottom));
+  }
+  .hud-body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 32px;
+    padding-left: 396px;
+  }
+  .hud-left {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .hud-bars {
+    width: 360px;
+  }
+  .hud-speed {
+    width: 330px;
+    height: 300px;
+    flex: none;
+  }
+  .hud-progress-track,
+  .hud-progress-fill,
+  .hud-speed-track,
+  .hud-speed-fill {
+    stroke-width: 14;
+  }
+  #hudSpeed {
+    font-size: 108px;
+  }
+  #hudSpeed.tri {
+    font-size: 76px;
+  }
+  .hud-speed-unit {
+    font-size: 24px;
+  }
+  .hud-progress-tag {
+    font-size: 20px;
+    top: 90%;
+  }
+  .hud-panel {
+    flex: 1;
+    max-width: 560px;
+    gap: 14px;
+  }
+  .hud-count span {
+    font-size: 32px;
+  }
+  .hud-foot {
+    margin-top: 6px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 420px) {
+  .hud-body {
+    padding-left: 326px;
+  }
+  .hud-bars {
+    width: 290px;
+    gap: 6px;
+  }
+  .hud-bar-track {
+    height: 19px;
+    border-radius: 10px;
+  }
+  .hud-bar-label {
+    font-size: 11px;
+  }
+  .hud-bar-val {
+    font-size: 12px;
+    min-width: 34px;
+  }
+  .hud-speed {
+    width: 250px;
+    height: 227px;
+  }
+  .hud-progress-track,
+  .hud-progress-fill,
+  .hud-speed-track,
+  .hud-speed-fill {
+    stroke-width: 12;
+  }
+  #hudSpeed {
+    font-size: 84px;
+  }
+  #hudSpeed.tri {
+    font-size: 60px;
+  }
+  .hud-speed-unit {
+    font-size: 20px;
+  }
+  .hud-progress-tag {
+    font-size: 16px;
+    top: 90%;
+  }
+  .hud-count {
+    padding: 7px 8px;
+  }
+  .hud-count span {
+    font-size: 23px;
+  }
+  .hud-count small {
+    font-size: 10px;
+  }
+  .hud-pump {
+    height: 46px;
+    padding: 0 6px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+  .hud-col {
+    gap: 8px;
+  }
+  .hud-temp {
+    height: 46px;
+    padding: 0 10px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+  .hud-meta {
+    font-size: 13px;
+  }
+}
+
+.ble-auto-btn {
+  position: fixed;
+  left: 50%;
+  bottom: 96px;
+  transform: translateX(-50%);
+  z-index: 999;
+  background: var(--accent, #3fb950);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 20px 44px;
+  font-size: 19px;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+/* HUD BLE — wierny port zatwierdzonego projektu: OBD | prędkościomierz | olejarka. */
+@media (orientation: landscape) {
+  body.hud #hud .hud-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+    justify-content: center;
+    padding: 10px 18px 22px;
+    transform: translateY(-15px);
+  }
+
+  body.hud #hud .hud-side {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    min-width: 0;
+    /* Kotwica dla znaczników kart (hud-col-pips) — wiszą w linii podpisu kolumny. */
+    position: relative;
+  }
+
+  body.hud #hud .hud-side h2 {
+    margin: 0 0 2px;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.11em;
+    text-align: center;
+  }
+
+  body.hud #hud .hud-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  body.hud #hud .hud-count {
+    min-height: 96px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(145deg, var(--card), color-mix(in srgb, var(--card) 55%, #000));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  body.hud #hud .hud-count.wide {
+    grid-column: 1 / -1;
+  }
+
+  body.hud #hud .hud-trip {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  body.hud #hud .hud-trip .hud-count {
+    position: absolute;
+    bottom: 0;
+    min-height: 26px;
+    padding: 2px 14px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  body.hud #hud .hud-trip .hud-count:first-child {
+    left: 25%;
+    transform: translateX(-50%);
+  }
+  body.hud #hud .hud-trip .hud-count:last-child {
+    left: 75%;
+    transform: translateX(-50%);
+  }
+  body.hud #hud .hud-trip .hud-count label {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+  body.hud #hud .hud-trip .hud-count span {
+    font-size: 26px;
+    line-height: 1;
+    margin: 1px 0 0;
+  }
+  body.hud #hud .hud-trip .hud-count small {
+    font-size: 9px;
+  }
+
+  body.hud #hud .hud-tilt {
+    position: absolute;
+    left: 50%;
+    bottom: 54px;
+    transform: translateX(-50%);
+    width: 100%;
+    pointer-events: none;
+  }
+  body.hud #hud .hud-tilt[hidden] { display: none; }
+  body.hud #hud .hud-tilt-vu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+  }
+  body.hud #hud .hud-vu {
+    flex: 1;
+    display: flex;
+    gap: 3px;
+    height: 12px;
+  }
+  body.hud #hud .hud-vu-l {
+    flex-direction: row-reverse;
+  }
+  body.hud #hud .hud-vu-r {
+    flex-direction: row;
+  }
+  body.hud #hud .hud-vu .vu-seg {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    background: rgba(148, 163, 184, 0.18);
+    transition: background 90ms linear, box-shadow 90ms linear;
+  }
+  body.hud #hud .hud-vu .vu-seg.on {
+    background: var(--accent);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  body.hud #hud .hud-vu .vu-seg.on.mid {
+    background: var(--warn);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--warn) 60%, transparent);
+  }
+  body.hud #hud .hud-vu .vu-seg.on.hot {
+    background: var(--danger);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--danger) 70%, transparent);
+  }
+  body.hud #hud .hud-tilt-vu .vu-mid {
+    flex: none;
+    width: 2px;
+    height: 14px;
+    margin: 0 2px;
+    border-radius: 1px;
+    background: color-mix(in srgb, var(--text) 65%, transparent);
+  }
+  body.hud #hud .hud-tilt-vu .hud-tilt-peak-val {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 2px);
+    transform: translateX(-50%);
+    padding: 1px 5px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: 0;
+    transition: left 100ms ease-out, opacity 200ms ease-out;
+    z-index: 2;
+  }
+  body.hud #hud .hud-tilt-vu .hud-tilt-peak-val.show {
+    opacity: 1;
+  }
+  body.hud #hud .hud-tilt .hud-tilt-read {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 22px;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    pointer-events: none;
+  }
+  body.hud #hud .hud-tilt .hud-tilt-read b#hudTiltVal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: 800;
+    text-align: center;
+    white-space: nowrap;
+  }
+  body.hud #hud .hud-tilt .hud-tilt-dir {
+    position: absolute;
+    left: calc(50% + 18px);
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    display: none;
+  }
+  body.hud #hud .hud-tilt-read.warn b#hudTiltVal,
+  body.hud #hud .hud-tilt-read.warn .hud-tilt-dir { color: var(--warn); }
+  body.hud #hud .hud-tilt-read.hot b#hudTiltVal,
+  body.hud #hud .hud-tilt-read.hot .hud-tilt-dir { color: var(--danger); }
+
+  body.hud #hud .hud-count label {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+
+  body.hud #hud .hud-count span {
+    font-size: 31px;
+    line-height: 1.1;
+    margin: 9px 0 3px;
+  }
+
+  body.hud #hud .hud-count small {
+    font-size: 12px;
+  }
+
+  body.hud #hud .hud-pump {
+    grid-column: 1 / -1;
+    height: 96px;
+    min-height: 96px;
+    border: 1px solid #39764e;
+    border-radius: 18px;
+    background: #17251d;
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  }
+
+  body.hud #hud .hud-pump.pumping {
+    background: #1c2f22;
+    color: var(--accent);
+  }
+
+  body.hud #hud .hud-mode {
+    grid-column: 1 / -1;
+    height: 96px;
+    min-height: 96px;
+    border: 1px solid #4a7a94;
+    border-radius: 18px;
+    background: #10202a;
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  body.hud #hud .hud-mode-label {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  body.hud #hud .hud-mode-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  body.hud #hud .hud-mode.rain {
+    border-color: #2f81b8;
+    background: #0d2a3a;
+    color: #7fd0ff;
+  }
+
+  /* Feedback dotknięcia — identyczny jak na „Smaruj teraz" (.hud-pump:active),
+     żeby dotknięcie przycisku Tryb było odczuwalne również bez połączenia BLE. */
+  body.hud #hud .hud-mode:active {
+    transform: scale(0.98);
+  }
+
+  /* ---- Tryb jasny: HUD — orientacja, przechył, przyciski ---- */
+  :root[data-theme="light"] body.hud #hud .hud-vu .vu-seg {
+    background: rgba(100, 116, 139, 0.22);
+  }
+  :root[data-theme="light"] body.hud #hud .hud-tilt-vu .vu-mid {
+    background: #4b5563;
+  }
+  :root[data-theme="light"] body.hud #hud .hud-tilt .hud-tilt-read,
+  :root[data-theme="light"] body.hud #hud .hud-tilt .hud-tilt-read b#hudTiltVal {
+    color: #111827;
+  }
+  :root[data-theme="light"] body.hud #hud .hud-tilt .hud-tilt-read b#hudTiltVal {
+    font-size: 22px;
+  }
+  :root[data-theme="light"] body.hud #hud .hud-tilt .hud-tilt-dir {
+    font-size: 12px;
+  }
+  :root[data-theme="light"] body.hud #hud .hud-pump {
+    background: #e8f3ec;
+    border-color: #9dc4a9;
+    color: #14532d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  :root[data-theme="light"] body.hud #hud .hud-pump.pumping {
+    background: #d8eadd;
+  }
+  :root[data-theme="light"] body.hud #hud .hud-mode {
+    background: #e7f0f8;
+    border-color: #a5c3d9;
+    color: #0c4a6e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  :root[data-theme="light"] body.hud #hud .hud-mode.rain {
+    background: #d9ecf9;
+    border-color: #7fb2d0;
+    color: #075985;
+  }
+  :root[data-theme="light"] body.hud #hud .hud-mode .hud-mode-sub,
+  :root[data-theme="light"] body.hud #hud .hud-mode.rain .hud-mode-sub {
+    color: #4b6478;
+  }
+
+  body.hud #hud .hud-center {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  body.hud #hud .hud-vbar {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    pointer-events: none;
+    overflow: visible;
+  }
+  body.hud #hud .hud-vbar[hidden] { display: none; }
+  body.hud #hud .hud-vbar-temp { left: 0; }
+  body.hud #hud .hud-vbar-fuel { right: 0; }
+  body.hud #hud .hud-vbar-icon {
+    position: absolute;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    color: var(--muted);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+    overflow: visible;
+    display: block;
+    z-index: 3;
+  }
+  body.hud #hud .hud-vbar-temp .hud-vbar-icon { left: 14px; top: -22px; width: 22px; height: 22px; }
+  body.hud #hud .hud-vbar-fuel .hud-vbar-icon { right: 12px; top: -22px; width: 22px; height: 22px; pointer-events: auto; }
+  body.hud #hud .hud-vbar-temp .hud-vbar-track { left: 0; top: 0; }
+  body.hud #hud .hud-vbar-fuel .hud-vbar-track { right: 0; top: 0; }
+  body.hud #hud .hud-vbar-track {
+    position: absolute;
+    bottom: 2px;
+    width: 10px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(148, 163, 184, 0.06), rgba(148, 163, 184, 0.16));
+    border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+  body.hud #hud .hud-vbar-temp .hud-vbar-track { left: 0; top: 0; }
+  body.hud #hud .hud-vbar-fuel .hud-vbar-track { right: 0; top: 0; }
+  body.hud #hud .hud-vbar-track::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: repeating-linear-gradient(to bottom, transparent 0 12px, rgba(148, 163, 184, 0.4) 12px 13px);
+  }
+  body.hud #hud .hud-vbar-track::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+  }
+  body.hud #hud .hud-vbar-val {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 3px);
+    transform: translateX(-50%);
+    padding: 1px 5px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+    z-index: 2;
+  }
+  body.hud #hud .hud-vbar-val.show {
+    opacity: 1;
+  }
+  body.hud #hud .hud-vbar-fuel .hud-vbar-val {
+    left: -19px;
+    right: auto;
+    transform: none;
+    text-align: left;
+    top: auto;
+    bottom: 0;
+  }
+  body.hud #hud .hud-vbar-temp .hud-vbar-val {
+    right: -16px;
+    left: auto;
+    transform: none;
+    text-align: left;
+    top: auto;
+    bottom: 0;
+  }
+
+  body.hud #hud .hud-vbar-fill {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 0%;
+    border-radius: 5px;
+    transition: height 180ms ease-out;
+  }
+
+  body.hud #hud .hud-center-head {
+    margin: 0;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+  }
+
+  body.hud #hud .hud-center-head span {
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  body.hud #hud .hud-center-head b {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  body.hud #hud .hud-center-head .hud-z-tag {
+    font-size: 11px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  body.hud #hud .hud-speed {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: min(100%, calc(100vh - var(--header-h) - 46px));
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+  }
+
+  body.hud #hud .hud-gauge {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body.hud #hud .hud-side-track {
+    fill: none;
+    stroke: var(--off);
+    stroke-width: 44;
+    stroke-linecap: round;
+  }
+
+  body.hud #hud .hud-load-fill,
+  body.hud #hud .hud-throttle-fill {
+    fill: none;
+    stroke-width: 44;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+    transition: stroke-dasharray 160ms ease-out;
+  }
+
+  body.hud #hud .hud-load-fill {
+    stroke: var(--warn);
+    filter: drop-shadow(0 0 6px rgba(229, 160, 81, 0.6));
+  }
+
+  body.hud #hud .hud-throttle-fill {
+    stroke: var(--accent);
+    filter: drop-shadow(0 0 6px rgba(112, 212, 119, 0.6));
+  }
+
+  body.hud #hud .hud-speed-track {
+    fill: none;
+    stroke: var(--off);
+    stroke-width: 12;
+    stroke-linecap: round;
+  }
+
+  body.hud #hud .hud-progress-track {
+    fill: none;
+    stroke: var(--off);
+    stroke-width: 16;
+    stroke-linecap: round;
+  }
+
+  body.hud #hud .hud-speed-fill {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+    filter: drop-shadow(0 0 6px rgba(85, 200, 114, 0.6));
+  }
+
+  body.hud #hud .hud-progress-fill {
+    fill: none;
+    stroke: var(--hud-blue);
+    stroke-width: 16;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+    filter: drop-shadow(0 0 5px rgba(107, 212, 208, 0.53));
+  }
+
+  body.hud #hud .hud-speed-read {
+    position: absolute;
+    left: 50%;
+    top: 68%;
+    width: 170px;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    text-align: center;
+  }
+
+  body.hud #hud .hud-speed-read #hudSpeed {
+    display: block;
+    font-size: clamp(58px, 6.5vw, 90px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  body.hud #hud .hud-speed-read #hudSpeed.tri {
+    font-size: clamp(45px, 5.5vw, 75px);
+  }
+
+  body.hud #hud .hud-speed-read .hud-speed-unit {
+    position: static;
+    display: block;
+    margin-top: 8px;
+    font-size: 21px;
+    color: var(--muted);
+    transform: translateX(10px);
+  }
+
+  body.hud #hud .hud-progress-tag {
+    position: absolute;
+    top: calc(6% - 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: block;
+    color: var(--muted);
+    letter-spacing: 0.13em;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  body.hud #hud .hud-progress-tag b {
+    display: block;
+    color: var(--hud-blue);
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  body.hud #hud .hud-arc-label {
+    position: absolute;
+    bottom: 16%;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  body.hud #hud .hud-arc-load {
+    left: 0%;
+    bottom: 12%;
+    transform: translateX(-20px);
+    color: var(--warn);
+  }
+
+  body.hud #hud .hud-arc-throttle {
+    right: 0%;
+    bottom: 12%;
+    transform: translateX(20px);
+    color: var(--accent);
+  }
+
+  body.hud #hud .hud-left,
+  body.hud #hud .hud-panel {
+    display: none;
+  }
+}
+
+.settings-group {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin: 10px 0;
+  background: color-mix(in srgb, var(--card) 40%, var(--bg) 60%);
+  overflow: hidden;
+}
+
+.settings-group summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 18px;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  user-select: none;
+  -webkit-user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.settings-group summary::after {
+  content: "▾";
+  color: var(--accent);
+  font-size: 16px;
+  transition: transform .18s ease;
+  transform: rotate(-90deg);
+  flex: none;
+}
+
+.settings-group[open] summary::after {
+  transform: rotate(0deg);
+}
+
+.settings-group summary:active {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+#settings .settings-group > *:not(summary) {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.settings-group + .settings-group {
+  margin-top: 18px;
+}
+
+#settings .settings-group h2 {
+  margin: 14px 0 4px;
+  padding-top: 14px;
+  border-top: 1px dashed color-mix(in srgb, var(--border) 70%, transparent);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+#settings .settings-group h2:first-child {
+  padding-top: 12px;
+  border-top: none;
+}
+
+#settings .settings-group .setting-row {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .22);
+}
+
+#settings .settings-group .setting-hint {
+  color: var(--muted);
+  text-align: left;
+  font-weight: 500;
+  grid-column: auto;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+/* Znacznik ostatniej synchronizacji zegara bije regułę grid-column: auto powyżej. */
+#settings .settings-group .setting-hint.date-sync-info {
+  grid-column: 1 / -1;
+}
+
+#settings .settings-group .date-sync-actions .setting-hint.date-sync-info {
+  grid-column: 2;
+  text-align: left;
+}
+
+#settings .settings-group .settings-actions,
+#settings .settings-group .setting-row {
+  margin: 6px 0;
+}
+
+#settings .settings-group .settings-lock {
+  margin-bottom: 4px;
+}
+
+#settings .settings-group .settings-actions button,
+#settings .settings-group .setting-controls button {
+  border-color: color-mix(in srgb, var(--text) 22%, var(--border));
+  background: color-mix(in srgb, var(--off) 70%, var(--card));
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+}
+
+#settings .settings-group .settings-actions button {
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 48px;
+  line-height: 1.2;
+  padding: 8px 10px;
+}
+
+#settings .settings-group .setting-controls .setting-line button {
+  min-height: 48px;
+  min-width: 56px;
+  font-size: 24px;
+}
+
+#settings .settings-group .setting-row > button {
+  background: color-mix(in srgb, var(--accent) 12%, var(--off));
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  color: var(--text);
+}
+
+#settings .settings-group .setting-row > button:active,
+#settings .settings-group .settings-actions button:active,
+#settings .settings-group .setting-controls button:active {
+  background: color-mix(in srgb, var(--accent) 34%, var(--off));
+}
+
+#settings .settings-group .setting-label {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#settings .settings-group .setting-value output,
+#settings .settings-group .setting-line output {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+#settings .settings-group .setting-tappable {
+  background: color-mix(in srgb, var(--accent) 16%, var(--off));
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--border));
+  color: var(--text);
+}
+
+#settings .settings-group .setting-tappable.on {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+body.native.settings-offline #settings button,
+body.native.settings-offline #settings .setting-tappable,
+body.native.settings-offline #settings .cal-input {
+  opacity: .45;
+  filter: grayscale(.75);
+  cursor: default;
+  transform: none;
+}
+
+body.native.settings-offline #settings button:active,
+body.native.settings-offline #settings .setting-tappable:active {
+  background: inherit;
+  transform: none;
+}
+
+.settings-offline-hint {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--muted);
+}
+
+:root[data-theme="amoled"] .settings-group {
+  background: color-mix(in srgb, var(--card) 60%, var(--bg));
+  border-color: #3a434f;
+}
+
+:root[data-theme="amoled"] .settings-group summary {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-bottom-color: #3a434f;
+}
+
+:root[data-theme="amoled"] .settings-group summary::after {
+  color: var(--accent);
+}
+
+:root[data-theme="amoled"] #settings .settings-group .setting-row {
+  background: color-mix(in srgb, var(--card) 75%, var(--bg));
+  border-color: #343d48;
+}
+
+:root[data-theme="amoled"] #settings .settings-group h2 {
+  border-top-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+:root[data-theme="amoled"] #settings .settings-group .settings-actions button,
+:root[data-theme="amoled"] #settings .settings-group .setting-controls button {
+  background: color-mix(in srgb, var(--off) 55%, var(--card));
+  border-color: #3a434f;
+}
+
+:root[data-theme="amoled"] #settings .settings-group .setting-row > button {
+  background: color-mix(in srgb, var(--accent) 22%, var(--off));
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+/* ---------- Responsywność: skrajne szerokości telefonów ---------- */
+
+/* Bardzo szerokie ekrany (foldable/tablet w landscape): trzymaj HUD w znośnej szerokości */
+@media (min-width: 1280px) {
+  body.hud #hud .hud-body {
+    width: 100%;
+    max-width: min(1180px, 100vw);
+    margin: 0 auto;
+  }
+}
+
+/* Wąskie landscape: zacieśnij sęki i karty, zachowaj proporcje siatki */
+@media (orientation: landscape) and (max-width: 700px) {
+  body.hud #hud .hud-body {
+    gap: 10px;
+  }
+  body.hud #hud .hud-side {
+    gap: 8px;
+  }
+  body.hud #hud .hud-data-grid {
+    gap: 8px;
+  }
+  html body.hud #hud .hud-mode,
+  html body.hud #hud .hud-pump,
+  html body.hud #hud .hud-side.with-mode > .hud-mode,
+  html body.hud #hud .hud-side.with-mode > .hud-pump {
+    height: 76px;
+    min-height: 76px;
+  }
+  body.hud #hud .hud-count {
+    min-height: 84px;
+  }
+  body.hud #hud .hud-count span {
+    font-size: 26px;
+  }
+}
+
+/* Ekstremalnie wąskie: boczna siatka leje się w kolumnę, mniejsze fonty */
+@media (orientation: landscape) and (max-width: 600px) {
+  body.hud #hud .hud-data-grid {
+    grid-template-columns: 1fr;
+  }
+  body.hud #hud .hud-count span {
+    font-size: 24px;
+  }
+  body.hud #hud .hud-count.small span {
+    font-size: 21px;
+  }
+  body.hud #hud .hud-speed-read #hudSpeed {
+    font-size: clamp(48px, 8vw, 84px);
+  }
+  body.hud #hud .hud-speed-read #hudSpeed.tri {
+    font-size: clamp(40px, 7vw, 70px);
+  }
+}
+
+/* Wąskie telefony w pionie: zmniejsz marginesy ustawień, by nie przelewać */
+@media (max-width: 340px) {
+  body.native .settings-scroll {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+/* ---------- Kolumna OBD: Podgląd nawigacji (powiadomienia Maps/Yanosik/Mapy.com) ---------- */
+body.hud #hud .hud-data-grid[hidden],
+body.hud #hud .hud-nav[hidden] {
+  display: none !important;
+}
+
+/* Przełączanie kolumny gestem (swipe w pionie): blokujemy przejęcie ruchu palca
+   przez przeglądarkę (scroll/overscroll strony) — również na karcie nawigacji,
+   żeby gest dochodził do JS zamiast ginąć w pointercancel. Kliknięcia (tap)
+   działają normalnie. */
+body.hud #hud .hud-obd-side,
+body.hud #hud .hud-obd-side .hud-nav-card {
+  touch-action: none;
+}
+
+/* Lewa kolumna w trybie nawigacji: karta rozciąga się na pełną wysokość kolumny,
+   a rząd przycisków stoi przy dolnej krawędzi — równo z kolumną OLEJARKI.
+   Kolumna jest w trybie nawigacji gridem 2-wierszowym: nagłówek + komórka, w
+   której NARAZ stoją (nakładają się) przezroczysta siatka OBD i karta
+   nawigacji. Dzięki temu siatka zachowuje geometrię, więc znaczniki dwóch kart
+   wiszą dokładnie w tej samej szczelinie między rzędami co w trybie telemetrii. */
+body.hud #hud .hud-side.nav-col {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 12px;
+}
+
+body.hud #hud .hud-side.nav-col > h2 {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+body.hud #hud .hud-side.nav-col > .hud-data-grid {
+  grid-row: 2;
+  grid-column: 1;
+  align-self: start;
+  z-index: 4;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.hud #hud .hud-side.nav-col > .hud-nav {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+body.hud #hud .hud-side.nav-col .hud-col-pips {
+  visibility: visible;
+}
+
+body.hud #hud .hud-side.nav-col .hud-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+/* Karta w stylu kafelków HUD — wypełnia miejsce kafelków telemetrii. */
+body.hud #hud .hud-nav-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--card), color-mix(in srgb, var(--card) 55%, #000));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  padding: 14px;
+  text-align: center;
+  overflow: hidden;
+}
+
+body.hud #hud .hud-nav-arrow {
+  font-size: 64px;
+  line-height: 1;
+  color: var(--accent, #3fb950);
+}
+
+body.hud #hud .hud-nav-text {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+body.hud #hud .hud-nav-sub {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Stan „brak nawigacji": spokojny komunikat zamiast strzałki. */
+body.hud #hud .hud-nav-card.empty .hud-nav-arrow,
+body.hud #hud .hud-nav-card.empty .hud-nav-sub {
+  display: none;
+}
+
+body.hud #hud .hud-nav-card.empty .hud-nav-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* Stan „brak dostępu do powiadomień": karta tłumaczy, co zrobić — powiadomienia
+   nawigacji dotrą tu dopiero po włączeniu uprawnienia w systemie. */
+body.hud #hud .hud-nav-card.no-perm .hud-nav-arrow {
+  display: none;
+}
+
+body.hud #hud .hud-nav-card.no-perm .hud-nav-text {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--warn);
+}
+
+body.hud #hud .hud-nav-card.no-perm .hud-nav-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Karta nawigacji jest sama w sobie przyciskiem: dotknięcie otwiera okienko
+   wyboru zainstalowanych nawigacji (bez dodatkowych przycisków pod spodem). */
+body.hud #hud .hud-nav-card.tappable {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+body.hud #hud .hud-nav-card.tappable:active {
+  opacity: 0.8;
+}
+
+/* Znaczniki kolumny z gestem (OBD ↔ nawigacja): dwa pionowe paski na lewej
+   krawędzi, aktywna podświetlona kolorem. Czysto nakładkowe (absolute) — niczego
+   nie ściskają; kotwicą jest kolumna (position: relative), a znaczniki wiszą
+   w linii podpisu kolumny („OBD"/„NAWIGACJA") — nie nachodzą na kafelki ani na
+   kartę nawigacji. Stan aktywny steruje istniejąca klasa .nav-col. */
+body.hud #hud .hud-data-grid {
+  position: relative;
+}
+
+body.hud #hud .hud-col-pips {
+  /* Czysta nakładka na lewej krawędzi kolumny, w linii podpisu (środek h2
+     to 8 px od góry kolumny; pipsy mają 2×5 px + 2 px odstępu = 12 px). */
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+body.hud #hud .hud-col-pips .pip {
+  width: 4px;
+  height: 5px;
+  border-radius: 2px;
+  background: var(--border);
+  opacity: 0.55;
+  transition: background 0.25s ease, opacity 0.25s ease;
+}
+
+body.hud #hud .hud-obd-side:not(.nav-col) .pip[data-card="telemetry"],
+body.hud #hud .hud-obd-side.nav-col .pip[data-card="nav"] {
+  background: var(--accent, #3fb950);
+  opacity: 1;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent, #3fb950) 55%, transparent);
+}
+
+/* Tryb nawigacji: znaczniki pochodzą z przezroczystej siatki (patrz wyżej) —
+   ta sama wysokość co w trybie OBD, bez osobnych pozycji dla karty. */
+
+/* Tryb jazdy obok „Smaruj teraz": jeden wspólny rząd zamiast dopięcia pod spodem.
+   align-content: stretch ubezpiecza dolne krawędzie (gdyby kolumny miały luz). */
+body.hud #hud .hud-side.with-mode {
+  grid-template-columns: 1fr 1fr;
+  align-content: stretch;
+}
+
+body.hud #hud .hud-side.with-mode > * {
+  grid-column: 1 / -1;
+}
+
+body.hud #hud .hud-side.with-mode > .hud-pump,
+body.hud #hud .hud-side.with-mode > .hud-mode {
+  grid-column: auto;
+  /* Rząd przycisków obok siebie. Wysokość 96 px jak bazowa (telemetria) —
+     dzięki temu wiersz kolumny OLEJARKI w trybie nawigacji jest równy
+     wierszowi telemetrii i znika pas pod całą kolumną. */
+  height: 96px;
+  min-height: 96px;
+  padding: 6px;
+}
+
+body.hud #hud .hud-side.with-mode > .hud-pump {
+  font-size: 16px;
+}
+
+body.hud #hud .hud-side.with-mode > .hud-pump .hud-pump-label {
+  white-space: normal;
+}
+
+body.hud #hud .hud-side.with-mode > .hud-mode .hud-mode-label {
+  font-size: 15px;
+  white-space: normal;
+}
+
+
+/* =========================================================================
+   HUD W PIONIE (telefon w uchwycie pionowym)
+
+   Włączane w Ustawieniach → 💡 Wyświetlacz → „Układ HUD: PIONOWA”.
+   Ekran jazdy (i tylko on) obraca się wtedy do pionu — patrz
+   MainActivity.applyOrientation(). Układ to trzy bloki ułożone jeden pod
+   drugim na całą szerokość ekranu, żaden nie wychodzi poza HUD:
+
+       rząd 1:  ŚRODEK — „Zużycie”, paski temp./paliwa i PRĘDKOŚCIOMIERZ;
+                          pod nim TRIP i ZASIĘG
+       rzędy 2–3: „OLEJARKA” — podpis + kafelki oleju
+       rzędy 4–5: „OBD” — podpis + kafelki OBD / karta nawigacji
+       rząd 6:  przyciski: „Tryb” (dawka) | „Smaruj teraz” — obok siebie
+
+   Aby przyciski z dwóch różnych sekcji mogły stanąć w jednym dolnym wierszu,
+   sekcje OBD i OLEJARKA mają `display: contents` — ich dzieci wchodzą
+   bezpośrednio na siatkę .hud-body. Dotyczy to też reguły .nav-col, która nie
+   siedzi w @media (landscape) i w pionie też by zbudowała pudełko.
+   Znaczniki kart (.hud-col-pips) w pionie są nakładką w wierszu podpisu „OBD”.
+
+   Paski temp./paliwa: wszystkie ich style są w @media (orientation: landscape),
+   więc tutaj kompletne style na nowo; pozycjonowanie JS (top/left/height z
+   układu poziomego) wyłączamy przez !important, a `hidden` pomijamy, żeby
+   wskaźniki były widoczne w środku.
+
+   Bez zmian w DOM, bez zmian w gestach, dawce, znacznikach i układzie poziomym
+   — całość wyłącznie w tym bloku @media (orientation: portrait).
+   ========================================================================= */
+@media (orientation: portrait) {
+  /* native.css chowa HUD w pionie (@media portrait: body.native #hud) — tu go
+     przywracamy; dodatkowa klasa .hud-vert daje selektor mocniejszy od tamtego,
+     a widoki inne niż jazda nadal wygrywają (body.native.settings #hud itd.). */
+  body.hud-vert #hud,
+  body.hud-vert.native #hud {
+    display: flex;
+    padding: calc(26px + env(safe-area-inset-top)) 10px calc(8px + env(safe-area-inset-bottom));
+    --hud-vert-speed-size: min(72vw, 250px, calc(100vw - 140px), calc(100vh - 600px));
+  }
+
+  /* ------------------------------ nagłówek ------------------------------
+     „HUD" to przycisk przejścia do ekranu jazdy — w pionie i tak jesteśmy
+     na tym ekranie (MainActivity trzyma PORTRAIT tylko dla widoku jazdy),
+     więc zostawia go tylko miejsce potrzebne kaflu statusu w środku.
+     Selektor mocniejszy od body.native.ble-on #hudBtn (display: inline-flex
+     !important), więc wygrywa niezależnie od kolejności arkuszy. */
+  body.native.hud-vert #hudBtn,
+  body.native.hud-vert.native #hudBtn {
+    display: none !important;
+  }
+
+  /* W pionie wycięcie aparatu może być z lewej albo na środku — chowamy drobne
+     ikonki z górnego paska, a tekstowy status BLE przenosimy pod przyciski,
+     poniżej obszaru kamerki. Menu i motyw pozostają po prawej, odsunięte safe-area. */
+  body.native.hud-vert #headLeft { display: none !important; }
+  body.native.hud-vert #headActions { margin-left: auto; }
+  body.native.hud-vert header {
+    padding-left: calc(14px + env(safe-area-inset-left));
+    padding-right: calc(38px + env(safe-area-inset-right));
+  }
+  body.native.hud-vert #hdrStatus {
+    position: fixed;
+    left: 50%;
+    top: calc(var(--header-h) + env(safe-area-inset-top) + 2px);
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: calc(100vw - 24px);
+    min-width: 0;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 3px 9px;
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 30;
+  }
+
+  /* ------------------------------- siatka -------------------------------
+     2 kolumny tylko po to, żeby przyciski mogły stanąć obok siebie;
+     wszystkie bloki treści mają grid-column: 1 / -1 (pełna szerokość). */
+  body.hud-vert #hud .hud-body {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+    align-content: stretch;
+    --v-gap: 8px; /* odstęp między wierszami; z niego korzysta też zasięg gestu */
+    gap: var(--v-gap);
+    padding-left: 0;
+    min-height: 0;
+    /* native.css dokłada translateY(-14px) pod układ poziomy — w pionie zbędne. */
+    transform: none !important;
+  }
+
+  /* Sekcje bez własnego pudełka — dzieci wchodzą na siatkę .hud-body. */
+  body.hud-vert #hud .hud-obd-side,
+  body.hud-vert #hud .hud-oil-side {
+    display: contents;
+  }
+  body.hud-vert #hud .hud-side.nav-col {
+    display: contents !important;
+  }
+
+  /* ------------------------ nagłówki OBD / OLEJARKA ------------------------ */
+  body.hud-vert #hud .hud-obd-side > h2,
+  body.hud-vert #hud .hud-oil-side > h2 {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: .08em;
+    grid-column: 1 / -1 !important;
+    text-align: center;
+  }
+  body.hud-vert #hud .hud-obd-side > h2 {
+    grid-row: 4 !important;
+    padding-left: 0;
+    /* Gest swipe po kolumnie OBD wisi na .hud-obd-side, który ma display:contents
+       i nie ma własnego pudła — dotyk z odstępu trafiłby do .hud-body i gest by
+       nie zadziałał. Rozszerzamy pudełko podpisu i siatki kafelków dokładnie o
+       całe 30 px dzieli nagłówek od siatki po zmianie kolejności bloków;
+       ujemny margines utrzymuje wiersz bez dodatkowej wysokości. */
+    padding-bottom: 30px;
+    margin-bottom: -30px;
+  }
+  /* Znaczniki kart zostają przy podpisie OBD po przeniesieniu środka nad OBD.
+     Nakładają się w tej samej komórce siatki, nie dodając osobnego wiersza. */
+  body.hud-vert #hud .hud-obd-side > .hud-col-pips {
+    position: static;
+    grid-row: 4 !important;
+    grid-column: 1 !important;
+    justify-self: start;
+    align-self: start;
+    margin: 2px 0 0 2px;
+    z-index: 5;
+  }
+  body.hud-vert #hud .hud-obd-side > .hud-data-grid {
+    padding-bottom: var(--v-gap);
+    margin-bottom: calc(var(--v-gap) * -1);
+  }
+  /* W trybie OBD cztery kafelki wypełniają całą wysokość dolnego pola;
+     wiersze są równe, a treść kafelków wyśrodkowana. W trybie nav ta siatka
+     jest ukryta, a pełną wysokość wykorzystuje karta nawigacji. */
+  body.hud-vert #hud .hud-obd-side:not(.nav-col) > .hud-data-grid {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    align-content: stretch;
+  }
+  body.hud-vert #hud .hud-obd-side:not(.nav-col) > .hud-data-grid > .hud-count {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  /* W trybie nawigacji kafelki są niewidoczne, więc ten sam pasek odstępu
+     musi dociągnąć karta nawigacji — inaczej 8 px nad środkiem ucieka
+     jako cel gestu. */
+  body.hud-vert #hud .hud-obd-side > .hud-nav {
+    padding-bottom: var(--v-gap);
+    margin-bottom: calc(var(--v-gap) * -1);
+  }
+  body.hud-vert #hud .hud-oil-side > h2 {
+    grid-row: 2 !important;
+  }
+
+  /* kafelki OBD + karta nawigacji w tej samej komórce (w trybie nav kafelki
+     są visibility:hidden — zachowują geometrię, więc znaczniki trzymają linie) */
+  body.hud-vert #hud .hud-obd-side > .hud-data-grid,
+  body.hud-vert #hud .hud-obd-side > .hud-nav {
+    grid-row: 5 !important;
+    grid-column: 1 / -1 !important;
+  }
+  /* touch-action na .hud-obd-side nie działa w pionie, bo ma display:contents;
+     ustawiamy je na rzeczywistych polach dotyku, żeby swipe nie kończył się
+     pointercancelem zanim osiągnie próg przełączenia. */
+  body.hud-vert #hud .hud-obd-side > h2,
+  body.hud-vert #hud .hud-obd-side > .hud-data-grid,
+  body.hud-vert #hud .hud-obd-side > .hud-nav {
+    touch-action: none;
+  }
+  /* kafelki oleju */
+  body.hud-vert #hud .hud-oil-side > .hud-data-grid {
+    grid-row: 3 !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  /* ------------------------ rząd 1: środek ------------------------ */
+  body.hud-vert #hud .hud-center {
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
+
+  /* ---------------- dolny rząd: oba przyciski obok siebie ---------------- */
+  body.hud-vert #hud #hudMode {
+    grid-row: 6 !important;
+    grid-column: 1 !important;
+  }
+  body.hud-vert #hud #hudPump {
+    grid-row: 6 !important;
+    grid-column: 2 !important;
+  }
+
+  /* --------------------------- kafelki --------------------------- */
+  body.hud-vert #hud .hud-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    align-content: start;
+  }
+
+  body.hud-vert #hud .hud-count {
+    min-height: 56px;
+    padding: 6px 4px;
+    border-radius: 10px;
+    /* Blokada przewijania i zaznaczania tekstu — w poziomie robi to blok
+       @media (orientation: landscape); tu kafelki istniały bez tego, więc
+       systemowy long-press Androida mógł przechwycić przytrzymanie TRIP
+       (zaznaczenie/„callout") i skasować pointercancel przed 800 ms. */
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  body.hud-vert #hud .hud-count label {
+    font-size: 9px;
+    margin-bottom: 1px;
+  }
+  body.hud-vert #hud .hud-count span { font-size: 19px; }
+  body.hud-vert #hud .hud-count small { font-size: 9px; }
+
+  /* --------------------------- karta nawigacji --------------------------- */
+  body.hud-vert #hud .hud-nav-card {
+    min-height: 92px;
+    padding: 8px;
+    border-radius: 14px;
+    gap: 4px;
+  }
+  body.hud-vert #hud .hud-nav { display: flex; flex-direction: column; min-height: 0; }
+  body.hud-vert #hud .hud-nav-arrow { font-size: 38px; }
+  body.hud-vert #hud .hud-nav-text { font-size: 15px; }
+  body.hud-vert #hud .hud-nav-sub { font-size: 11px; }
+  body.hud-vert #hud .hud-nav-card.empty .hud-nav-text { font-size: 14px; }
+  body.hud-vert #hud .hud-nav-card.no-perm .hud-nav-text { font-size: 13px; }
+  body.hud-vert #hud .hud-nav-card.no-perm .hud-nav-sub { font-size: 10px; }
+
+  /* --------------------------- przyciski ---------------------------
+     !important, bo reguły .hud-side.with-mode (bez @media) mają wyższą
+     specyficzność i ustalają 96 px. */
+  body.hud-vert #hud #hudMode,
+  body.hud-vert #hud #hudPump {
+    height: 50px !important;
+    min-height: 50px !important;
+    padding: 4px 6px !important;
+    border-radius: 12px;
+    width: 100%;
+    align-self: stretch;
+    min-width: 0;
+  }
+
+  body.hud-vert #hud .hud-mode {
+    border: 1px solid #4a7a94;
+    background: #10202a;
+    color: var(--accent);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    font-size: 15px;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  body.hud-vert #hud .hud-mode.rain {
+    border-color: #2f81b8;
+    background: #0d2a3a;
+    color: #7fd0ff;
+  }
+  body.hud-vert #hud .hud-mode:active { transform: scale(0.98); }
+  body.hud-vert #hud .hud-mode-label { font-size: 14px; letter-spacing: .03em; }
+  body.hud-vert #hud .hud-mode-sub { font-size: 10px; letter-spacing: .04em; }
+
+  /* --------------------------- środek ---------------------------
+     grid: pasek temp. | prędkościomierz | pasek paliwa
+           nad nimi „Zużycie”, pod nimi TRIP/ZASIĘG */
+  body.hud-vert #hud .hud-center {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "head head head"
+      "temp speed fuel"
+      "trip trip trip";
+    gap: 4px;
+    align-items: center;
+    justify-items: center;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  body.hud-vert #hud .hud-center-head {
+    grid-area: head;
+    justify-self: center;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 12px;
+  }
+  body.hud-vert #hud .hud-center-head b { font-size: 15px; }
+
+  body.hud-vert #hud .hud-trip {
+    grid-area: trip;
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    width: 100%;
+  }
+
+  body.hud-vert #hud .hud-trip .hud-count {
+    min-height: 40px;
+    padding: 2px 3px;
+  }
+  body.hud-vert #hud .hud-trip .hud-count label { font-size: 7px; margin-bottom: 2px; }
+  body.hud-vert #hud .hud-trip .hud-count span { font-size: 14px; }
+  body.hud-vert #hud .hud-trip .hud-count small { font-size: 7px; }
+
+  /* Wskaźnik przechyłu mieści się w szerokości tarczy, nad TRIP. */
+  body.hud-vert #hud .hud-tilt {
+    display: block;
+    position: absolute;
+    left: 50%;
+    z-index: 6;
+    pointer-events: none;
+  }
+  body.hud-vert #hud .hud-tilt[hidden] { display: none; }
+  body.hud-vert #hud .hud-tilt-vu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+  }
+  body.hud-vert #hud .hud-vu { flex: 1; display: flex; gap: 3px; height: 10px; }
+  body.hud-vert #hud .hud-vu-l { flex-direction: row-reverse; }
+  body.hud-vert #hud .hud-vu-r { flex-direction: row; }
+  body.hud-vert #hud .hud-vu .vu-seg {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    background: rgba(148, 163, 184, 0.18);
+    transition: background 90ms linear, box-shadow 90ms linear;
+  }
+  body.hud-vert #hud .hud-vu .vu-seg.on {
+    background: var(--accent);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  body.hud-vert #hud .hud-vu .vu-seg.on.mid {
+    background: var(--warn);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--warn) 60%, transparent);
+  }
+  body.hud-vert #hud .hud-vu .vu-seg.on.hot {
+    background: var(--danger);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--danger) 70%, transparent);
+  }
+  body.hud-vert #hud .hud-tilt-vu .vu-mid {
+    flex: none;
+    width: 2px;
+    height: 12px;
+    margin: 0 2px;
+    border-radius: 1px;
+    background: color-mix(in srgb, var(--text) 65%, transparent);
+  }
+  body.hud-vert #hud .hud-tilt-vu .hud-tilt-peak-val {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 2px);
+    transform: translateX(-50%);
+    padding: 1px 5px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: 0;
+    transition: left 100ms ease-out, opacity 200ms ease-out;
+    z-index: 2;
+  }
+  body.hud-vert #hud .hud-tilt-vu .hud-tilt-peak-val.show { opacity: 1; }
+  body.hud-vert #hud .hud-tilt .hud-tilt-read {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 18px;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    pointer-events: none;
+  }
+  body.hud-vert #hud .hud-tilt .hud-tilt-read b#hudTiltVal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+    white-space: nowrap;
+  }
+  body.hud-vert #hud .hud-tilt .hud-tilt-dir {
+    position: absolute;
+    left: calc(50% + 15px);
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 12px;
+    font-size: 10px;
+    font-weight: 800;
+    display: none;
+  }
+  body.hud-vert #hud .hud-tilt-read.warn b#hudTiltVal,
+  body.hud-vert #hud .hud-tilt-read.warn .hud-tilt-dir { color: var(--warn); }
+  body.hud-vert #hud .hud-tilt-read.hot b#hudTiltVal,
+  body.hud-vert #hud .hud-tilt-read.hot .hud-tilt-dir { color: var(--danger); }
+
+  /* ----------------- paski temp. i paliwa (w środku) -----------------
+     Style pasków żyły wyłącznie w @media (orientation: landscape), więc tu
+     kompletne; pozycjonowanie ustawione przez JS neutralizujemy !important. */
+  body.hud-vert #hud .hud-vbar-temp { grid-area: temp; }
+  body.hud-vert #hud .hud-vbar-fuel { grid-area: fuel; }
+
+  body.hud-vert #hud .hud-vbar {
+    display: block !important; /* pokonuje [hidden] — w pionie widoczne zawsze */
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: auto !important;
+    width: 46px;
+    align-self: stretch;
+    justify-self: center;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  body.hud-vert #hud .hud-vbar-icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    color: var(--muted);
+    display: block;
+    z-index: 3;
+    /* ikona paliwa obsługuje przytrzymanie (reset poziomu) */
+    pointer-events: auto;
+  }
+
+  body.hud-vert #hud .hud-vbar-track {
+    position: absolute;
+    top: 30px;
+    /* Dolny koniec toru pokrywa się z dolną krawędzią końcówki LOAD/TPS. */
+    bottom: 29.4%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 12px;
+    border-radius: 7px;
+    background: linear-gradient(180deg, rgba(148, 163, 184, 0.06), rgba(148, 163, 184, 0.16));
+    border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+  body.hud-vert #hud .hud-vbar-track::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: repeating-linear-gradient(to bottom, transparent 0 12px, rgba(148, 163, 184, 0.4) 12px 13px);
+  }
+  body.hud-vert #hud .hud-vbar-track::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    border-radius: 7px 7px 0 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+  }
+
+  body.hud-vert #hud .hud-vbar-fill {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 0%;
+    border-radius: 5px;
+    transition: height 180ms ease-out;
+  }
+
+  body.hud-vert #hud .hud-vbar-val {
+    position: absolute;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 60%; /* JS nadpisuje ten % poziomem wypełnienia */
+    padding: 1px 5px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+    z-index: 2;
+    pointer-events: none;
+  }
+  body.hud-vert #hud .hud-vbar-val.show { opacity: 1; }
+
+  /* ----------------------- prędkościomierz -----------------------
+     Maks. 250 px; rozmiar współdzielony ze wskaźnikiem przechyłu. */
+  body.hud-vert #hud .hud-speed {
+    grid-area: speed;
+    align-self: center;
+    justify-self: center;
+    width: var(--hud-vert-speed-size);
+    height: auto;
+    aspect-ratio: auto;
+    flex: none;
+    min-width: 0;
+    /* Element siatki ma domyślnie min-height: auto = rozmiar treści, więc
+       kwadratowa tarcza wyrastała ponad swój wiersz i wchodziła na podpis
+       „Zużycie" oraz na TRIP (7 px przy 360×640). Reszta treści jest
+       absolutna, więc pudełko = dokładnie kwadrat tarczy; max-height to
+       blokada na wypadek węższego wiersza. */
+    min-height: 0;
+    max-height: 100%;
+    /* Pojemnik dla responsywnych rozmiarów cyfr — bez niego WebView
+       traktuje cqw jak vw i cyfry zostają przypięte do 132 px, nie mieszcząc
+       się w małej tarczy. */
+    container-type: inline-size;
+  }
+
+  /* Tarcza w pionie zachowuje kompletne łuki HUD-u. Skala 0.66 pozostawia
+     odstęp od pasków bocznych; w bardzo małym pudełku skala wraca do 1, bo
+     sama tarcza mieści się między paskami. */
+  body.hud-vert #hud .hud-speed > svg.hud-gauge {
+    display: block;
+    overflow: visible;
+    transform: scale(0.66);
+    transform-origin: center;
+  }
+  body.hud-vert #hud .hud-side-track {
+    fill: none;
+    stroke: var(--off);
+    stroke-width: 44;
+    stroke-linecap: round;
+  }
+  body.hud-vert #hud .hud-load-fill,
+  body.hud-vert #hud .hud-throttle-fill {
+    fill: none;
+    stroke-width: 44;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+    transition: stroke-dasharray 160ms ease-out;
+  }
+  body.hud-vert #hud .hud-load-fill {
+    stroke: var(--warn);
+    filter: drop-shadow(0 0 6px rgba(229, 160, 81, 0.6));
+  }
+  body.hud-vert #hud .hud-throttle-fill {
+    stroke: var(--accent);
+    filter: drop-shadow(0 0 6px rgba(112, 212, 119, 0.6));
+  }
+  body.hud-vert #hud .hud-speed-track {
+    fill: none;
+    stroke: var(--off);
+    stroke-width: 12;
+    stroke-linecap: round;
+  }
+  body.hud-vert #hud .hud-progress-track {
+    fill: none;
+    stroke: var(--off);
+    stroke-width: 16;
+    stroke-linecap: round;
+  }
+  body.hud-vert #hud .hud-speed-fill {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+    filter: drop-shadow(0 0 6px rgba(85, 200, 114, 0.6));
+  }
+  body.hud-vert #hud .hud-progress-fill {
+    fill: none;
+    stroke: var(--hud-blue);
+    stroke-width: 16;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100;
+    filter: drop-shadow(0 0 5px rgba(107, 212, 208, 0.53));
+  }
+
+  /* Etykiety łuku (LOAD / TPS) w poziomie leżą poza tarczą i są statyczne —
+     w pionie rosłyby pod SVG i wydłużały pudełko o wysokość tekstu.
+     Przenosimy je do środka tarczy jak w układzie poziomym, z mniejszym
+     pismem i bez wysuwania poza krawędź: w wąskiej tarczy obie etykiety
+     muszą zmieścić się obok siebie. */
+  body.hud-vert #hud .hud-arc-label {
+    position: absolute;
+    bottom: 22%;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  body.hud-vert #hud .hud-arc-load {
+    left: 0;
+    transform: none;
+    color: var(--warn);
+  }
+  body.hud-vert #hud .hud-arc-throttle {
+    right: 0;
+    transform: none;
+    color: var(--accent);
+  }
+
+  /* Liczba i jednostka trafiają w dolną część łuku jak w poziomie; rozmiar
+     jest liczony względem szerokości samej tarczy. */
+  body.hud-vert #hud .hud-speed-read {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    width: 170px;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    text-align: center;
+  }
+  body.hud-vert #hud .hud-speed-read #hudSpeed {
+    display: block;
+    font-size: clamp(32px, 13.5cqw, 44px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  body.hud-vert #hud .hud-speed-read #hudSpeed.tri {
+    font-size: clamp(27px, 10cqw, 34px);
+  }
+  body.hud-vert #hud .hud-speed-read .hud-speed-unit {
+    position: static;
+    display: block;
+    margin-top: 6px;
+    font-size: clamp(12px, 5.7cqw, 16px);
+    color: var(--muted);
+    transform: none;
+  }
+  body.hud-vert #hud .hud-progress-tag {
+    position: absolute;
+    top: calc(6% - 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: block;
+    color: var(--muted);
+    letter-spacing: 0.13em;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  body.hud-vert #hud .hud-progress-tag b {
+    display: block;
+    color: var(--hud-blue);
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  /* ============ niższe ekrany: ciaśniejszy wariant ============ */
+  @media (max-height: 780px) {
+    body.hud-vert #hud .hud-body { --v-gap: 6px; gap: var(--v-gap); }
+    body.hud-vert.native #hud { --hud-vert-speed-size: min(72vw, 250px, calc(100vw - 110px), calc((100vh - 515px) * 0.9)); }
+
+    @media (max-height: 681px) {
+      body.hud-vert #hud .hud-vbar-track { bottom: 18.75%; }
+    }
+
+    body.hud-vert #hud .hud-count {
+      min-height: 46px;
+      padding: 4px 3px;
+    }
+    body.hud-vert #hud .hud-count label { font-size: 8px; }
+    body.hud-vert #hud .hud-count span { font-size: 16px; }
+    body.hud-vert #hud .hud-count small { font-size: 8px; }
+
+    body.hud-vert #hud #hudMode,
+    body.hud-vert #hud #hudPump {
+      height: 44px !important;
+      min-height: 44px !important;
+    }
+
+    body.hud-vert #hud .hud-center-head { font-size: 11px; }
+    body.hud-vert #hud .hud-center-head b { font-size: 13px; }
+    body.hud-vert #hud .hud-nav-card { min-height: 74px; }
+    body.hud-vert #hud .hud-nav-arrow { font-size: 30px; }
+
+    body.hud-vert #hud .hud-speed-unit { font-size: clamp(12px, 5.7cqw, 16px); }
+    body.hud-vert #hud .hud-progress-tag { font-size: 12px; }
+  }
+
+  /* Przy tarczy bardzo małej (np. 360×640) łuki mieszczą się między paskami
+     bez redukcji skali. Tag przechodzi w jeden wiersz, nad łukiem. */
+  @container (max-width: 150px) {
+    body.hud-vert #hud .hud-speed > svg.hud-gauge { transform: scale(1); }
+    body.hud-vert #hud .hud-vbar-track { bottom: 18.75%; }
+    body.hud-vert #hud .hud-speed-read { top: 45%; }
+    body.hud-vert #hud .hud-speed-read #hudSpeed {
+      font-size: clamp(24px, 14cqw, 30px);
+    }
+    body.hud-vert #hud .hud-speed-read #hudSpeed.tri {
+      font-size: clamp(20px, 11cqw, 25px);
+    }
+    body.hud-vert #hud .hud-speed-read .hud-speed-unit { font-size: 11px; }
+    body.hud-vert #hud .hud-arc-label {
+      bottom: 30%;
+      font-size: 6px;
+      letter-spacing: .02em;
+    }
+    body.hud-vert #hud .hud-progress-tag {
+      top: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+    body.hud-vert #hud .hud-progress-tag b {
+      display: inline;
+      font-size: 11px;
+      margin: 0;
+    }
+  }
+}

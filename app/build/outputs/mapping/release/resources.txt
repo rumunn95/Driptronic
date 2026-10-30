@@ -1,0 +1,1203 @@
+Marking id:tag_window_insets_animation_callback:2131034192 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_on_apply_window_listener:2131034183 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_compat_insets_dispatch:2131034182 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_unhandled_key_listeners:2131034191 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_unhandled_key_event_manager:2131034190 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:androidx_startup:2131296256 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_lifecycle_owner:2131034198 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_view_model_store_owner:2131034201 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_saved_state_registry_owner:2131034200 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_on_back_pressed_dispatcher_owner:2131034199 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:report_drawn:2131034175 reachable: referenced from in_memory_r8_base_classes0.dex
+android.content.res.Resources#getIdentifier present: false
+Web content present: true
+Referenced Strings:
+owner$volatile
+exception
+getModule
+_state$volatile
+kotlin.Cloneable
+androidx.activity.result.contract.ext...
+descriptor
+java.lang.Integer
+trip
+androidx.lifecycle.LifecycleDispatche...
+TAKEN
+getUncaughtExceptionPreHandler
+kotlin.reflect.jvm.internal.Reflectio...
+getSuppressed
+PARKING
+androidx.activity.result.contract.act...
+addObserver
+java.lang.CharSequence
+DTC_CLR
+ContentQueryWrapper.query
+ON_ANY
+guava.concurrent.generate_cancellatio...
+traceCounter
+kotlin.Unit
+kotlinx.coroutines.scheduler.resoluti...
+dose
+ON_PAUSE
+kotlin.jvm.functions.
+left
+mime_type
+kotlinx.coroutines.DefaultExecutor
+kotlinx.coroutines.scheduler.default....
+kotlin.jvm.internal.StringCompanionOb...
+onMenuKeyEvent
+FontProvider.query
+TraceCompat
+pl.neptis.yanosik.mobi.android
+getEmojiConsistencySet
+emoji2.text.DefaultEmojiConfig
+enabled_notification_listeners
+_availablePermits$volatile
+characteristic
+cz.seznam.mapy
+result
+EmojiCompat.EmojiCompatInitializer.run
+EXTRA_BENCHMARK_OPERATION
+_
+android.permission.SEND_SMS
+RESULT_DESIRED_FORMAT_UNSUPPORTED
+a
+b
+c
+Infinity
+RESULT_PARSE_EXCEPTION
+g
+Blocking
+kotlin.String
+PERMIT
+r
+java.lang.Module
+t
+androidx.lifecycle.BundlableSavedStat...
+TypefaceCompatApi26Impl
+_reusableCancellableContinuation$vola...
+this$0
+x
+Startup
+acc
+dd
+androidx.profileinstaller.action.SKIP...
+isTagEnabled
+dt
+addSuppressed
+tilt_z
+kotlin.Boolean
+android.bigText
+android.intent.action.OPEN_DOCUMENT
+RESULT_OK
+tilt_x
+tilt_y
+DORMANT
+_resumed$volatile
+parcel
+valveOpenMs
+NonDisposableHandle
+gps
+.json
+dailyLimitImp
+java.lang.annotation.Annotation
+sensorManager
+android.permission.BLUETOOTH_CONNECT
+font_weight
+_invoked$volatile
+TERMINATED
+COMPLETING_WAITING_CHILDREN
+RESULT_BASELINE_PROFILE_NOT_FOUND
+title
+android.permission.WRITE_EXTERNAL_STO...
+content
+RESULT_DELETE_SKIP_FILE_SUCCESS
+kotlin.collections.Map
+SDK_INT
+load
+provider
+ProfileInstaller
+java.lang.Boolean
+json
+FontProvider.getFontFamilyResult
+NaN
+kotlinx.coroutines.main.delay
+android.textLines
+classSimpleName
+pct
+BITMAP_MASKABLE
+image/png
+kotlin.collections.List
+parkedWorkersStack$volatile
+IconCompat
+false
+label
+message
+hud
+pulpit
+FontProvider.getProvider
+DEFAULT
+tail$volatile
+android.view.View$AttachInfo
+java.lang.Float
+Dispatchers.IO
+grantResults
+%04d%02d%02d
+UNDEFINED
+invoke
+_queue$volatile
+androidx.activity.result.contract.ext...
+_removedRef$volatile
+androidx.profileinstaller.action.SAVE...
+android.os.Build$VERSION
+java.lang.Character
+dexopt/baseline.prof
+executor
+context
+text
+fullPackage
+createSegment
+write
+dispatcher
+_isCompleted$volatile
+blockingTasksInBuffer$volatile
+byte
+primary.prof
+runningWorkers$volatile
+kotlin.jvm.functions.Function2
+it
+UNDECIDED
+getResId
+RESULT_NOT_WRITABLE
+kotlin.jvm.internal.
+cmd
+arch_disk_io_
+.xml
+RESULT_INSTALL_SKIP_FILE_SUCCESS
+charset
+com.google.android.apps.maps
+URI
+file
+android.intent.action.END_CALL
+kotlin.Long
+Completing
+ble
+java.lang.String
+bundle
+head$volatile
+android.intent.extra.MIME_TYPES
+AndroidBle
+intervalImp
+menu
+DESTROYED
+EmojiCompat.MetadataRepo.create
+/data/misc/profiles/ref/
+New
+RESUMED
+auto
+ATOMIC
+KEY_COMPONENT_ACTIVITY_PENDING_RESULT
+kotlin.collections.Collection
+_decision$volatile
+workerCtl$volatile
+cleanedAndPointers$volatile
+mVisibleInsets
+__REDACTED__
+pumpFlowMlPer1k
+lat
+kotlin.Number
+settings
+read
+NULL
+void
+TOO_LATE_TO_CANCEL
+olejarka
+java.util.List
+pumpRunMs
+null
+font_italic
+lastScheduledTask$volatile
+androidx.lifecycle.internal.SavedStat...
+kotlin.Int
+tempCal
+sensor
+_id
+UNDISPATCHED
+NonCancellable
+kotlin.Throwable
+_handled$volatile
+errors
+android.permission.CALL_PHONE
+handleLifecycleEvent
+COMPLETING_ALREADY
+addFontFromBuffer
+pkg
+java.lang.Iterable
+asyncTraceEnd
+kotlinx.coroutines.DefaultExecutor.ke...
+kotlin.Annotation
+inParcel
+.gpx
+STARTED
+kotlin.Comparable
+Połączono
+androidx.activity.result.contract.ext...
+baseKey
+BITMAP
+newConfig
+NIE
+COROUTINE_SUSPENDED
+rpm
+Trace
+intrface
+endCall
+_size$volatile
+application
+_LifecycleAdapter
+Completed
+callback
+RESUME_TOKEN
+UNKNOWN
+initialExtras
+android.graphics.FontFamily
+_isCompleting$volatile
+_prev$volatile
+fuelTotal
+createAsync
+.Companion
+observer
+TypefaceCompatApi29Impl
+emojiCompat
+freeze
+kotlinx.coroutines.scheduler.keep.ali...
+java.lang.Long
+android.title
+java.util.Map
+TRACE_TAG_APP
+/data/misc/profiles/cur/0
+state
+CompanionObject
+element
+android.permission.BLUETOOTH_SCAN
+Pictures/Olejarka
+android.view.ViewRootImpl
+input_method
+input
+defaultCreationExtras
+obdCoolant
+setCurrentState
+REMOVE_FROZEN
+androidx.activity.result.contract.ext...
+components
+RESULT_CANCELED
+activity
+emergencyPending
+kotlin.Function
+androidx.savedstate.Restarter
+kotlinx.coroutines.semaphore.segmentSize
+DROP_SHADER_CACHE
+long
+kotlin.collections.ListIterator
+/Olejarka
+Olejarka
+classes_to_restore
+poz
+key
+kotlin.Enum.Companion
+RESOURCE
+profileinstaller_profileWrittenFor_la...
+window.decorView
+WRITE_SKIP_FILE
+kotlin.Float
+_next$volatile
+runnable
+trips
+kotlin.Char
+compressed
+wheelCircumCm
+charts
+klass.interfaces
+java.util.ListIterator
+DefaultDispatcher
+kotlin.Double
+tilt
+dest
+lifecycle
+view
+java.lang.Short
+androidx.profileinstaller.action.INST...
+ON_START
+KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS
+BROKEN
+Dispatchers.Default
+kotlinx.coroutines.io.parallelism
+java.util.Collection
+android.intent.action.CALL
+DIAGNOSTIC_PROFILE_IS_COMPRESSED
+file:///android_asset/native/index.html
+profileInstalled
+name
+NOT_IN_STACK
+emergencyMin
+androidx.lifecycle.internal.SavedStat...
+getDescriptor
+_isTerminated$volatile
+font_variation_settings
+distance
+removeObserver
+ON_DESTROY
+destination
+consumerIndex$volatile
+java.lang.module.ModuleDescriptor
+abortCreation
+speed
+pumpImp
+SEALED
+RESULT_ALREADY_INSTALLED
+CREATED
+NO_OWNER
+FontsProvider
+androidx.content.action.LOAD_EMOJI_FONT
+registry
+Dispatchers.Main
+EXTRA_SKIP_FILE_OPERATION
+_decisionAndIndex$volatile
+Cancelled
+Dispatchers.Main.immediate
+pair
+pumping
+android.title.big
+obdFuel
+android.intent.action.VIEW
+short
+java.lang.Object
+location
+Cancelling
+dexopt/baseline.profm
+COMPLETING_RETRY
+TypefaceCompat.createFromFontInfo
+state1
+EmptyCoroutineContext
+CPU_ACQUIRED
+getViewRootImpl
+superclass
+font_ttc_index
+permissions
+NONE
+fuelCal
+actuatorType
+item
+kotlinx.coroutines.semaphore.maxSpinC...
+application/json
+_display_name
+kotlinx.coroutines.scheduler.core.poo...
+kotlinx.coroutines.scheduler.max.pool...
+double
+CONSUMED
+java.util.Set
+zd
+.png
+kotlin.Short
+phone
+.apk
+result_code
+zt
+BLOCKING
+Rozłączono
+_delayed$volatile
+is_pending
+java.lang.Throwable
+DELETE_SKIP_FILE
+loc
+throttle
+/data/misc/profiles/cur/0/
+kotlin.collections.MutableMap
+java.lang.Double
+createFromFamiliesWithDefault
+ActivityResultRegistry
+tel:
+lon
+android.permission.ACCESS_FINE_LOCATION
+savedStateRegistry
+numbersJson
+web
+INITIALIZED
+NO_THREAD_ELEMENTS
+LAZY
+event
+java.lang.Number
+spdObd
+deqIdx$volatile
+dataUrl
+java.util.Map$Entry
+DefaultExecutor
+tankCapacityMl
+PENDING
+android.settings.ACTION_NOTIFICATION_...
+controlState$volatile
+androidx.profileinstaller.action.BENC...
+.immediate
+outState
+elements
+char
+java.lang.Comparable
+android.text
+URI_MASKABLE
+ON_CREATE
+kotlinx.coroutines.fast.service.loader
+android.intent.extra.INITIAL_INTENTS
+androidx.graphics.path
+EmojiCompatInitializer
+kotlin.Any
+ON_RESUME
+KEY_COMPONENT_ACTIVITY_REGISTERED_RCS
+coroutineContext
+float
+RESULT_INSTALL_SUCCESS
+asyncTraceBegin
+notification
+vibrator_manager
+java.lang.Enum
+android.permission.ACCESS_COARSE_LOCA...
+KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS
+emergencyMode
+android.permission.POST_NOTIFICATIONS
+java.lang.Byte
+enqIdx$volatile
+tak
+EmojiCompat.FontRequestEmojiCompatCon...
+rain
+java.lang.Cloneable
+updateEnabledCallbacks
+kotlin.jvm.internal.EnumCompanionObject
+profiles
+_rootCause$volatile
+_exceptionsHolder$volatile
+RESULT_UNSUPPORTED_ART_VERSION
+CANCELLED
+Active
+DTC_READ
+kotlin.collections.Iterable
+DATA
+file_id
+CLOSED_EMPTY
+kotlin.collections.Iterator
+job
+relative_path
+fuelLevel
+CLOSED
+android.text.EmojiConsistency
+kotlin.collections.Map.Entry
+Trasa
+producerIndex$volatile
+unexpected
+imp
+kotlin.Byte
+kotlin.Enum
+_parentHandle$volatile
+backEvent
+array
+android.subText
+kotlin.collections.Set
+value
+androidx.activity.result.contract.ext...
+kotlin.String.Companion
+temp
+REUSABLE_CLAIMED
+java.util.Iterator
+0x%08x
+Parcelizer
+ON_STOP
+kotlin.CharSequence
+addFontFromAssetManager
+RESULT_IO_EXCEPTION
+intent
+int
+androidx.lifecycle.savedstate.vm.tag
+distCal
+command
+WindowInsetsCompat
+vibrator
+boolean
+bluetooth
+minSpeedKph
+androidx.activity.result.contract.act...
+mAttachInfo
+classes.dex
+_cur$volatile
+Marking color:accent:2130837504 used because it matches string pool constant acc
+Marking id:accessibility_action_clickable_span:2131034112 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_0:2131034113 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_1:2131034114 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_10:2131034115 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_11:2131034116 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_12:2131034117 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_13:2131034118 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_14:2131034119 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_15:2131034120 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_16:2131034121 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_17:2131034122 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_18:2131034123 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_19:2131034124 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_2:2131034125 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_20:2131034126 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_21:2131034127 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_22:2131034128 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_23:2131034129 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_24:2131034130 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_25:2131034131 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_26:2131034132 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_27:2131034133 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_28:2131034134 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_29:2131034135 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_3:2131034136 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_30:2131034137 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_31:2131034138 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_4:2131034139 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_5:2131034140 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_6:2131034141 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_7:2131034142 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_8:2131034143 used because it matches string pool constant acc
+Marking id:accessibility_custom_action_9:2131034144 used because it matches string pool constant acc
+Marking id:title:2131034196 used because it matches string pool constant title
+Marking id:title:2131034196 used because it matches string pool constant title
+Marking color:hud_blue:2130837513 used because it matches string pool constant hud
+Marking color:text:2130837517 used because it matches string pool constant text
+Marking id:text:2131034193 used because it matches string pool constant text
+Marking color:text:2130837517 used because it matches string pool constant text
+Marking id:text:2131034193 used because it matches string pool constant text
+Marking id:text2:2131034194 used because it matches string pool constant text
+Marking string:autofill:2131296258 used because it matches string pool constant auto
+Marking string:state_empty:2131296336 used because it matches string pool constant state
+Marking string:state_off:2131296337 used because it matches string pool constant state
+Marking string:state_on:2131296338 used because it matches string pool constant state
+Marking id:view_tree_disjoint_parent:2131034197 used because it matches string pool constant view
+Marking id:view_tree_lifecycle_owner:2131034198 used because it matches string pool constant view
+Marking id:view_tree_on_back_pressed_dispatcher_owner:2131034199 used because it matches string pool constant view
+Marking id:view_tree_saved_state_registry_owner:2131034200 used because it matches string pool constant view
+Marking id:view_tree_view_model_store_owner:2131034201 used because it matches string pool constant view
+Marking attr:shortcutMatchRequired:2130771984 used because it matches string pool constant short
+Marking color:notification_action_color_filter:2130837515 used because it matches string pool constant notification
+Marking color:notification_icon_bg_color:2130837516 used because it matches string pool constant notification
+Marking dimen:notification_action_icon_size:2130903047 used because it matches string pool constant notification
+Marking dimen:notification_action_text_size:2130903048 used because it matches string pool constant notification
+Marking dimen:notification_big_circle_margin:2130903049 used because it matches string pool constant notification
+Marking dimen:notification_content_margin_start:2130903050 used because it matches string pool constant notification
+Marking dimen:notification_large_icon_height:2130903051 used because it matches string pool constant notification
+Marking dimen:notification_large_icon_width:2130903052 used because it matches string pool constant notification
+Marking dimen:notification_main_column_padding_top:2130903053 used because it matches string pool constant notification
+Marking dimen:notification_media_narrow_margin:2130903054 used because it matches string pool constant notification
+Marking dimen:notification_right_icon_size:2130903055 used because it matches string pool constant notification
+Marking dimen:notification_right_side_padding_top:2130903056 used because it matches string pool constant notification
+Marking dimen:notification_small_icon_background_padding:2130903057 used because it matches string pool constant notification
+Marking dimen:notification_small_icon_size_as_large:2130903058 used because it matches string pool constant notification
+Marking dimen:notification_subtext_size:2130903059 used because it matches string pool constant notification
+Marking dimen:notification_top_pad:2130903060 used because it matches string pool constant notification
+Marking dimen:notification_top_pad_large_text:2130903061 used because it matches string pool constant notification
+Marking drawable:notification_action_background:2130968585 used because it matches string pool constant notification
+Marking drawable:notification_bg:2130968586 used because it matches string pool constant notification
+Marking drawable:notification_bg_low:2130968587 used because it matches string pool constant notification
+Marking drawable:notification_bg_low_normal:2130968588 used because it matches string pool constant notification
+Marking drawable:notification_bg_low_pressed:2130968589 used because it matches string pool constant notification
+Marking drawable:notification_bg_normal:2130968590 used because it matches string pool constant notification
+Marking drawable:notification_bg_normal_pressed:2130968591 used because it matches string pool constant notification
+Marking drawable:notification_icon_background:2130968592 used because it matches string pool constant notification
+Marking drawable:notification_oversize_large_icon_bg:2130968593 used because it matches string pool constant notification
+Marking drawable:notification_template_icon_bg:2130968594 used because it matches string pool constant notification
+Marking drawable:notification_template_icon_low_bg:2130968595 used because it matches string pool constant notification
+Marking drawable:notification_tile_bg:2130968596 used because it matches string pool constant notification
+Marking id:notification_background:2131034171 used because it matches string pool constant notification
+Marking id:notification_main_column:2131034172 used because it matches string pool constant notification
+Marking id:notification_main_column_container:2131034173 used because it matches string pool constant notification
+Marking layout:notification_action:2131165187 used because it matches string pool constant notification
+Marking layout:notification_action_tombstone:2131165188 used because it matches string pool constant notification
+Marking layout:notification_template_custom_big:2131165189 used because it matches string pool constant notification
+Marking layout:notification_template_icon_group:2131165190 used because it matches string pool constant notification
+Marking layout:notification_template_part_chronometer:2131165191 used because it matches string pool constant notification
+Marking layout:notification_template_part_time:2131165192 used because it matches string pool constant notification
+Marking string:template_percent:2131296342 used because it matches string pool constant temp
+@pl.olejarka.trk702x:attr/alpha : reachable=false
+@pl.olejarka.trk702x:attr/font : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderAuthority : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderCerts : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderFallbackQuery : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderFetchStrategy : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderFetchTimeout : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderPackage : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderQuery : reachable=false
+@pl.olejarka.trk702x:attr/fontProviderSystemFontFamily : reachable=false
+@pl.olejarka.trk702x:attr/fontStyle : reachable=false
+@pl.olejarka.trk702x:attr/fontVariationSettings : reachable=false
+@pl.olejarka.trk702x:attr/fontWeight : reachable=false
+@pl.olejarka.trk702x:attr/lStar : reachable=false
+@pl.olejarka.trk702x:attr/nestedScrollViewStyle : reachable=false
+@pl.olejarka.trk702x:attr/queryPatterns : reachable=false
+@pl.olejarka.trk702x:attr/shortcutMatchRequired : reachable=true
+@pl.olejarka.trk702x:attr/ttcIndex : reachable=false
+@pl.olejarka.trk702x:color/accent : reachable=true
+@pl.olejarka.trk702x:color/androidx_core_ripple_material_light : reachable=false
+@pl.olejarka.trk702x:color/androidx_core_secondary_text_default_material_light : reachable=false
+@pl.olejarka.trk702x:color/background : reachable=false
+@pl.olejarka.trk702x:color/border : reachable=false
+@pl.olejarka.trk702x:color/call_notification_answer_color : reachable=false
+@pl.olejarka.trk702x:color/call_notification_decline_color : reachable=false
+@pl.olejarka.trk702x:color/card : reachable=false
+@pl.olejarka.trk702x:color/danger : reachable=false
+@pl.olejarka.trk702x:color/hud_blue : reachable=true
+@pl.olejarka.trk702x:color/muted : reachable=false
+@pl.olejarka.trk702x:color/notification_action_color_filter : reachable=true
+    @pl.olejarka.trk702x:color/androidx_core_secondary_text_default_material_light
+@pl.olejarka.trk702x:color/notification_icon_bg_color : reachable=true
+@pl.olejarka.trk702x:color/text : reachable=true
+@pl.olejarka.trk702x:color/vector_tint_color : reachable=false
+@pl.olejarka.trk702x:color/vector_tint_theme_color : reachable=false
+@pl.olejarka.trk702x:color/warn : reachable=false
+@pl.olejarka.trk702x:dimen/compat_button_inset_horizontal_material : reachable=false
+@pl.olejarka.trk702x:dimen/compat_button_inset_vertical_material : reachable=false
+@pl.olejarka.trk702x:dimen/compat_button_padding_horizontal_material : reachable=false
+@pl.olejarka.trk702x:dimen/compat_button_padding_vertical_material : reachable=false
+@pl.olejarka.trk702x:dimen/compat_control_corner_material : reachable=false
+@pl.olejarka.trk702x:dimen/compat_notification_large_icon_max_height : reachable=false
+@pl.olejarka.trk702x:dimen/compat_notification_large_icon_max_width : reachable=false
+@pl.olejarka.trk702x:dimen/notification_action_icon_size : reachable=true
+@pl.olejarka.trk702x:dimen/notification_action_text_size : reachable=true
+@pl.olejarka.trk702x:dimen/notification_big_circle_margin : reachable=true
+@pl.olejarka.trk702x:dimen/notification_content_margin_start : reachable=true
+@pl.olejarka.trk702x:dimen/notification_large_icon_height : reachable=true
+@pl.olejarka.trk702x:dimen/notification_large_icon_width : reachable=true
+@pl.olejarka.trk702x:dimen/notification_main_column_padding_top : reachable=true
+@pl.olejarka.trk702x:dimen/notification_media_narrow_margin : reachable=true
+@pl.olejarka.trk702x:dimen/notification_right_icon_size : reachable=true
+@pl.olejarka.trk702x:dimen/notification_right_side_padding_top : reachable=true
+@pl.olejarka.trk702x:dimen/notification_small_icon_background_padding : reachable=true
+@pl.olejarka.trk702x:dimen/notification_small_icon_size_as_large : reachable=true
+@pl.olejarka.trk702x:dimen/notification_subtext_size : reachable=true
+@pl.olejarka.trk702x:dimen/notification_top_pad : reachable=true
+@pl.olejarka.trk702x:dimen/notification_top_pad_large_text : reachable=true
+@pl.olejarka.trk702x:drawable/ic_call_answer : reachable=false
+@pl.olejarka.trk702x:drawable/ic_call_answer_low : reachable=false
+@pl.olejarka.trk702x:drawable/ic_call_answer_video : reachable=false
+@pl.olejarka.trk702x:drawable/ic_call_answer_video_low : reachable=false
+@pl.olejarka.trk702x:drawable/ic_call_decline : reachable=false
+@pl.olejarka.trk702x:drawable/ic_call_decline_low : reachable=false
+@pl.olejarka.trk702x:drawable/ic_launcher_background : reachable=false
+@pl.olejarka.trk702x:drawable/ic_launcher_foreground : reachable=false
+@pl.olejarka.trk702x:drawable/ic_splash_transparent : reachable=false
+@pl.olejarka.trk702x:drawable/notification_action_background : reachable=true
+    @pl.olejarka.trk702x:color/androidx_core_ripple_material_light
+    @pl.olejarka.trk702x:dimen/compat_button_inset_horizontal_material
+    @pl.olejarka.trk702x:dimen/compat_button_inset_vertical_material
+    @pl.olejarka.trk702x:dimen/compat_control_corner_material
+    @pl.olejarka.trk702x:dimen/compat_button_padding_vertical_material
+    @pl.olejarka.trk702x:dimen/compat_button_padding_horizontal_material
+@pl.olejarka.trk702x:drawable/notification_bg : reachable=true
+    @pl.olejarka.trk702x:drawable/notification_bg_normal_pressed
+    @pl.olejarka.trk702x:drawable/notification_bg_normal
+@pl.olejarka.trk702x:drawable/notification_bg_low : reachable=true
+    @pl.olejarka.trk702x:drawable/notification_bg_low_pressed
+    @pl.olejarka.trk702x:drawable/notification_bg_low_normal
+@pl.olejarka.trk702x:drawable/notification_bg_low_normal : reachable=true
+@pl.olejarka.trk702x:drawable/notification_bg_low_pressed : reachable=true
+@pl.olejarka.trk702x:drawable/notification_bg_normal : reachable=true
+@pl.olejarka.trk702x:drawable/notification_bg_normal_pressed : reachable=true
+@pl.olejarka.trk702x:drawable/notification_icon_background : reachable=true
+    @pl.olejarka.trk702x:color/notification_icon_bg_color
+@pl.olejarka.trk702x:drawable/notification_oversize_large_icon_bg : reachable=true
+@pl.olejarka.trk702x:drawable/notification_template_icon_bg : reachable=true
+@pl.olejarka.trk702x:drawable/notification_template_icon_low_bg : reachable=true
+@pl.olejarka.trk702x:drawable/notification_tile_bg : reachable=true
+    @pl.olejarka.trk702x:drawable/notify_panel_notification_icon_bg
+@pl.olejarka.trk702x:drawable/notify_panel_notification_icon_bg : reachable=false
+@pl.olejarka.trk702x:id/accessibility_action_clickable_span : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_0 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_1 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_10 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_11 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_12 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_13 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_14 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_15 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_16 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_17 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_18 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_19 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_2 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_20 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_21 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_22 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_23 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_24 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_25 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_26 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_27 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_28 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_29 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_3 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_30 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_31 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_4 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_5 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_6 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_7 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_8 : reachable=true
+@pl.olejarka.trk702x:id/accessibility_custom_action_9 : reachable=true
+@pl.olejarka.trk702x:id/action_container : reachable=false
+@pl.olejarka.trk702x:id/action_divider : reachable=false
+@pl.olejarka.trk702x:id/action_image : reachable=false
+@pl.olejarka.trk702x:id/action_text : reachable=false
+@pl.olejarka.trk702x:id/actions : reachable=false
+@pl.olejarka.trk702x:id/androidx_compose_ui_view_composition_context : reachable=false
+@pl.olejarka.trk702x:id/async : reachable=false
+@pl.olejarka.trk702x:id/blocking : reachable=false
+@pl.olejarka.trk702x:id/chronometer : reachable=false
+@pl.olejarka.trk702x:id/compose_view_saveable_id_tag : reachable=false
+@pl.olejarka.trk702x:id/consume_window_insets_tag : reachable=false
+@pl.olejarka.trk702x:id/dialog_button : reachable=false
+@pl.olejarka.trk702x:id/edit_text_id : reachable=false
+@pl.olejarka.trk702x:id/forever : reachable=false
+@pl.olejarka.trk702x:id/hide_graphics_layer_in_inspector_tag : reachable=false
+@pl.olejarka.trk702x:id/hide_ime_id : reachable=false
+@pl.olejarka.trk702x:id/hide_in_inspector_tag : reachable=false
+@pl.olejarka.trk702x:id/icon : reachable=false
+@pl.olejarka.trk702x:id/icon_group : reachable=false
+@pl.olejarka.trk702x:id/info : reachable=false
+@pl.olejarka.trk702x:id/inspection_slot_table_set : reachable=false
+@pl.olejarka.trk702x:id/is_pooling_container_tag : reachable=false
+@pl.olejarka.trk702x:id/italic : reachable=false
+@pl.olejarka.trk702x:id/line1 : reachable=false
+@pl.olejarka.trk702x:id/line3 : reachable=false
+@pl.olejarka.trk702x:id/normal : reachable=false
+@pl.olejarka.trk702x:id/notification_background : reachable=true
+@pl.olejarka.trk702x:id/notification_main_column : reachable=true
+@pl.olejarka.trk702x:id/notification_main_column_container : reachable=true
+@pl.olejarka.trk702x:id/pooling_container_listener_holder_tag : reachable=false
+@pl.olejarka.trk702x:id/report_drawn : reachable=true
+@pl.olejarka.trk702x:id/right_icon : reachable=false
+@pl.olejarka.trk702x:id/right_side : reachable=false
+@pl.olejarka.trk702x:id/tag_accessibility_actions : reachable=false
+@pl.olejarka.trk702x:id/tag_accessibility_clickable_spans : reachable=false
+@pl.olejarka.trk702x:id/tag_accessibility_heading : reachable=false
+@pl.olejarka.trk702x:id/tag_accessibility_pane_title : reachable=false
+@pl.olejarka.trk702x:id/tag_compat_insets_dispatch : reachable=true
+@pl.olejarka.trk702x:id/tag_on_apply_window_listener : reachable=true
+@pl.olejarka.trk702x:id/tag_on_receive_content_listener : reachable=false
+@pl.olejarka.trk702x:id/tag_on_receive_content_mime_types : reachable=false
+@pl.olejarka.trk702x:id/tag_screen_reader_focusable : reachable=false
+@pl.olejarka.trk702x:id/tag_state_description : reachable=false
+@pl.olejarka.trk702x:id/tag_system_bar_state_monitor : reachable=false
+@pl.olejarka.trk702x:id/tag_transition_group : reachable=false
+@pl.olejarka.trk702x:id/tag_unhandled_key_event_manager : reachable=true
+@pl.olejarka.trk702x:id/tag_unhandled_key_listeners : reachable=true
+@pl.olejarka.trk702x:id/tag_window_insets_animation_callback : reachable=true
+@pl.olejarka.trk702x:id/text : reachable=true
+@pl.olejarka.trk702x:id/text2 : reachable=true
+@pl.olejarka.trk702x:id/time : reachable=false
+@pl.olejarka.trk702x:id/title : reachable=true
+@pl.olejarka.trk702x:id/view_tree_disjoint_parent : reachable=true
+@pl.olejarka.trk702x:id/view_tree_lifecycle_owner : reachable=true
+@pl.olejarka.trk702x:id/view_tree_on_back_pressed_dispatcher_owner : reachable=true
+@pl.olejarka.trk702x:id/view_tree_saved_state_registry_owner : reachable=true
+@pl.olejarka.trk702x:id/view_tree_view_model_store_owner : reachable=true
+@pl.olejarka.trk702x:id/wrapped_composition_tag : reachable=false
+@pl.olejarka.trk702x:integer/m3c_window_layout_in_display_cutout_mode : reachable=false
+@pl.olejarka.trk702x:integer/status_bar_notification_info_maxnum : reachable=false
+@pl.olejarka.trk702x:layout/custom_dialog : reachable=false
+@pl.olejarka.trk702x:layout/ime_base_split_test_activity : reachable=false
+@pl.olejarka.trk702x:layout/ime_secondary_split_test_activity : reachable=false
+@pl.olejarka.trk702x:layout/notification_action : reachable=true
+    @pl.olejarka.trk702x:style/Widget_Compat_NotificationActionContainer
+    @pl.olejarka.trk702x:dimen/notification_action_icon_size
+    @pl.olejarka.trk702x:style/Widget_Compat_NotificationActionText
+@pl.olejarka.trk702x:layout/notification_action_tombstone : reachable=true
+    @pl.olejarka.trk702x:style/Widget_Compat_NotificationActionContainer
+    @pl.olejarka.trk702x:dimen/notification_action_icon_size
+    @pl.olejarka.trk702x:style/Widget_Compat_NotificationActionText
+@pl.olejarka.trk702x:layout/notification_template_custom_big : reachable=true
+    @pl.olejarka.trk702x:layout/notification_template_icon_group
+    @pl.olejarka.trk702x:dimen/notification_large_icon_width
+    @pl.olejarka.trk702x:dimen/notification_large_icon_height
+    @pl.olejarka.trk702x:dimen/notification_right_side_padding_top
+    @pl.olejarka.trk702x:layout/notification_template_part_time
+    @pl.olejarka.trk702x:layout/notification_template_part_chronometer
+    @pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Info
+@pl.olejarka.trk702x:layout/notification_template_icon_group : reachable=true
+    @pl.olejarka.trk702x:dimen/notification_large_icon_width
+    @pl.olejarka.trk702x:dimen/notification_large_icon_height
+    @pl.olejarka.trk702x:dimen/notification_big_circle_margin
+    @pl.olejarka.trk702x:dimen/notification_right_icon_size
+@pl.olejarka.trk702x:layout/notification_template_part_chronometer : reachable=true
+    @pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Time
+@pl.olejarka.trk702x:layout/notification_template_part_time : reachable=true
+    @pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Time
+@pl.olejarka.trk702x:mipmap/ic_launcher : reachable=true
+    @pl.olejarka.trk702x:drawable/ic_launcher_background
+    @pl.olejarka.trk702x:drawable/ic_launcher_foreground
+@pl.olejarka.trk702x:mipmap/ic_launcher_round : reachable=true
+    @pl.olejarka.trk702x:drawable/ic_launcher_background
+    @pl.olejarka.trk702x:drawable/ic_launcher_foreground
+@pl.olejarka.trk702x:string/androidx_startup : reachable=true
+@pl.olejarka.trk702x:string/app_name : reachable=true
+@pl.olejarka.trk702x:string/autofill : reachable=true
+@pl.olejarka.trk702x:string/call_notification_answer_action : reachable=false
+@pl.olejarka.trk702x:string/call_notification_answer_video_action : reachable=false
+@pl.olejarka.trk702x:string/call_notification_decline_action : reachable=false
+@pl.olejarka.trk702x:string/call_notification_hang_up_action : reachable=false
+@pl.olejarka.trk702x:string/call_notification_incoming_text : reachable=false
+@pl.olejarka.trk702x:string/call_notification_ongoing_text : reachable=false
+@pl.olejarka.trk702x:string/call_notification_screening_text : reachable=false
+@pl.olejarka.trk702x:string/close_drawer : reachable=false
+@pl.olejarka.trk702x:string/close_sheet : reachable=false
+@pl.olejarka.trk702x:string/default_error_message : reachable=false
+@pl.olejarka.trk702x:string/default_popup_window_title : reachable=false
+@pl.olejarka.trk702x:string/dropdown_menu : reachable=false
+@pl.olejarka.trk702x:string/in_progress : reachable=false
+@pl.olejarka.trk702x:string/indeterminate : reachable=false
+@pl.olejarka.trk702x:string/m3c_bottom_sheet_collapse_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_bottom_sheet_dismiss_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_bottom_sheet_drag_handle_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_bottom_sheet_expand_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_bottom_sheet_pane_title : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_headline : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_headline_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_invalid_for_pattern : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_invalid_not_allowed : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_invalid_year_range : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_label : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_no_input_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_input_title : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_headline : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_headline_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_navigate_to_year_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_no_selection_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_scroll_to_earlier_years : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_scroll_to_later_years : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_switch_to_calendar_mode : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_switch_to_day_selection : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_switch_to_input_mode : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_switch_to_next_month : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_switch_to_previous_month : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_switch_to_year_selection : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_title : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_today_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_picker_year_picker_pane_title : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_input_invalid_range_input : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_input_title : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_picker_day_in_range : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_picker_end_headline : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_picker_scroll_to_next_month : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_picker_scroll_to_previous_month : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_picker_start_headline : reachable=false
+@pl.olejarka.trk702x:string/m3c_date_range_picker_title : reachable=false
+@pl.olejarka.trk702x:string/m3c_dialog : reachable=false
+@pl.olejarka.trk702x:string/m3c_dropdown_menu_collapsed : reachable=false
+@pl.olejarka.trk702x:string/m3c_dropdown_menu_expanded : reachable=false
+@pl.olejarka.trk702x:string/m3c_dropdown_menu_toggle : reachable=false
+@pl.olejarka.trk702x:string/m3c_search_bar_search : reachable=false
+@pl.olejarka.trk702x:string/m3c_snackbar_dismiss : reachable=false
+@pl.olejarka.trk702x:string/m3c_suggestions_available : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_am : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_hour : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_hour_24h_suffix : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_hour_selection : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_hour_suffix : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_hour_text_field : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_minute : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_minute_selection : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_minute_suffix : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_minute_text_field : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_period_toggle_description : reachable=false
+@pl.olejarka.trk702x:string/m3c_time_picker_pm : reachable=false
+@pl.olejarka.trk702x:string/m3c_tooltip_long_press_label : reachable=false
+@pl.olejarka.trk702x:string/m3c_tooltip_pane_description : reachable=false
+@pl.olejarka.trk702x:string/navigation_menu : reachable=false
+@pl.olejarka.trk702x:string/not_selected : reachable=false
+@pl.olejarka.trk702x:string/range_end : reachable=false
+@pl.olejarka.trk702x:string/range_start : reachable=false
+@pl.olejarka.trk702x:string/selected : reachable=false
+@pl.olejarka.trk702x:string/snackbar_pane_title : reachable=false
+@pl.olejarka.trk702x:string/state_empty : reachable=true
+@pl.olejarka.trk702x:string/state_off : reachable=true
+@pl.olejarka.trk702x:string/state_on : reachable=true
+@pl.olejarka.trk702x:string/status_bar_notification_info_overflow : reachable=false
+@pl.olejarka.trk702x:string/switch_role : reachable=false
+@pl.olejarka.trk702x:string/tab : reachable=false
+@pl.olejarka.trk702x:string/template_percent : reachable=true
+@pl.olejarka.trk702x:string/tooltip_description : reachable=false
+@pl.olejarka.trk702x:string/tooltip_label : reachable=false
+@pl.olejarka.trk702x:style/DialogWindowTheme : reachable=false
+@pl.olejarka.trk702x:style/EdgeToEdgeFloatingDialogTheme : reachable=false
+    @pl.olejarka.trk702x:integer/m3c_window_layout_in_display_cutout_mode
+@pl.olejarka.trk702x:style/EdgeToEdgeFloatingDialogWindowTheme : reachable=false
+    @pl.olejarka.trk702x:style/EdgeToEdgeFloatingDialogTheme
+@pl.olejarka.trk702x:style/FloatingDialogTheme : reachable=false
+@pl.olejarka.trk702x:style/FloatingDialogWindowTheme : reachable=false
+    @pl.olejarka.trk702x:style/FloatingDialogTheme
+@pl.olejarka.trk702x:style/TextAppearance_Compat_Notification : reachable=false
+@pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Info : reachable=false
+@pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Line2 : reachable=false
+    @pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Info
+@pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Time : reachable=false
+@pl.olejarka.trk702x:style/TextAppearance_Compat_Notification_Title : reachable=false
+@pl.olejarka.trk702x:style/Theme_Olejarka : reachable=true
+    @pl.olejarka.trk702x:color/background
+    @pl.olejarka.trk702x:drawable/ic_splash_transparent
+@pl.olejarka.trk702x:style/Widget_Compat_NotificationActionContainer : reachable=false
+    @pl.olejarka.trk702x:drawable/notification_action_background
+@pl.olejarka.trk702x:style/Widget_Compat_NotificationActionText : reachable=false
+    @pl.olejarka.trk702x:color/androidx_core_secondary_text_default_material_light
+    @pl.olejarka.trk702x:dimen/notification_action_text_size
+
+The root reachable resources are:
+ attr:shortcutMatchRequired:2130771984
+ color:accent:2130837504
+ color:hud_blue:2130837513
+ color:notification_action_color_filter:2130837515
+ color:notification_icon_bg_color:2130837516
+ color:text:2130837517
+ dimen:notification_action_icon_size:2130903047
+ dimen:notification_action_text_size:2130903048
+ dimen:notification_big_circle_margin:2130903049
+ dimen:notification_content_margin_start:2130903050
+ dimen:notification_large_icon_height:2130903051
+ dimen:notification_large_icon_width:2130903052
+ dimen:notification_main_column_padding_top:2130903053
+ dimen:notification_media_narrow_margin:2130903054
+ dimen:notification_right_icon_size:2130903055
+ dimen:notification_right_side_padding_top:2130903056
+ dimen:notification_small_icon_background_padding:2130903057
+ dimen:notification_small_icon_size_as_large:2130903058
+ dimen:notification_subtext_size:2130903059
+ dimen:notification_top_pad:2130903060
+ dimen:notification_top_pad_large_text:2130903061
+ drawable:notification_action_background:2130968585
+ drawable:notification_bg:2130968586
+ drawable:notification_bg_low:2130968587
+ drawable:notification_bg_low_normal:2130968588
+ drawable:notification_bg_low_pressed:2130968589
+ drawable:notification_bg_normal:2130968590
+ drawable:notification_bg_normal_pressed:2130968591
+ drawable:notification_icon_background:2130968592
+ drawable:notification_oversize_large_icon_bg:2130968593
+ drawable:notification_template_icon_bg:2130968594
+ drawable:notification_template_icon_low_bg:2130968595
+ drawable:notification_tile_bg:2130968596
+ id:accessibility_action_clickable_span:2131034112
+ id:accessibility_custom_action_0:2131034113
+ id:accessibility_custom_action_1:2131034114
+ id:accessibility_custom_action_10:2131034115
+ id:accessibility_custom_action_11:2131034116
+ id:accessibility_custom_action_12:2131034117
+ id:accessibility_custom_action_13:2131034118
+ id:accessibility_custom_action_14:2131034119
+ id:accessibility_custom_action_15:2131034120
+ id:accessibility_custom_action_16:2131034121
+ id:accessibility_custom_action_17:2131034122
+ id:accessibility_custom_action_18:2131034123
+ id:accessibility_custom_action_19:2131034124
+ id:accessibility_custom_action_2:2131034125
+ id:accessibility_custom_action_20:2131034126
+ id:accessibility_custom_action_21:2131034127
+ id:accessibility_custom_action_22:2131034128
+ id:accessibility_custom_action_23:2131034129
+ id:accessibility_custom_action_24:2131034130
+ id:accessibility_custom_action_25:2131034131
+ id:accessibility_custom_action_26:2131034132
+ id:accessibility_custom_action_27:2131034133
+ id:accessibility_custom_action_28:2131034134
+ id:accessibility_custom_action_29:2131034135
+ id:accessibility_custom_action_3:2131034136
+ id:accessibility_custom_action_30:2131034137
+ id:accessibility_custom_action_31:2131034138
+ id:accessibility_custom_action_4:2131034139
+ id:accessibility_custom_action_5:2131034140
+ id:accessibility_custom_action_6:2131034141
+ id:accessibility_custom_action_7:2131034142
+ id:accessibility_custom_action_8:2131034143
+ id:accessibility_custom_action_9:2131034144
+ id:notification_background:2131034171
+ id:notification_main_column:2131034172
+ id:notification_main_column_container:2131034173
+ id:report_drawn:2131034175
+ id:tag_compat_insets_dispatch:2131034182
+ id:tag_on_apply_window_listener:2131034183
+ id:tag_unhandled_key_event_manager:2131034190
+ id:tag_unhandled_key_listeners:2131034191
+ id:tag_window_insets_animation_callback:2131034192
+ id:text:2131034193
+ id:text2:2131034194
+ id:title:2131034196
+ id:view_tree_disjoint_parent:2131034197
+ id:view_tree_lifecycle_owner:2131034198
+ id:view_tree_on_back_pressed_dispatcher_owner:2131034199
+ id:view_tree_saved_state_registry_owner:2131034200
+ id:view_tree_view_model_store_owner:2131034201
+ layout:notification_action:2131165187
+ layout:notification_action_tombstone:2131165188
+ layout:notification_template_custom_big:2131165189
+ layout:notification_template_icon_group:2131165190
+ layout:notification_template_part_chronometer:2131165191
+ layout:notification_template_part_time:2131165192
+ mipmap:ic_launcher:2131230720
+ mipmap:ic_launcher_round:2131230721
+ string:androidx_startup:2131296256
+ string:app_name:2131296257
+ string:autofill:2131296258
+ string:state_empty:2131296336
+ string:state_off:2131296337
+ string:state_on:2131296338
+ string:template_percent:2131296342
+ style:Theme_Olejarka:2131361802
+Unused resources are: 
+ color:border:2130837508
+ color:call_notification_answer_color:2130837509
+ color:call_notification_decline_color:2130837510
+ color:card:2130837511
+ color:danger:2130837512
+ color:muted:2130837514
+ color:vector_tint_color:2130837518
+ color:vector_tint_theme_color:2130837519
+ color:warn:2130837520
+ dimen:compat_notification_large_icon_max_height:2130903045
+ dimen:compat_notification_large_icon_max_width:2130903046
+ drawable:ic_call_answer:2130968576
+ drawable:ic_call_answer_low:2130968577
+ drawable:ic_call_answer_video:2130968578
+ drawable:ic_call_answer_video_low:2130968579
+ drawable:ic_call_decline:2130968580
+ drawable:ic_call_decline_low:2130968581
+ id:action_container:2131034145
+ id:action_divider:2131034146
+ id:action_image:2131034147
+ id:action_text:2131034148
+ id:actions:2131034149
+ id:androidx_compose_ui_view_composition_context:2131034150
+ id:async:2131034151
+ id:blocking:2131034152
+ id:chronometer:2131034153
+ id:compose_view_saveable_id_tag:2131034154
+ id:consume_window_insets_tag:2131034155
+ id:dialog_button:2131034156
+ id:edit_text_id:2131034157
+ id:forever:2131034158
+ id:hide_graphics_layer_in_inspector_tag:2131034159
+ id:hide_ime_id:2131034160
+ id:hide_in_inspector_tag:2131034161
+ id:icon:2131034162
+ id:icon_group:2131034163
+ id:info:2131034164
+ id:inspection_slot_table_set:2131034165
+ id:is_pooling_container_tag:2131034166
+ id:italic:2131034167
+ id:line1:2131034168
+ id:line3:2131034169
+ id:normal:2131034170
+ id:pooling_container_listener_holder_tag:2131034174
+ id:right_icon:2131034176
+ id:right_side:2131034177
+ id:tag_accessibility_actions:2131034178
+ id:tag_accessibility_clickable_spans:2131034179
+ id:tag_accessibility_heading:2131034180
+ id:tag_accessibility_pane_title:2131034181
+ id:tag_on_receive_content_listener:2131034184
+ id:tag_on_receive_content_mime_types:2131034185
+ id:tag_screen_reader_focusable:2131034186
+ id:tag_state_description:2131034187
+ id:tag_system_bar_state_monitor:2131034188
+ id:tag_transition_group:2131034189
+ id:time:2131034195
+ id:wrapped_composition_tag:2131034202
+ integer:m3c_window_layout_in_display_cutout_mode:2131099648
+ integer:status_bar_notification_info_maxnum:2131099649
+ layout:custom_dialog:2131165184
+ layout:ime_base_split_test_activity:2131165185
+ layout:ime_secondary_split_test_activity:2131165186
+ string:call_notification_answer_action:2131296259
+ string:call_notification_answer_video_action:2131296260
+ string:call_notification_decline_action:2131296261
+ string:call_notification_hang_up_action:2131296262
+ string:call_notification_incoming_text:2131296263
+ string:call_notification_ongoing_text:2131296264
+ string:call_notification_screening_text:2131296265
+ string:close_drawer:2131296266
+ string:close_sheet:2131296267
+ string:default_error_message:2131296268
+ string:default_popup_window_title:2131296269
+ string:dropdown_menu:2131296270
+ string:in_progress:2131296271
+ string:indeterminate:2131296272
+ string:m3c_bottom_sheet_collapse_description:2131296273
+ string:m3c_bottom_sheet_dismiss_description:2131296274
+ string:m3c_bottom_sheet_drag_handle_description:2131296275
+ string:m3c_bottom_sheet_expand_description:2131296276
+ string:m3c_bottom_sheet_pane_title:2131296277
+ string:m3c_date_input_headline:2131296278
+ string:m3c_date_input_headline_description:2131296279
+ string:m3c_date_input_invalid_for_pattern:2131296280
+ string:m3c_date_input_invalid_not_allowed:2131296281
+ string:m3c_date_input_invalid_year_range:2131296282
+ string:m3c_date_input_label:2131296283
+ string:m3c_date_input_no_input_description:2131296284
+ string:m3c_date_input_title:2131296285
+ string:m3c_date_picker_headline:2131296286
+ string:m3c_date_picker_headline_description:2131296287
+ string:m3c_date_picker_navigate_to_year_description:2131296288
+ string:m3c_date_picker_no_selection_description:2131296289
+ string:m3c_date_picker_scroll_to_earlier_years:2131296290
+ string:m3c_date_picker_scroll_to_later_years:2131296291
+ string:m3c_date_picker_switch_to_calendar_mode:2131296292
+ string:m3c_date_picker_switch_to_day_selection:2131296293
+ string:m3c_date_picker_switch_to_input_mode:2131296294
+ string:m3c_date_picker_switch_to_next_month:2131296295
+ string:m3c_date_picker_switch_to_previous_month:2131296296
+ string:m3c_date_picker_switch_to_year_selection:2131296297
+ string:m3c_date_picker_title:2131296298
+ string:m3c_date_picker_today_description:2131296299
+ string:m3c_date_picker_year_picker_pane_title:2131296300
+ string:m3c_date_range_input_invalid_range_input:2131296301
+ string:m3c_date_range_input_title:2131296302
+ string:m3c_date_range_picker_day_in_range:2131296303
+ string:m3c_date_range_picker_end_headline:2131296304
+ string:m3c_date_range_picker_scroll_to_next_month:2131296305
+ string:m3c_date_range_picker_scroll_to_previous_month:2131296306
+ string:m3c_date_range_picker_start_headline:2131296307
+ string:m3c_date_range_picker_title:2131296308
+ string:m3c_dialog:2131296309
+ string:m3c_dropdown_menu_collapsed:2131296310
+ string:m3c_dropdown_menu_expanded:2131296311
+ string:m3c_dropdown_menu_toggle:2131296312
+ string:m3c_search_bar_search:2131296313
+ string:m3c_snackbar_dismiss:2131296314
+ string:m3c_suggestions_available:2131296315
+ string:m3c_time_picker_am:2131296316
+ string:m3c_time_picker_hour:2131296317
+ string:m3c_time_picker_hour_24h_suffix:2131296318
+ string:m3c_time_picker_hour_selection:2131296319
+ string:m3c_time_picker_hour_suffix:2131296320
+ string:m3c_time_picker_hour_text_field:2131296321
+ string:m3c_time_picker_minute:2131296322
+ string:m3c_time_picker_minute_selection:2131296323
+ string:m3c_time_picker_minute_suffix:2131296324
+ string:m3c_time_picker_minute_text_field:2131296325
+ string:m3c_time_picker_period_toggle_description:2131296326
+ string:m3c_time_picker_pm:2131296327
+ string:m3c_tooltip_long_press_label:2131296328
+ string:m3c_tooltip_pane_description:2131296329
+ string:navigation_menu:2131296330
+ string:not_selected:2131296331
+ string:range_end:2131296332
+ string:range_start:2131296333
+ string:selected:2131296334
+ string:snackbar_pane_title:2131296335
+ string:status_bar_notification_info_overflow:2131296339
+ string:switch_role:2131296340
+ string:tab:2131296341
+ string:tooltip_description:2131296343
+ string:tooltip_label:2131296344
+ style:DialogWindowTheme:2131361792
+ style:EdgeToEdgeFloatingDialogTheme:2131361793
+ style:EdgeToEdgeFloatingDialogWindowTheme:2131361794
+ style:FloatingDialogTheme:2131361795
+ style:FloatingDialogWindowTheme:2131361796
+ style:TextAppearance_Compat_Notification:2131361797
+ style:TextAppearance_Compat_Notification_Line2:2131361799
+ style:TextAppearance_Compat_Notification_Title:2131361801

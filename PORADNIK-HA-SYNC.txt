@@ -1,0 +1,173 @@
+=====================================================
+  OLEJARKA TRK 702X - SYNCHRONIZACJA Z HOME ASSISTANT
+  Instrukcja dla użytkownika
+=====================================================
+
+Co to daje?
+------------
+Podczas jazdy apka stale wysyła do Home Assistant lokalizację i dane
+czujników. W HA zobaczysz:
+  1) TRASĘ dnia na mapie (urządzenie "Olejarka GPS") - ciągła linia
+     z ostatnich godzin, jak w Yanosiku;
+  2) LISTĘ DZIENNYCH TRIPÓW (sensor "Olejarka Trips Today"):
+     każdy dzień jazdy to jeden zapis - godziny, dystans, czas jazdy,
+     średnia i maksymalna prędkość. Krótkie postoje (sklep, tankowanie)
+     NIE dzielą trasy - jeden przejazd dnia = jeden trip.
+
+Do wysyłki NIE jest potrzebne żadne hasło ani token. Wystarczy adres
+Twojego HA i nazwa webhooka - wszystko konfigurujesz w ustawieniach
+apki. Wysyłka działa tylko podczas jazdy (powyżej ~5 km/h): na postoju
+apka nie zaśmieca mapy, a postój w trakcie trasy nie przerywa tripu.
+
+BEZ INTERNETU? Nie ma tragedii:
+- punkty GPS i tripy lądują w kolejce apki (do 600 punktow, zapisane
+  w telefonie, przetrwaja restart); po powrocie zasięgu apka wysyla je
+  sama (flusz po ping o co 15 s). Dzienny trip NIE zostanie utracony
+  nawet przy kilkugodzinnej przerwie w sieci.
+
+Dane ponadto: prędkość, kierunek, poziom paliwa, temperatura i
+przechylenie - dostępne jako atrybuty sensora/dane na karcie.
+
+-----------------------------------------------------
+KROK 1 - TRASA NA MAPIE (pakiet YAML)
+-----------------------------------------------------
+1. W katalogu "packages" swojego Home Assistant (np. /config/packages)
+   utwórz plik o nazwie   olejarka_remote.yaml   i wklej do niego:
+
+   template:
+     - triggers:
+         - trigger: webhook
+           webhook_id: olejarka-trip
+           local_only: false
+       device_tracker:
+         - name: "Olejarka GPS"
+           unique_id: olejarka_gps_tracker
+           latitude: "{{ trigger.json.lat }}"
+           longitude: "{{ trigger.json.lon }}"
+           location_accuracy: "{{ trigger.json.acc }}"
+           attributes:
+             speed_kmh: "{{ trigger.json.spd }}"
+             heading_deg: "{{ trigger.json.hdg }}"
+             fuel_l: "{{ trigger.json.fuel }}"
+             temp_c: "{{ trigger.json.tmp }}"
+             tilt_deg: "{{ trigger.json.tilt }}"
+
+2. Jeśli Twój plik configuration.yaml nie zawiera jeszcze linii
+   "packages", dodaj pod sekcją "homeassistant:":
+
+   homeassistant:
+     ...
+     packages: !include_dir_named packages
+
+   (Uwaga: nie zmieniaj niczego innego w tym pliku.)
+
+-----------------------------------------------------
+KROK 2 - LISTA DZIENNYCH TRIPÓW (integracja Olejarka Trips)
+-----------------------------------------------------
+1. Skopiuj katalog  olejarka_trips  do folderu
+     /config/custom_components/olejarka_trips
+   w swoim Home Assistant (np. przez SMB do /config).
+
+2. Ustawienia > Integracje > "+ Dodaj integrację" > wyszukaj
+   "Olejarka Trips" > Dodaj (nic nie trzeba wpisywać).
+
+Integracja przyjmuje dane na webhooku "olejarka-trip-end" i zapisuje
+dzienne tripy w systemie Home Assistant (przetrwają restart).
+
+-----------------------------------------------------
+KROK 3 - ZRESTARTUJ HOME ASSISTANT
+-----------------------------------------------------
+Ustawienia > System > Uruchom ponownie.
+
+-----------------------------------------------------
+KROK 4 - KARTY NA DASHBOARDZIE
+-----------------------------------------------------
+A. Mapa z trasą:
+   Dodaj kartę "Mapa", w opcjach karty jednostka:
+   device_tracker.olejarka_gps
+   i ustaw "Pokaż historię" na np. 24 godziny - zobaczysz
+   dzisiejszą trasę jako linię.
+
+B. Lista dziennych tripów (karta "Znacznik" - Markdown):
+
+   type: markdown
+   content: |
+     ### Tripy
+     {% set s = 'sensor.olejarka_trips_today' %}
+     {% for t in state_attr(s, 'days') %}
+     - **{{ t.day }}** : {{ t.start[11:16] }} - {{ t.end[11:16] }}
+       {% if t.status == 'open' %} (trwa){% endif %}
+       {{ t.dist_km }} km, jazda {{ t['moving_min'] }} min,
+       śr {{ t.avg_kmh }} km/h, max {{ t.max_kmh }} km/h
+     {% else %}
+     Brak tripów.
+     {% endfor %}
+
+   (Odświeżanie ręczne - tapnij kartę lub dostaw "history", jeśli
+    chcesz. Sensor aktualizuje się po każdej wysyłce apki.)
+
+-----------------------------------------------------
+KROK 5 - KONFIGURACJA W APCE
+-----------------------------------------------------
+1. W apce otwórz Ustawienia > sekcja "Home Assistant".
+2. Przełącz "Wysyłanie danych" na ON.
+3. Adres: https://twoj-ha.pl
+   (jeśli masz chmurę/DDNS/tunel, wpisz adres zewnętrzny - dzięki
+   temu działa również poza domem, np. na działce bez WiFi).
+4. Webhook ID:  olejarka-trip   (zostaw bez zmian).
+5. Interwał wysyłki: 30 s wystarczy; 10 s = gęstsza trasa i więcej
+   baterii.
+
+Przy pierwszym włączeniu apka poprosi o zgodę na lokalizację.
+
+Statusy, które zobaczysz pod spodem:
+   ● Połączono z HA            - ciagly ping co 120 s (działa na postoju)
+   ● HA odpowiada, brak integracji Olejarka Trips - patrz KROK 2
+   ● Brak połączenia z HA      - brak internetu lub zły adres
+   Aktywne - czekam na GPS
+   Wysłano 14:23:05        - punkt trasy
+   Dzienny trip: 3.2 km    - aktywny/temp. trip dnia (postoje nie
+                             przerywają, "postoj" = nie jedziesz teraz)
+   Trip zapisany ...       - domknięto trip (północ / wyłączenie)
+   Brak netu - w kolejce: N pkt   - dane poczekają na zasięg
+
+-----------------------------------------------------
+JAK TO DZIAŁA OD STRONY TECHNICZNEJ (dla ciekawskich)
+-----------------------------------------------------
+Punkty trasy:
+   POST https://TWÓJ_ADRES/api/webhook/olejarka-trip
+   {"lat":51.990000,"lon":23.130000,"acc":6,"spd":72,"hdg":118,
+    "fuel":15.25,"tmp":88,"tilt":-3.2}
+
+Trip (co 60 s podczas jazdy + domknięcie):
+   POST https://TWÓJ_ADRES/api/webhook/olejarka-trip-end
+   {"day":"2026-09-14","start":"...14:23:05","end":"...15:02:41",
+    "dist_km":12.5,"dur_min":39.6,"moving_min":34.2,"avg_kmh":21.9,
+    "max_kmh":87,"status":"open"}
+
+Jeden "trip" = jeden dzień jazdy; integracja nadpisuje wpis danego
+dnia, więc trip dzień nigdy się nie zdubluje (nawet przy restarcie
+apki - ostatnie ~60 s przed zakończeniem może zostać utracone, ale
+trasa na mapie z historii pozostanie).
+
+Webhooki w HA nie wymagają logowania. Przy Cloudflare Tunnel
+(cloudflared) działa też poza domem, po sieci komórkowej.
+
+-----------------------------------------------------
+ROZWIĄZYWANIE PROBLEMÓW
+-----------------------------------------------------
+- "Brak GPS w tym urządzeniu" - telefon bez modułu GPS.
+- "Błąd GPS (1/2/3)" - brak zgody na lokalizację albo brak sygnału
+  (np. w garażu). Wyjedź na otwartą przestrzeń.
+- "HTTP 404" - sprawdź, czy olejarka_remote.yaml jest w packages,
+  a integracja Olejarka Trips dodana; po zmianach restart.
+- "HTTP 401" - HA wymusza logowanie dla webhooków (rzadkie); usuń
+  wymuszenie auth dla /api/webhook/*.
+- "Błąd sieci" - brak internetu (zasięg) albo zły adres.
+- Trasy nie ma na mapie, ale sensor trzyma km - najczęściej brak
+  zgody lokalizacji; sprawdź status w apce.
+- Brak tripu po całym dniu - jedź powyżej 5 km/h z włączonym
+  przełącznikiem, a pod koniec dnia webhook przyjmie "closed" albo
+  wyłącz synchronizację (zapisze trip od razu).
+
+Powodzenia!

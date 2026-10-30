@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "pl.olejarka.app-mergeReleaseResources-43:/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\ALA\\Desktop\\olejarka-android\\app\\src\\main\\res\\values-v31\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "334"
+                    }
+                }
+            ]
+        }
+    ]
+}

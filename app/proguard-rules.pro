@@ -1,0 +1,1 @@
+# Olejarka TRK 702X - proguard rules (empty by default, add if needed)

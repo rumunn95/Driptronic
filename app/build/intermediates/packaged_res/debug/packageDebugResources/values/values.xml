@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#3FB950</color>
+    <color name="background">#0E1117</color>
+    <color name="border">#21262D</color>
+    <color name="card">#161B22</color>
+    <color name="danger">#F85149</color>
+    <color name="hud_blue">#3B82F6</color>
+    <color name="muted">#8B949E</color>
+    <color name="text">#E6EDF3</color>
+    <color name="warn">#D29922</color>
+    <string name="app_name">DripTronic</string>
+    <style name="Theme.Olejarka" parent="android:Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+</resources>

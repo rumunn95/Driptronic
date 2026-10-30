@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="olejarka-dashboard-v3l.css">
+  <link rel="stylesheet" href="native.css">
+  <link rel="stylesheet" href="maplibre-gl.min.css">
+  <link rel="stylesheet" href="leaflet.min.css">
+</head>
+<body class="native hud ble-on">
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-glow"></div>
+    <svg class="splash-fall-drop" viewBox="0 0 20 28"><path d="M10 2 C6 10 2 15 2 20 a8 8 0 0,0 16 0 C18 15 14 10 10 2Z" fill="var(--accent)" opacity=".85"/></svg>
+    <div class="splash-ripple"></div>
+    <div class="splash-logo-lockup">
+      <div class="splash-word">
+        <span class="splash-d-wrap">
+          <span class="splash-d">D</span>
+          <svg class="splash-drop" viewBox="0 0 14 18"><path d="M7 1 C4 6 2 8 2 11 a5 5 0 0,0 10 0 C12 8 10 6 7 1Z" fill="#E63946" stroke="var(--accent)" stroke-width="1.2"/></svg>
+        </span>
+        <span class="splash-rip">RIPTRONIC</span>
+      </div>
+      <div class="splash-tag">automatyczne smarowanie łańcucha · OBD · tripy</div>
+    </div>
+    <div class="splash-by">by rumunn95</div>
+  </div>
+  <header>
+    <div id="headLeft">
+      <span id="dot"></span>
+      <div id="titles">
+        <h1 id="title">
+          <span class="t-in">
+            <span class="splash-d-wrap" style="display:inline-block;position:relative;font-size:16px">
+              <span class="splash-d" style="font-size:16px">D</span>
+              <svg class="splash-drop" viewBox="0 0 14 18" style="width:7px;height:9px;left:50%;top:50%;transform:translate(-50%,-50%)"><path d="M7 1 C4 6 2 8 2 11 a5 5 0 0,0 10 0 C12 8 10 6 7 1Z" fill="#E63946" stroke="var(--accent)" stroke-width="1.5"/></svg>
+            </span>
+            <span style="font-size:16px;font-weight:700">RIPTRONIC</span>
+          </span>
+          <span class="brand-by"> by rumunn95</span>
+        </h1>
+        <div id="subtitle" aria-hidden="true">Rozłączono</div>
+      </div>
+      <span id="btSig" class="bt-sig" title="Sygnał BT" hidden><i></i><i></i><i></i><i></i></span>
+      <span id="gpsSig" class="sig-ic" title="Status GPS" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11.2A7 7 0 0 0 5 9.8C5 14.9 12 21 12 21Z" fill="currentColor"/><circle cx="12" cy="9.5" r="2.6" fill="var(--card)"/></svg></span>
+      <span id="haSig" class="sig-ic" title="Połączenie z Home Assistant" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="3" width="19" height="18" rx="5" fill="currentColor"/><text x="12" y="15.2" text-anchor="middle" fill="var(--card)" font-size="8.5" font-weight="900" font-family="Arial, sans-serif">HA</text></svg></span>
+    </div>
+    <div id="hdrStatus" class="hdr-status lost" role="status"><span id="hdrStatusText">Rozłączono</span><span id="hdrStatusExtra"></span></div>
+    <div id="headActions">
+      <button id="hudEditOkBtn" class="hbtn on" type="button" hidden>✔ OK</button>
+      <button id="hudBtn" class="hbtn on" type="button">HUD</button>
+      <button id="menuBtn" class="hbtn icon-btn" type="button">☰</button>
+      <button id="themeBtn" class="hbtn icon-btn" type="button">☀</button>
+    </div>
+  </header>
+
+  <nav id="menuPanel" class="menu-panel" hidden>
+    <button data-nav="settings" type="button">
+      <span class="menu-title">Ustawienia</span>
+      <small class="menu-sub">parametry, tryb, resetowanie</small>
+    </button>
+    <button data-nav="pulpit" type="button">
+      <span class="menu-title">Pulpit</span>
+      <small class="menu-sub">serwis łańcucha, olej, statystyki</small>
+    </button>
+    <button data-nav="charts" type="button">
+      <span class="menu-title">Wykresy</span>
+      <small class="menu-sub">OBD: LOAD / TPS / zużycie</small>
+    </button>
+    <button data-nav="profiles" type="button">
+      <span class="menu-title">Profile / Kopia</span>
+      <small class="menu-sub">zapis i przywracanie ustawień</small>
+    </button>
+    <button data-nav="errors" type="button">
+      <span class="menu-title">Błędy OBD</span>
+      <small class="menu-sub">odczyt i kasowanie kodów</small>
+    </button>
+    <button data-nav="trips" type="button">
+      <span class="menu-title">Tripy</span>
+      <small class="menu-sub">zapisane trasy na mapie</small>
+    </button>
+    <button id="menuScreenBtn" type="button">
+      <span class="menu-title">📷 Zrzut ekranu</span>
+      <small class="menu-sub">zapisz bieżący widok jako PNG</small>
+    </button>
+    <button data-nav="info" type="button">
+      <span class="menu-title">ℹ Info</span>
+      <small class="menu-sub">changelog, instrukcja, autor</small>
+    </button>
+  </nav>
+
+  <section id="hud">
+    <div class="hud-body">
+      <section class="hud-side hud-obd-side">
+        <h2>OBD</h2>
+        <!-- Znaczniki dwóch kart (OBD ↔ nawigacja): czysta nakładka na lewej
+             krawędzi kolumny, w linii podpisu kolumny — nie nachodzą na kafelki
+             ani na kartę nawigacji. Kotwica: kolumna (position: relative). -->
+        <div class="hud-col-pips" id="hudColPips" aria-hidden="true">
+          <span class="pip" data-card="telemetry"></span>
+          <span class="pip" data-card="nav"></span>
+        </div>
+        <div class="hud-data-grid">
+          <div class="hud-count" data-tile="coolant"><label>ENGINE</label><span id="hudCoolant">—</span><small>°C</small></div>
+          <div class="hud-count" data-tile="outside"><label>OUTSIDE</label><span id="hudTempVal">—</span><small>°C</small></div>
+          <div class="hud-count" data-tile="fuelrate"><label>FUEL RATE</label><span id="hudFuel">—</span><small id="hudFuelUnit">l/100</small></div>
+          <div class="hud-count" data-tile="avg"><label>AVG</label><span id="hudAvg">—</span><small>l/100</small></div>
+        </div>
+        <div class="hud-nav" id="hudNav" hidden>
+          <div class="hud-nav-card" id="hudNavCard">
+            <span class="hud-nav-arrow" id="hudNavArrow">↑</span>
+            <span class="hud-nav-text" id="hudNavText">—</span>
+            <small class="hud-nav-sub" id="hudNavSub"></small>
+          </div>
+        </div>
+        <button id="hudMode" class="hud-mode" type="button">
+          <span class="hud-mode-label">Tryb: Normal</span>
+          <small class="hud-mode-sub">porcja ×1,0</small>
+        </button>
+      </section>
+
+      <section class="hud-center">
+        <h2 class="hud-center-head">
+          <span>Zużycie</span>
+          <b id="hudZuz">—</b>
+        </h2>
+        <div class="hud-speed" id="gauge"></div>
+        <div class="hud-vbar hud-vbar-temp" id="hudTempBar" hidden>
+          <svg class="hud-vbar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3v10.2a3.2 3.2 0 1 0 2 0V3a2 2 0 0 0-2 0Z" fill="currentColor"/><path d="M14.5 5h6M14.5 8.5h4.5M14.5 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2 17.5c1.8-1.7 3.6 1.7 5.4 0s3.6 1.7 5.4 0 3.6 1.7 5.4 0 3.6 1.7 5.4 0M2 21c1.8-1.7 3.6 1.7 5.4 0s3.6 1.7 5.4 0 3.6 1.7 5.4 0 3.6 1.7 5.4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <div class="hud-vbar-track"><div class="hud-vbar-fill" id="hudTempFill"></div></div>
+          <span class="hud-vbar-val" id="hudTempBarVal"></span>
+        </div>
+        <div class="hud-vbar hud-vbar-fuel" id="hudFuelBar" hidden>
+          <svg class="hud-vbar-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 18V4.5A1.5 1.5 0 0 1 5.5 3h5A1.5 1.5 0 0 1 12 4.5V18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 5h4v4H6zM12 6h1.5L16 8.5V14a1.5 1.5 0 0 0 3 0V8l-2-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 18h11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <div class="hud-vbar-track"><div class="hud-vbar-fill" id="hudFuelFill"></div></div>
+          <span class="hud-vbar-val" id="hudFuelBarVal"></span>
+        </div>
+        <div class="hud-tilt" id="hudTilt" hidden>
+          <div class="hud-tilt-vu">
+            <span class="hud-vu hud-vu-l" id="hudVuL"></span>
+            <i class="vu-mid"></i>
+            <span class="hud-vu hud-vu-r" id="hudVuR"></span>
+            <span class="hud-tilt-peak-val" id="hudTiltPeakVal"></span>
+          </div>
+          <span class="hud-tilt-read" id="hudTiltRead"><b id="hudTiltVal">—</b><span class="hud-tilt-dir" id="hudTiltDir"></span></span>
+        </div>
+        <div class="hud-trip">
+          <div class="hud-count" data-tile="trip"><label>TRIP</label><span id="hudTrip">—</span><small>km</small></div>
+          <div class="hud-count" data-tile="range"><label>ZASIĘG</label><span id="hudRange">—</span><small>km</small></div>
+        </div>
+      </section>
+
+      <section class="hud-side hud-oil-side">
+        <h2>OLEJARKA</h2>
+        <div class="hud-data-grid">
+          <div class="hud-count" data-tile="oil"><label>OLEJ</label><span id="hudOlej">—</span><small>ml</small></div>
+          <div class="hud-count" data-tile="imp"><label>LICZNIK</label><span id="hudImp">—</span><small>imp</small></div>
+          <div class="hud-count" data-tile="dosesday"><label>DZIŚ</label><span id="hudDawkiDz">—</span><small>szt</small></div>
+          <div class="hud-count" data-tile="dosestotal"><label>ŁĄCZNIE</label><span id="hudDawkiTot">—</span><small>szt</small></div>
+        </div>
+        <button id="hudPump" class="hud-pump" type="button">
+          <span class="hud-pump-label">Smaruj teraz</span>
+        </button>
+      </section>
+    </div>
+  </section>
+
+  <section id="settings" hidden>
+    <div class="settings-scroll">
+      <button id="settingsLock" class="settings-lock" type="button">🔒 Ustawienia zablokowane</button>
+      <p class="setting-hint settings-offline-hint" id="settingsOfflineHint" hidden></p>
+      <details class="settings-group">
+        <summary>💡 Wyświetlacz</summary>
+        <h2>Czujnik przechyłu</h2>
+        <p class="setting-hint">Kalibruj przy telefonie w uchwycie i moto pionowo (na bocznej stopce przechył będzie błędny).</p>
+        <div class="settings-actions">
+          <button id="tiltCalBtn" type="button">Kalibruj poziom</button>
+          <button id="tiltClearBtn" type="button">Wyczyść</button>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Przechył teraz (na poziomie = 0°)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <output id="tiltLive">—</output>
+            </div>
+          </div>
+        </div>
+        <h2>Orientacja HUD</h2>
+        <p class="setting-hint">Dla telefonu w uchwycie pionowym: ekran jazdy (HUD) obraca się do pionu — na górze jest licznik z zużyciem, przechyłem i TRIP/ZASIĘG, niżej OLEJARKA, potem OBD/nawigacja; przyciski Tryb i Smaruj zostają na dole. Status BLE pokazuje się w osobnym pasku pod przyciskami, bez ikonek GPS/HA/BLE w nagłówku. Paski temperatury i paliwa kończą się równo z podstawą łuków LOAD/TPS. Ustawienia, wykresy i widoki tripów zostają poziomo. Tryb działa tylko na ekranie HUD.</p>
+        <div class="setting-row">
+          <div class="setting-label">Układ HUD</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="hudVertBtn" type="button">POZIOMA</button>
+            </div>
+          </div>
+        </div>
+        <h2>Motyw automatyczny</h2>
+        <p class="setting-hint">Gdy wokół jest jasno — motyw jasny; gdy ciemno — wybrany ciemny (AMOLED/CIEMNY). „Próg” to ilość światła, od której uznajemy, że jest jasno. „Histereza” to zapas wokół progu, żeby motyw nie migotał, gdy światło jest blisko progu.</p>
+        <div class="setting-row">
+          <div class="setting-label">Przełączanie automatyczne</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="themeAutoBtn" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Ciemna strona motywu</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="themeDarkBtn" type="button">AMOLED</button>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Który ciemny motyw ma się włączać nocą: AMOLED = pełna czerń (oszczędza ekran OLED), CIEMNY = grafit. Motyw jasny ma stały wygląd.</p>
+        <div class="setting-row">
+          <div class="setting-label">Natężenie teraz</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <output id="luxLive">—</output>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Bieżący odczyt czujnika światła w telefonie (luksy) — rośnie w słońcu, spada w cieniu i w nocy. „Próg” to ilość światła, od której uznajemy, że jest jasno (2000 lx ≈ dzień w pokoju). „Histereza” to bufor wokół progu — większy = rzadsze zmiany, mniej migotania.</p>
+        <div class="setting-row">
+          <div class="setting-label">Próg (lx)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="thrMinus" type="button">−</button>
+              <output id="thrOut">2000</output>
+              <button id="thrPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Histereza (lx)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="hystMinus" type="button">−</button>
+              <output id="hystOut">500</output>
+              <button id="hystPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <h2>Jasność ekranu</h2>
+        <p class="setting-hint">Podświetlenie podąża za światłem: nocą schodzi do „Jasność nocą”, w słońcu wchodzi na „Jasność w słońcu”, pomiędzy zmienia się płynnie. Zmiany są wygładzane i ograniczone do jednej na ~4 s (duży skok światła działa od razu), żeby ekran nie migotał.</p>
+        <div class="setting-row">
+          <div class="setting-label">Jasność automatyczna</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="brAutoBtn" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Poziom wysyłany teraz do ekranu (%). „Jasność nocą” = przy słabym świetle (noc, tunel). „Jasność w słońcu” = przy pełnym słońcu. Między nimi ekran zmienia się płynnie.</p>
+        <div class="setting-row">
+          <div class="setting-label">Jasność teraz</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <output id="brLive">—</output>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Jasność nocą (min)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="brMinMinus" type="button">−</button>
+              <output id="brMinOut">20</output>
+              <button id="brMinPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Jasność w słońcu (max)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="brMaxMinus" type="button">−</button>
+              <output id="brMaxOut">100</output>
+              <button id="brMaxPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Mnożnik jasności</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="brMulMinus" type="button">−</button>
+              <output id="brMulOut">100</output>
+              <button id="brMulPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Ogólne wzmocnienie lub osłabienie jasności (50–150 %). Powyżej 100 — ekran jaśniejszy przy tym samym świetle; poniżej 100 — ciemniejszy.</p>
+        <h2>Wskaźnik przechyłu (VU)</h2>
+        <p class="setting-hint">Skala = przechył 15 segmentów w pełni (większa = wskaźnik „leniwszy"). Przesunięcia dopasowują pasek, gdy telefon nie jest idealnie wyśrodkowany w uchwycie.</p>
+        <div class="setting-row">
+          <div class="setting-label">Skala wskaźnika</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="vuLeanMinus" type="button">−</button>
+              <output id="vuLeanOut">60</output>
+              <button id="vuLeanPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Przesunięcie pionowe (px)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="vuYMinus" type="button">−</button>
+              <output id="vuYOut">0</output>
+              <button id="vuYPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Przesunięcie poziome (px)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="vuXMinus" type="button">−</button>
+              <output id="vuXOut">0</output>
+              <button id="vuXPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="settings-group">
+        <summary>🔔 Powiadomienia</summary>
+        <p class="setting-hint">Alerty z dźwiękiem i wibracją przez systemowe powiadomienia (Android 13+ wymaga zezwolenia — aplikacja prosi przy starcie).</p>
+        <div class="setting-row">
+          <div class="setting-label">Utrata połączenia BLE</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="alertBtBtn" class="setting-tappable" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Powiadomienie z dźwiękiem i wibracją, gdy regulator zerwie połączenie Bluetooth.</p>
+        <div class="setting-row">
+          <div class="setting-label" id="alertOilLabel">Niski poziom oleju (&lt; 250 ml)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="alertOilBtn" class="setting-tappable" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Próg niskiego oleju (ml)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="oilLevelMinus" type="button">−</button>
+              <output id="oilLevelOut">15</output>
+              <button id="oilLevelPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Gdy poziom oleju w HUD spadnie poniżej tej wartości, włączy się alert. Zbiornik ma 60 ml.</p>
+        <div class="setting-row">
+          <div class="setting-label">Wysoka temperatura silnika (≥ 105 °C)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="alertTempBtn" class="setting-tappable" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="settings-group">
+        <summary>🚨 Alarm wypadku</summary>
+        <p class="setting-hint">Gdy apka wykryje prawdopodobny upadek (motocykl leży, silnik zgasł, koło stoi), włączy głośny alarm i odliczanie. Jeśli nie anulujesz, wyśle SMS z pozycją i zadzwoni na zapisane numery. Alarm działa tylko przy połączonej olejarce (przechył, obroty i prędkość przychodzą przez BLE). Gdy obsługujesz telefon — wpisujesz tankowanie, siedzisz w ustawieniach albo otwarte jest okno dialogowe — alarm jest wstrzymany, żeby podniesiony telefon nie udawał upadku.</p>
+        <div class="setting-row">
+          <div class="setting-label">Alarm wypadku</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="crashOnBtn" class="setting-tappable" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Czułość</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="crashLayerBtn" type="button">—</button>
+            </div>
+          </div>
+        </div>
+        <div class="crash-layer-info" id="crashLayerInfo"></div>
+        <div class="crash-layer-dots" id="crashLayerDots"></div>
+        <p class="setting-hint">Wyższa czułość łapie więcej sytuacji, ale rośnie ryzyko fałszywego alarmu. Warstwy niższe działają zawsze — wybór tylko dodaje kolejne.</p>
+        <div class="setting-row">
+          <div class="setting-label">Opóźnienie (s)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="crashDelayMinus" type="button">−</button>
+              <output id="crashDelayOut">30</output>
+              <button id="crashDelayPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Powtórzenia SMS</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="crashRepeatMinus" type="button">−</button>
+              <output id="crashRepeatOut">3</output>
+              <button id="crashRepeatPlus" type="button">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Dzwoń po SMS</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="crashCallBtn" class="setting-tappable" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <h2>Numery alarmowe (max 3)</h2>
+        <p class="setting-hint">Przy każdym numerze dotknij <b>słuchawki</b>, żeby wybrać, do kogo ma zadzwonić alarm — wybrany podświetli się na zielono. SMS idzie do wszystkich numerów. <b>Kosz</b> usuwa numer.</p>
+        <div id="crashNumList" class="crash-num-list"></div>
+        <p class="setting-hint" id="crashCallHint"></p>
+        <div class="settings-actions">
+          <button id="crashAddNumBtn" type="button">➕ Dodaj numer</button>
+          <button id="crashPermBtn" type="button">Przyznaj uprawnienia</button>
+          <button id="crashTestBtn" type="button">🔔 Test alarmu</button>
+        </div>
+        <p class="setting-hint" id="crashPermHint">—</p>
+      </details>
+
+      <details class="settings-group">
+        <summary>🎛 Kafelki HUD</summary>
+        <p class="setting-hint">Zmień, co pokazują kafelki na ekranie jazdy: nadać własną nazwę (np. zamiast „OUTSIDE" wpisz „OBROTY") i wybrać wartość (np. obroty silnika, temp. zewnętrzna, poziom oleju). Układ HUD pozostaje bez zmian — zmieniasz tylko zawartość i nazwę kafelka.</p>
+        <div class="setting-row">
+          <div class="setting-label">Kolumna OBD</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="obdColBtn" class="setting-tappable" type="button">Telemetria OBD</button>
+            </div>
+          </div>
+        </div>
+        <p class="setting-hint">Ten sam wybór zrobisz gestem na ekranie jazdy: swipe w pionie (góra lub dół) po kolumnie OBD przełącza OBD ↔ nawigację. „Podgląd nawigacji" podmienia całą kolumnę OBD na aktualną trasę z Google Maps / Yanosika / Mapy.com (czytaną z powiadomień telefonu) — a przycisk Tryb jazdy przenosi się wtedy obok „Smaruj teraz". Podgląd działa automatycznie: pokazuje trasę tej nawigacji, która aktualnie prowadzi, bez wybierania mapy. Gdy trasa nie gra, karta pokazuje komunikat — dotknięcie karty otwiera systemowe okienko „Otwórz za pomocą…" z zainstalowanymi nawigacjami (bez przeklikiwania przez menu). Wymaga zgody „Dostęp do powiadomień" w systemowych ustawieniach telefonu.</p>
+        <div class="settings-actions">
+          <button id="hudNavPermSettings" type="button">🔔 Dostęp do powiadomień</button>
+        </div>
+        <div class="settings-actions">
+          <button id="hudEditBtn" type="button">⚙ Edytuj HUD</button>
+          <button id="hudTilesResetBtn" type="button">↩ Przywróć domyślne</button>
+        </div>
+        <p class="setting-hint" id="hudEditHint"></p>
+      </details>
+
+      <details class="settings-group">
+        <summary>🗺 Mapa (Tripy)</summary>
+        <p class="setting-hint" id="mapCacheHint">Kafelki mapy są wczytywane na bieżąco. W trybie offline mapa korzysta tylko z już pobranych kafelków — spędź chwilę on-line przeglądając okolicę.</p>
+        <div class="setting-row">
+          <div class="setting-label">Tryb offline (tylko cache)</div>
+          <div class="setting-controls">
+            <div class="setting-line">
+              <button id="mapOfflineBtn" class="setting-tappable" type="button">WYŁ</button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-actions">
+          <button id="mapCacheClearBtn" type="button">Wyczyść cache mapy</button>
+        </div>
+        <p class="setting-hint" id="mapCacheStatus"></p>
+        <p class="setting-hint">Wyczyść cache, aby zwolnić miejsce na telefonie — tryb offline będzie wtedy korzystał tylko z ponownie pobranych kafelków.</p>
+      </details>
+      <details class="settings-group">
+        <summary>💧 Dozowanie oleju</summary>
+        <h2>Parametry dawkowania</h2>
+        <div id="settingsParams"></div>
+        <h2>Tryb pracy</h2>
+        <div id="settingsMode"></div>
+        <h2>Sterowanie</h2>
+        <div class="settings-actions">
+          <button id="autoBtn" type="button">AUTO: —</button>
+          <button id="rainBtn" type="button">DESZCZ: —</button>
+          <button id="spdSrcBtn" type="button">PRĘDKOŚĆ: —</button>
+          <button id="bleedBtn" type="button">Odpowietrz</button>
+          <button data-command="LUBS" type="button">Dawka ręczna</button>
+        </div>
+        <p class="setting-hint">AUTO włącza/wyłącza automatyczne smarowanie. DESZCZ skraca interwał do 50 % (mokra nawierzchnia). PRĘDKOŚĆ wybiera źródło prędkości: HALL (czujnik na kole) albo OBD (z CAN). Od tego zależy prędkość na HUD, liczniki km/trip w olejarce i próg min. prędkości do dawkowania. Odpowietrz wykonuje krótki impuls, wypychając powietrze z przewodu. Dawka ręczna dozuje jednorazowo na żądanie. Tryb przełączasz na HUD przyciskiem Tryb jazdy: Eco → Normal → Rain → Turbo (Eco/Normal/Turbo zmieniają porcję ×0,6 / ×1,0 / ×1,5 względem interwału, Rain skraca interwał do 50 %).</p>
+        <div id="calPanel" data-actuator="pump">
+          <h2>Kalibracja wydajności</h2>
+          <div class="setting-row">
+            <div class="setting-label">Impulsy testu (pomiar do strzykawki)</div>
+            <div class="setting-controls">
+              <div class="setting-line">
+                <button id="calImpMinus" type="button">−</button>
+                <output id="calImpOut">200</output>
+                <button id="calImpPlus" type="button">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="settings-actions">
+            <button id="calTestBtn" type="button">Uruchom test</button>
+          </div>
+          <div class="setting-row">
+            <div class="setting-label">Pomiar ze strzykawki</div>
+            <div class="setting-controls">
+              <div class="setting-line">
+                <input id="calMl" class="cal-input" type="text" inputmode="decimal" placeholder="np. 4,4 ml">
+                <button id="calSaveBtn" type="button">Zapisz WYDAJ</button>
+              </div>
+            </div>
+          </div>
+          <p class="setting-hint cal-hint" id="calHint">Test poda ok. <span id="calEst">4,4</span> ml. Po teście wpisz faktyczny pomiar (albo podaj go w oknie, które wyskoczy) i zapisz — WYDAJ = pomiar × 1000 ÷ impulsy.</p>
+        </div>
+      </details>
+      <details class="settings-group">
+        <summary>⛽ Paliwo i synchronizacja</summary>
+        <h2>Synchronizacja</h2>
+        <div class="settings-actions date-sync-actions">
+          <button data-command="DATE" type="button">Synchronizuj datę</button>
+          <p class="setting-hint date-sync-info">Ostatnia synchronizacja: —</p>
+        </div>
+        <p class="setting-hint">Ustawia zegar regulatora według godziny z telefonu — bez tego liczniki „dziś” i wpisy czasu jazdy pokażą zły dzień. Datę regulator wysyła też sam po każdym połączeniu.</p>
+        <h2>Wi-Fi (ESPHome)</h2>
+        <div id="wifiPanel">
+          <p class="setting-hint">Podłącz olejarkę do swojego Wi-Fi, żeby pojawiła się w Twoim ESPHome (przycisk Adopt) — wtedy aktualizacje firmware robisz z poziomu ESPHome, bez kabla. Wpisz nazwę sieci (SSID) i hasło; dane pójdą do olejarki przez Bluetooth i zapiszą się w niej na stałe. Fabrycznie olejarka ma Wi-Fi z testów — po tym kroku przełączy się na Twoje.</p>
+          <div class="setting-row">
+            <div class="setting-label">Sieć Wi-Fi</div>
+            <div class="setting-controls">
+              <button id="wifiSetupBtn" class="setting-tappable" type="button">🌐 Podłącz do Wi-Fi…</button>
+            </div>
+          </div>
+          <p class="setting-hint" id="wifiStatus">Nie wysłano jeszcze żadnej sieci.</p>
+          <p class="setting-hint">Wysłać możesz zawsze inną sieć — nowa zastąpi poprzednią. Nazwę i hasło poprawisz, otwierając okno ponownie.</p>
+        </div>
+        <h2>Home Assistant</h2>
+        <div id="haPanel">
+          <p class="setting-hint">Wysyłaj lokalizację i dane czujników do Home Assistant (webhook). Działa tylko podczas jazdy. Bez zasięgu punkty czekają w kolejce i wyślą się po powrocie sieci. GPS działa jak w aplikacjach nawigacji: pozycja co ~5 s podczas jazdy, a na postoju jest wyłączany (motocykl stoi — trasa i tak nie rośnie) i wraca sam przy ruszeniu, więc ładowarka nadąża.</p>
+          <div class="setting-row">
+            <div class="setting-label">Wysyłanie danych</div>
+            <div class="setting-controls">
+              <div class="setting-line">
+                <button id="haToggle" class="setting-tappable" type="button">WYŁ</button>
+              </div>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-label">Adres Home Assistant</div>
+            <div class="setting-controls">
+              <div class="setting-line">
+                <input id="haUrl" class="cal-input" type="url" inputmode="url" placeholder="https://twoj-ha.pl" spellcheck="false" autocomplete="url">
+              </div>
+            </div>
+          </div>
+          <p class="setting-hint">Adres instalacji Home Assistant, np. https://twoj-ha.pl lub http://192.168.1.10:8123 — tam pójdą webhooki.</p>
+          <div class="setting-row">
+            <div class="setting-label">Webhook ID</div>
+            <div class="setting-controls">
+              <div class="setting-line">
+                <input id="haHook" class="cal-input" type="text" value="olejarka-trip" spellcheck="false">
+              </div>
+            </div>
+          </div>
+          <p class="setting-hint">Ścieżka webhooka pod adresem /api/webhook/… — musi się zgadzać z tą skonfigurowaną na serwerze.</p>
+          <div class="setting-row">
+            <div class="setting-label">Interwał wysyłki</div>
+            <div class="setting-controls">
+              <div class="setting-line">
+                <button id="haSecMinus" type="button">−</button>
+                <output id="haSecOut">30</output>
+                <button id="haSecPlus" type="button">+</button>
+              </div>
+            </div>
+          </div>
+          <p class="setting-hint" id="haStatus">Wyłączone</p>
+          <p class="setting-hint" id="haConn">—</p>
+          <p class="setting-hint" id="haTripStatus"></p>
+        </div>
+        <button id="tripsOpenBtn" class="trips-card" type="button">
+          <b>🗺 Tripy</b>
+          <small>zapisane trasy — mapa i kalendarz (20 dni)</small>
+        </button>
+        <p class="setting-hint" id="tripsCountHint">Brak tripów na tym telefonie.</p>
+        <h2>Resetowanie pomiarów</h2>
+        <p class="setting-hint">Każdy przycisk najpierw pyta o potwierdzenie. Czerwone „Zero całk.” kasują liczniki łączne — to nieodwracalne.</p>
+        <div class="settings-actions reset-actions">
+          <button data-command="RST_TRIP" type="button">Zeruj trip</button>
+          <button data-command="RST_FUEL" type="button">Zeruj AVG / paliwo</button>
+          <button data-command="RST_DD" type="button">Zero dz. dawki</button>
+          <button data-command="RST_ZD" type="button">Zero dz. oleju</button>
+          <button data-command="RST_IMP" type="button">Zero impulsów</button>
+          <button data-command="RST_OIL" type="button">Reset poziomu oleju</button>
+          <button data-command="RST_DT" class="danger" type="button">Zero całk. dawki</button>
+          <button data-command="RST_ZT" class="danger" type="button">Zero całk. oleju</button>
+        </div>
+      </details>
+      <details class="settings-group">
+        <summary>🔧 Zaawansowane (testowe)</summary>
+        <div class="settings-actions">
+          <button data-command="AP" type="button">Tryb AP</button>
+          <button data-command="WIFI" type="button">Powrót na WiFi</button>
+        </div>
+        <p class="setting-hint">Serwisowe funkcje WiFi regulatora: Tryb AP włącza jego własny hotspot (np. do zmiany hasła/sieci), Powrót na WiFi łączy go z powrotem z domową siecią.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="pulpit" hidden>
+    <div class="pulpit-scroll">
+      <h2 class="pulpit-title">Pulpit</h2>
+      <div class="pulpit-grid">
+        <div class="pulpit-tile refuel-tile" id="refuelTile">
+          <div class="pulpit-tile-head">⛽ Tankowanie</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>ostatnie</span><b id="refuelLast">brak wpisów</b></div>
+            <div class="pulpit-row"><span id="refuelSince">—</span></div>
+            <div class="pulpit-row"><span>koszt</span><b id="refuelCost">—</b></div>
+          </div>
+          <div class="pulpit-actions">
+            <button id="refuelAddBtn" type="button">⛽ Zatankowano do pełna</button>
+            <button id="refuelTopUpBtn" type="button">⛽ Dotankowanie (nie do pełna)</button>
+            <button id="refuelHistBtn" type="button">📋 Historia tankowań</button>
+            <button id="refuelFcalBtn" class="danger" type="button" hidden>↩ Cofnij auto-korektę FCAL</button>
+          </div>
+        </div>
+        <div class="pulpit-tile" id="crashTile">
+          <div class="pulpit-tile-head">🚨 Alarm wypadku</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>stan</span><b id="crashTileState">—</b></div>
+            <div class="pulpit-row"><span>numery</span><b id="crashTileNums">—</b></div>
+          </div>
+          <div class="pulpit-actions">
+            <button id="crashTileTestBtn" type="button">🔔 Test alarmu</button>
+          </div>
+        </div>
+        <div class="pulpit-tile" id="chainTile">
+          <div class="pulpit-tile-head">🔗 Serwis łańcucha</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>od serwisu</span><b id="chainSinceKm">—</b></div>
+            <div class="pulpit-row"><span>następny za</span><b id="chainNextKm">—</b></div>
+          </div>
+          <div class="pulpit-actions">
+            <button id="chainDoneBtn" type="button">✔ Zrobiłem serwis</button>
+            <span class="pulpit-stepper"><button id="chainIntMinus" type="button">−</button><output id="chainIntOut">400</output> km<button id="chainIntPlus" type="button">+</button></span>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">🛢 Olej — dolej za</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><b id="oilKmLeft" class="pulpit-big">—</b></div>
+            <div class="pulpit-row"><span id="oilKmSub">poziom —</span></div>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">📊 Zużycie oleju</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>dziś</span><b id="oilUsageToday">—</b></div>
+            <div class="pulpit-row"><span>ostatnie dni</span><b id="oilUsageWeek">—</b></div>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">⛽ Spalanie długoterminowe</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>średnio</span><b id="fuelAvgL100">—</b></div>
+            <div class="pulpit-row"><span>teraz</span><b id="fuelNow">—</b></div>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">🛣 Przebieg</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>OBD łącznie</span><b id="odoKm">—</b></div>
+            <div class="pulpit-row"><span>trip</span><b id="odoTrip">—</b></div>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">📈 Dziś — maksima</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>prędkość</span><b id="maxSpeedVal">—</b></div>
+            <div class="pulpit-row"><span>obroty</span><b id="maxRpmVal">—</b></div>
+            <div class="pulpit-row"><span>temp. silnika</span><b id="maxCoolantVal">—</b></div>
+            <div class="pulpit-row"><span>przechył</span><b id="maxTiltVal">—</b></div>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">⚙️ Ustawienia smarowania</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><span>dawka co</span><b id="doseEveryKm">—</b></div>
+            <div class="pulpit-row"><span>start od</span><b id="minSpeedValue">—</b></div>
+            <div class="pulpit-row"><span>limit / dzień</span><b id="dailyLimitValue">—</b></div>
+            <div class="pulpit-row"><span>wydajność</span><b id="pumpFlowValue">—</b></div>
+          </div>
+        </div>
+        <div class="pulpit-tile">
+          <div class="pulpit-tile-head">📡 Stan</div>
+          <div class="pulpit-rows">
+            <div class="pulpit-row"><b id="connStatus">—</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="setting-hint pulpit-hint">Tankowanie zapisujesz kafelkiem „⛽ Tankowanie" (litry + opcjonalna cena) albo przytrzymując wskaźnik paliwa — wtedy apka zapyta, czy zapisać tyle, ile brakowało do pełna. Każdy wpis ustawia wskaźnik na pełny bak. Gdy olejarka ma OBD, apka liczy też rzeczywiste l/100 km i sama koryguje współczynnik paliwa (FCAL). Statystyki liczą się długoterminowo i nie resetują się przy tankowaniu. Serwis łańcucha: po wykonaniu przeglądu wciśnij „Zrobiłem serwis" — od tej chwili odliczany jest dystans.</p>
+    </div>
+  </section>
+
+  <section id="charts" hidden>
+    <div class="charts-scroll">
+      <div class="charts-top">
+        <div class="charts-group">
+          <button data-metric="load" class="tab on" type="button">LOAD</button>
+          <button data-metric="throttle" class="tab" type="button">TPS</button>
+          <button data-metric="progress" class="tab" type="button">POSTĘP</button>
+          <button data-metric="rpm" class="tab" type="button">OBROTY</button>
+          <button data-metric="speed" class="tab" type="button">KM/H</button>
+          <button data-metric="coolant" class="tab" type="button">SILNIK</button>
+          <button data-metric="oil" class="tab" type="button">OLEJ</button>
+          <button data-metric="usageToday" class="tab" type="button">OLEJ DZIŚ</button>
+          <button data-metric="fuel" class="tab" type="button">L/h</button>
+          <button data-metric="tilt" class="tab" type="button">PRZECHYŁ</button>
+        </div>
+        <div class="charts-group">
+          <label class="charts-field">
+            <span class="charts-field-label">Dzień</span>
+            <input type="date" id="chartDate" class="charts-date">
+          </label>
+          <span class="charts-day" id="chartDayLabel" hidden></span>
+        </div>
+        <div class="charts-group">
+          <label class="charts-field">
+            <span class="charts-field-label">Zakres</span>
+            <select id="chartScale" class="charts-select">
+              <option value="5">5 min</option>
+              <option value="30">30 min</option>
+              <option value="60">60 min</option>
+              <option value="360">6 h</option>
+              <option value="1440" selected>24 h</option>
+            </select>
+          </label>
+          <button id="chartsFull" class="charts-reset" type="button">CAŁY DZIEŃ</button>
+        </div>
+        <button id="chartsReset" class="charts-reset" type="button">RESET</button>
+        <button id="chartsSave" class="charts-reset" type="button">ZAPISZ WYKRES</button>
+      </div>
+      <div class="charts-stage">
+        <canvas id="chartCanvas"></canvas>
+        <div class="charts-empty" id="chartsEmpty" hidden>Brak danych — nagrywanie zacznie się po odebraniu stanu BLE</div>
+      </div>
+      <div class="charts-foot" id="chartsLive">LOAD — · TPS — · L/h —</div>
+    </div>
+  </section>
+
+  <section id="profiles" hidden>
+    <div class="settings-scroll">
+      <h2>Kopia ustawień</h2>
+      <div class="settings-actions">
+        <button id="profileSaveBtn" type="button">💾 Zapisz kopię</button>
+        <button id="profileRestoreBtn" type="button">↩ Przywróć kopię</button>
+        <button data-command="DATE" type="button">Synchronizuj datę</button>
+        <p class="setting-hint date-sync-info">Ostatnia synchronizacja: —</p>
+      </div>
+      <p class="setting-hint" id="profileHint">Kopia zapisuje aktualne ustawienia smarowania do pliku na telefonie. Po zmianie telefonu lub reinstalacji przywróć ją, aby nie konfigurować wszystkiego od nowa.</p>
+    </div>
+  </section>
+
+  <section id="errors" hidden>
+    <div class="settings-scroll">
+      <h2>Błędy OBD</h2>
+      <div class="settings-actions">
+        <button id="errorsReadBtn" type="button">Odczytaj błędy</button>
+        <button id="errorsClearBtn" class="danger" type="button">Kasuj błędy</button>
+      </div>
+      <p class="setting-hint" id="errorsStatus">Naciśnij „Odczytaj błędy”, aby pobrać kody błędów z ECU (Mode 03). Kasowanie wysyła komendę Mode 04.</p>
+      <div id="errorsList"></div>
+    </div>
+  </section>
+
+  <section id="trips" hidden>
+    <div class="trips-topbar">
+      <div class="charts-group">
+        <label class="charts-field">
+          <span class="charts-field-label">Dzień</span>
+          <input type="date" id="tripDate" class="charts-date">
+        </label>
+        <label class="charts-field" id="tripTimeGroup" hidden>
+          <span class="charts-field-label">Trasa</span>
+          <select id="tripTimeSelect" class="charts-date"></select>
+        </label>
+        <span class="charts-day" id="tripDayLabel" hidden></span>
+      </div>
+      <button id="tripsGpxBtn" class="hbtn trips-hud-btn" type="button">GPX</button>
+      <button id="tripsSaveBtn" class="hbtn trips-hud-btn" type="button">MAP</button>
+      <button id="tripsHudBtn" class="hbtn trips-hud-btn" type="button">HUD</button>
+    </div>
+    <div class="trips-scroll">
+      <div class="trips-main">
+        <div class="charts-stage trips-stage">
+          <div id="tripMap" class="trips-map"></div>
+          <div class="charts-empty" id="tripsEmpty" hidden>Brak tripów dla tego dnia</div>
+        </div>
+        <div class="trips-stats-bar" id="tripsStatsBar">
+          <span class="trips-bar-item"><b id="sbKm">0</b><small>Dystans</small></span>
+          <span class="trips-bar-item"><b id="sbMax">0</b><small>Max prędkość</small></span>
+          <span class="trips-bar-item"><b id="sbMin">0</b><small>Czas jazdy</small></span>
+          <span class="trips-bar-item"><b id="sbTilt">0</b><small>Max przechył</small></span>
+          <span class="trips-bar-item"><b id="sbOil">–</b><small>Olej zużyty</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="info" hidden>
+    <div class="settings-scroll">
+      <h2>O aplikacji</h2>
+      <p class="setting-hint">DripTronic — automatyczna olejarka łańcucha z pełnym podglądem parametrów motocykla. Sterownikiem jest ESP32, aplikacja łączy się z nim bezprzewodowo i pokazuje dane w czasie rzeczywistym.</p>
+
+      <details class="settings-group" open>
+        <summary>📖 Jak korzystać</summary>
+        <h2>Pierwsze uruchomienie</h2>
+        <p class="setting-hint">Włącz olejarkę i zaakceptuj uprawnienia Bluetooth. Aplikacja połączy się z regulatorem automatycznie (nazwa urządzenia zaczyna się od „olejarka”). Gdy połączenie zostanie zerwane, aplikacja sama spróbuje się połączyć ponownie.</p>
+        <h2>Ekran HUD</h2>
+        <p class="setting-hint">Po lewej dane z motocykla (temperatura silnika, temp. zewnętrzna, paliwo, spalanie), na środku prędkość, trip, zasięg i postęp do kolejnej dawki, po prawej stan olejarki (poziom oleju, impulsy, dawki). Na dole „Smaruj teraz” podaje dawkę na żądanie.</p>
+        <h2>Smarowanie</h2>
+        <p class="setting-hint">Smarowanie działa automatycznie co zadany dystans. Tryb AUTO włącza/wyłącza automat, DESZCZ skraca interwał o połowę, Odpowietrz wypycha powietrze z przewodu, a Dawka ręczna podaje jednorazową porcję.</p>
+        <h2>Ustawienia</h2>
+        <p class="setting-hint">Zmiany parametrów zapisują się w regulatorze. Ustawienia można zablokować kłódką, żeby nie zmienić czegoś przypadkiem na wybojach. Reset liczników (dziennych i łącznych) jest w sekcji „Resetowanie pomiarów” — przyciski „Zero całk.” są nieodwracalne.</p>
+        <h2>Tripy i mapa</h2>
+        <p class="setting-hint">Każda przejażdżka zapisuje się razem z trasą. Mapa działa też bez zasięgu (korzysta z pobranych kafelków), a trasę można wyeksportować do GPX.</p>
+        <h2>Wykresy</h2>
+        <p class="setting-hint">Pokazują historię parametrów z ostatnich 7 dni. Domyślnie otwiera się zakres 24 h; parametry dodaje się (i zdejmuje) klikając ich nazwy u góry. Dane zapisują się lokalnie na telefonie.</p>
+      </details>
+
+      <details class="settings-group">
+        <summary>📋 Changelog</summary>
+        <div id="changelogList">
+          <h2>0.6.146</h2>
+          <p class="setting-hint">• Nowe ustawienie „PRĘDKOŚĆ: HALL / OBD" (Ustawienia → 💧 Dozowanie oleju → Sterowanie): wybierasz, skąd olejarka ma brać prędkość. HALL to czujnik na kole, OBD to prędkość z magistrali CAN. Od wyboru zależy prędkość na HUD, liczniki km/trip w olejarce i próg minimalnej prędkości do dawkowania. Wybór zapisuje się w olejarce (przetrwa restart) i widać go też w panelu ESP/HA jako listę „Źródło prędkości". Wymaga firmware z obsługą komend SPD_HALL / SPD_OBD.</p>
+          <h2>0.6.145</h2>
+          <p class="setting-hint">• Trasa nie urywa się już po zgaszeniu i ponownym odpaleniu motocykla. Apka pilnuje teraz, czy GPS daje świeże pozycje: gdy Android zdejmie nasłuch (zgaszony ekran, inne okno na wierzchu, chwilowa utrata fixa), ponawia go sama — wcześniej po takim zdarzeniu nie wracały ani punkty trasy, ani wysyłka do HA do końca jazdy. • Gdy GPS milczy, do HA nie idzie już „zamrożona" ostatnia pozycja — apka wstrzymuje wysyłkę, zamiast pokazywać motocykl w miejscu, w którym stał.</p>
+          <h2>0.6.144</h2>
+          <p class="setting-hint">• Usunięte Waze z listy obsługiwanych nawigacji — powiadomienia z Waze nie są odczytywane, więc „Podgląd nawigacji" korzysta z Google Maps, Yanosika i Mapy.com.</p>
+          <h2>0.6.143</h2>
+          <p class="setting-hint">• Poprawiona stopka wersji na ekranie „O aplikacji" — pokazywała 0.6.129, teraz pokazuje numer aktualnej wersji.</p>
+          <h2>0.6.142</h2>
+          <p class="setting-hint">• Poprawiona literówka na HUD: gdy olej jest do dolewki, wyświetla się „DOLEJ OLEJ" (wcześniej „DOLIJ OLEJ").</p>
+          <h2>0.6.141</h2>
+          <p class="setting-hint">• Synchronizacja daty: obok przycisku „Synchronizuj datę" widać teraz, kiedy ostatnio data poszła do regulatora (data i godzina) — także gdy synchronizacja wykonała się sama, po połączeniu. Zapis zostaje po zamknięciu apki. • Wi-Fi (ESPHome): w Ustawieniach widać, jaką sieć wysłano ostatnio z apki — nazwę, czy z hasłem, kiedy i czy olejarka była wtedy połączona. Nazwa ostatniej sieci podpowiada się przy ponownym otwarciu okna, a wysłanie kolejnej sieci zastępuje poprzednią.</p>
+          <h2>0.6.140</h2>
+          <p class="setting-hint">• Tryby dawki Eco/Normal/Turbo działają teraz w samej olejarce: porcja jest naprawdę mniejsza lub większa (×0,6 / ×1,0 / ×1,5) — elektrozawór otwiera się krócej lub dłużej, a pompka Webasto wykonuje mniej lub więcej impulsów. Olejarka zapamiętuje tryb i odsyła go w pakiecie stanu, więc po ponownym połączeniu apka pokazuje rzeczywisty tryb. W panelu web olejarki doszedł wybór „Tryb dawki". • Auto-naprawa połączenia: gdy olejarka utraci połączenie z telefonem na 5 minut, restartuje się sama i znów jest gotowa do połączenia. • Alarm wypadku nie myli już podnoszenia telefonu z upadkiem: gdy wpisujesz tankowanie, siedzisz w ustawieniach albo otwarte jest okno dialogowe, detekcja jest wstrzymana, a po powrocie na HUD czeka, aż telefon wróci do uchwytu. „Nagłe zatrzymanie” liczy się teraz tylko przy gwałtownym staniu z prędkości ≥ 25 km/h — zwykłe dojechanie i zgaszenie silnika na postoju nie wywołuje już alarmu. • Wi-Fi z poziomu apki (Ustawienia → „🌐 Wi-Fi (ESPHome)"): odbiorca wpisuje nazwę swojej sieci i hasło, dane idą do olejarki przez Bluetooth i zapisują się na stałe — olejarka przełącza się na jego sieć i pojawia się w jego ESPHome (Adopt), więc aktualizacje firmware robi się potem z poziomu ESPHome, bez kabla. • GPS działa teraz natywnie (jak w aplikacjach nawigacji): pozycja co ~5 s podczas jazdy, na postoju GPS jest wyłączany (trasa i tak nie rośnie, gdy motocykl stoi) i wraca sam przy ruszeniu — mniejsze zużycie baterii, ładowarka nadąża. • Dotankowanie (nie do pełna): w kafelku Tankowanie nowy przycisk „⛽ Dotankowanie" — dopisuje litry do wskaźnika paliwa bez ustawiania pełnego baku (komenda FUEL_ADD w firmware, gdy dotankowujesz do blaszki), nie wylicza l/100 (zbiornik nie jest pełny) i nie rusza bazy spalania — rzeczywiste l/100 liczy się od ostatniego tankowania DO PEŁNA, a dotankowania sumują się do niego.</p>
+          <h2>0.6.139</h2>
+          <p class="setting-hint">• TRIP zgadza się z licznikiem — poprawiona korekta długości trasy. • Po zerwaniu połączenia z ESP spalanie pokazuje „—” zamiast ostatniej znanej wartości. • Licznik „smarowanie dziś” i data liczą się od razu po starcie apki (bez drugiego uruchomienia). • Karta nawigacji pokazuje właściwy kierunek skrętu (lewo/prawo/zawróć/meta), nie tylko strzałkę prosto. • Zapis tankowania działa: czytelne okna (TAK/NIE/POMIŃ/ZAPISZ) z możliwością pominięcia ceny i kalibracji ilości, wpis trafia do dziennika. • Max przechył z dnia jazdy i dane komputera pokładowego zapisują się w HA. • Postęp podróży widać na mapie w HA na żywo (ślad w heartbeatach), nie dopiero po zakończeniu tripu. • Jasność ekranu nie migocze: odczyt czujnika jest wygładzany, zmiany najwyżej raz na ~4 s (duży skok działa od razu), a opisy ustawień ekranu są zrozumiałe.</p>
+          <h2>0.6.138</h2>
+          <p class="setting-hint">• Przycisk Tryb jazdy na HUD przełącza teraz cztery tryby: Eco → Normal → Rain → Turbo. Rain wraca do cyklu (interwał 50 %), a przycisk jest zawsze podpisany „Tryb: …" — koniec z przeskakiwaniem z „Tryb: Normal" na „Dawka: …". Przycisk DESZCZ w Sterowaniu nadal działa; gdy deszcz jest włączony, HUD pokazuje „Tryb: Rain".</p>
+          <h2>0.6.137</h2>
+          <p class="setting-hint">• Ekran startowy (splash) pokazuje się teraz zawsze poziomo — telefon nie obraca się do pionu, dopóki splash jest widoczny. Po jego zniknięciu HUD wraca do wybranej orientacji (poziomej lub pionowej).</p>
+          <h2>0.6.136</h2>
+          <p class="setting-hint">• Przytrzymanie kafelka TRIP w pionowym HUD działa pewnie: kafelki nie zaznaczają już tekstu ani nie oddają dotyku przewijaniu strony, więc systemowy long-press Androida nie przerywa przytrzymania. ZASIĘG pozostaje bez resetu — jest wyliczany z paliwa i dystansu i przelicza się sam.</p>
+          <h2>0.6.135</h2>
+          <p class="setting-hint">• W pionowym HUD kafelki OBD rozciągają się na całą wysokość dolnego pola, z wyśrodkowaną treścią; w trybie nawigacji większy obszar wypełnia karta. Wskaźnik przechyłu został rozszerzony od paska temperatury do paska paliwa.</p>
+          <h2>0.6.134</h2>
+          <p class="setting-hint">• HUD w pionie: nagłówki OLEJARKA i OBD są wyśrodkowane, wolne odstępy między blokami zebrane do góry, a dolny obszar OBD/nawigacji powiększony. Przyciski zostają na dole. Ikonki BLE/GPS/HA są ukryte w górnym pasku, a status skanowania/połączenia wyświetla się w osobnym wierszu pod przyciskami, poza strefą wycięcia aparatu.</p>
+          <h2>0.6.133</h2>
+          <p class="setting-hint">• HUD w pionie dopracowany: niższa tarcza, widoczny wskaźnik przechyłu, wyżej umieszczone LOAD/TPS i niższe kafelki TRIP/ZASIĘG. Kolejność to licznik → OLEJARKA → OBD/nawigacja, a przyciski Tryb/Smaruj pozostają na dole. Naprawiony gest swipe OBD ↔ nawigacja. Podstawy pasków temperatury i paliwa są wyrównane z podstawą łuków LOAD/TPS.</p>
+          <h2>0.6.132</h2>
+          <p class="setting-hint">• HUD w pionie: prędkościomierz z modułem zużycia i TRIP/ZASIĘG przeniesiony nad OBD. Tarcza ma komplet łuków i oznaczeń jak w poziomie, skaluje się do szerokości ekranu, a etykiety i liczby nie nachodzą na siebie ani na paski boczne.</p>
+          <h2>0.6.131</h2>
+          <p class="setting-hint">• Kolumna OBD może pokazywać nawigację: w Ustawieniach → „🎛 Kafelki HUD" wybierasz „Podgląd nawigacji" — kolumna OBD pokazuje wtedy aktualną trasę (duża strzałka, „za ile skręcić", ETA) czytaną automatycznie z powiadomień Google Maps / Yanosika / Mapy.com (bez wybierania mapy — pokazuje się ta nawigacja, która aktualnie prowadzi), a przycisk Tryb jazdy przenosi się obok „Smaruj teraz" (nazwy obu przycisków są zawsze widoczne). Gdy nawigacja nie gra, karta pokazuje komunikat — dotknięcie karty otwiera systemowe okienko „Otwórz za pomocą…" z zainstalowanymi nawigacjami (Google Maps, Yanosik, Mapy.com). Zgoda „Dostęp do powiadomień" jest tylko w Ustawieniach → „🎛 Kafelki HUD". Naprawiony odczyt powiadomień bez tytułu (Yanosik, Mapy.com wysyłają samą instrukcję), pakiet Yanosika oraz filtrowanie komunikatów serwisowych typu „Działa. Naciśnij, aby otworzyć" (nie zastępują instrukcji). Kolumnę OBD przełączysz też gestem: swipe w pionie (góra lub dół) po całej kolumnie — wybór jest pamiętany i nie zależy od tego, czy OBD jest podpięte.</p>
+          <p class="setting-hint">• Tryby dawki: przycisk Tryb jazdy przełącza teraz dawkę Eco → Normal → Turbo (porcja ×0,6 / ×1,0 / ×1,5 względem interwału z ustawień). Przy każdej zmianie na dole ekranu pojawia się na 4 s okienko z opisem trybu. Deszcz działa osobno (DESZCZ w Sterowaniu) — gdy jest włączony, HUD pokazuje „🌧" przy trybie. Apka wysyła komendy DOSE_ECO / DOSE_NORMAL / DOSE_TURBO; mnożenie czasu pompki i odczyt trybu w pakiecie stanu doda firmware olejarki.</p>
+          <p class="setting-hint">• HUD w pionie (uchwyt pionowy): w Ustawieniach → „💡 Wyświetlacz" → „Układ HUD" wybierzesz POZIOMA / PIONOWA. W trybie pionowym tylko ekran jazdy obraca się do pionu — kolumny OBD i OLEJARKA są u góry, a prędkościomierz na dole, na całą szerokość. Ustawienia, wykresy i tripy pozostają poziomo. W pionie ukryte są pionowe paski temperatury/paliwa i wskaźnik przechyłu (są pozycjonowane pod układ poziomy) — ich wartości i tak widać w kafelkach.</p>
+          <h2>0.6.130</h2>
+          <p class="setting-hint">• Połączenie BLE naprawia się samo — bez klikania: gdy olejarka dopiero startuje (moto zapalone), apka automatycznie ponawia skanowanie co 3 s (po 15 s bez wyniku) i łączy się, jak tylko ESP „wstanie". Zawisłe połączenie, błąd skanowania lub „brak usługi olejarki" nie blokują już apki — po 15 s sama się zamyka i skanuje od nowa, a po serii nieudanych łączeń z zapamiętanym urządzeniem robi świeży pełny skan (np. po restarcie ESP).</p>
+          <p class="setting-hint">• Android 12+: zniknęła wielka ikona aplikacji pokazywana przez system przed własnym ekranem startowym — zamiast niej tylko czarne tło (przezroczysta ikona splasha, bez zmiany ikony launchera).</p>
+          <h2>0.6.129</h2>
+          <p class="setting-hint">• Telemetria na żywo → Home Assistant: podczas jazdy apka wysyła oprócz pozycji także wartości OBD/BLE — obroty, LOAD, TPS, prędkość, temp. silnika, poziom oleju (ml), spalanie (L/h) i przechył. Home Assistant pokazuje je jako osobne sensory z historią (wykresy, powiadomienia, automatyzacje). Dane idą co 30 sekund (ustawisz w opcjach połączenia) i tylko podczas jazdy, więc zużycie internetu jest minimalne.</p>
+          <h2>0.6.128</h2>
+          <p class="setting-hint">• Tankowania → Home Assistant: webhook wysyła teraz komplet danych — czas, litry, przebieg (OBD), cenę za litr, koszt, rzeczywiste l/100, dystans przejechany od poprzedniego tankowania oraz koszt paliwa z ostatnich 30 dni (plus lokalizacja, jeśli jest zgoda). Home Assistant pokazuje ostatnie tankowanie i ten sam zestaw na sensorach.</p>
+          <h2>0.6.127</h2>
+          <p class="setting-hint">• Klawiatura nie zasłania pól tekstowych (zmiana nazwy kafelka, ilość paliwa itp.) — okno z polem i przyciskami mieści się nad klawiaturą, także gdy klawiatura jest pływająca. Okno wpisywania jest wyższe i czytelniejsze: większe pole, większa czcionka i przyciski, które zawsze są widoczne na dole okna. Okno wyboru wartości kafelka: mieści się w ekranie, lista przewija się sama, na dole jeden przycisk ANULUJ (wcześniej były dwa).</p>
+          <h2>0.6.126</h2>
+          <p class="setting-hint">• Naprawione okienko wyboru wartości kafelka: karta mieści się w ekranie, sama lista się przewija, a przyciski na dole są zawsze widoczne (wcześniej w poziomie były ucięte). Naprawione okienko wpisywania tekstu przy klawiaturze: pole i przyciski zawsze nad klawiaturą (okienko dopasowuje się do widocznej części ekranu, bez przewijania pod klawiaturę).</p>
+          <h2>0.6.125</h2>
+          <p class="setting-hint">• Edycja kafelków: po wybraniu wartości kafelka pojawia się dodatkowy krok z propozycją nazwy (można ją zmienić albo zostawić automatyczną). Kafelki TRIP i ZASIĘG mają edycję zablokowaną — są na stałe. Naprawione okienko wpisywania przy klawiaturze w trybie poziomym: karta przypina się do góry ekranu i kurczy, więc klawiatura nie zasłania pola ani przycisków.</p>
+          <h2>0.6.124</h2>
+          <p class="setting-hint">• Naprawa edycji kafelków HUD: dotknięcie kafelka w trybie edycji od razu pokazuje listę wartości do wyboru (bez wcześniejszego wpisywania nazwy — nazwa i jednostka ustawiają się automatycznie po wybraniu wartości). Przycisk „✔ OK" widoczny jest tylko w trybie edycji, a nie zawsze. Kafelki już nie drgają ani nie przesuwają się przy dłuższych nazwach — układ HUD pozostaje stabilny.</p>
+          <h2>0.6.120</h2>
+          <p class="setting-hint">• Edycja kafelków HUD: w Ustawieniach → „🎛 Kafelki HUD" jest przycisk „⚙ Edytuj HUD". Po dotknięciu przenosi na ekran jazdy w trybie edycji (kafelki lekko drgają) — dotknięcie kafelka zmienia jego nazwę i wartość (np. zamiast „OUTSIDE" możesz mieć „OBROTY" z obrotami silnika). Układ HUD pozostaje bez zmian, rozmiary też. Zatwierdzasz przyciskiem „✔ OK" na górnej belce, a „Przywróć domyślne" cofa wszystko. Do wyboru są obroty, prędkość, temperatury, spalanie chwilowe i średnie, LOAD, TPS, postęp dawki, poziom i zużycie oleju, dawki, TRIP, dystans, zasięg, poziom paliwa, % zbiornika oleju i przechył.</p>
+          <h2>0.6.119</h2>
+          <p class="setting-hint">• Alarm wypadku: gdy apka wykryje prawdopodobny upadek (przechył + obroty 0 + prędkość 0), włącza głośny alarm z odliczaniem i wielkim przyciskiem „JEST OK". Bez reakcji wysyła SMS z pozycją na max 3 numery (powtarzany) i dzwoni — dzwoni tylko numer wybrany słuchawką, SMS idzie do wszystkich. Numery można podpisywać (np. Żona, Kolega). Kafelek w Pulpicie, pełne ustawienia w menu (czułość, opóźnienie, numery, test alarmu). Alarm działa przy połączonej olejarce — przechył, obroty i prędkość przychodzą przez BLE, dlatego najczulsza warstwa (telefon) jest domyślnie wyłączona.</p>
+          <h2>0.6.118</h2>
+          <p class="setting-hint">• Tankowania: kafelek na górze Pulpitu — „Zatankowano do pełna" (litry i opcjonalna cena) albo przytrzymanie wskaźnika paliwa (apka pyta, czy zapisać tyle, ile brakowało do pełnych 20 L). Każdy wpis ustawia wskaźnik na pełny bak. „Dotankowanie (nie do pełna)" dopisuje litry do wskaźnika bez resetu do 20 L — nie wylicza l/100 (zbiornik nie jest pełny). Podgląd ostatniego tankowania, dystansu i zużycia od pełnego oraz kosztu z 30 dni, plus pełna historia z rzeczywistym l/100 km — każdy wpis można poprawić lub usunąć (usunięcie cofa też powiązaną korektę FCAL). Gdy olejarka ma OBD, apka sama koryguje współczynnik paliwa (FCAL), gdy model zaniża lub zawyża spalanie o więcej niż 3%. Tankowanie wysyła się do Home Assistant (webhook olejarka_refuel).</p>
+          <h2>0.6.117</h2>
+          <p class="setting-hint">• Pulpit: nowe kafelki — maksima dnia (najwyższa prędkość, obroty, temp. silnika i przechył z historii dzisiejszego dnia), podgląd ustawień smarowania (dawka co km, start od, limit dzienny, wydajność pompki — bez wchodzenia w Ustawienia) oraz poziom oleju z pojemnością zbiornika w procentach.</p>
+          <h2>0.6.116</h2>
+          <p class="setting-hint">• Nowa zakładka Pulpit w menu: serwis łańcucha (odliczanie do przeglądu, interwał i przypomnienie), olej — prognoza „dolej za X km", zużycie oleju (dziś / ostatnie dni), średnie spalanie, przebieg i stan połączenia. Statystyki liczą się długoterminowo i nie resetują się przy tankowaniu ani zerowaniu liczników w HUD.</p>
+          <h2>0.6.115</h2>
+          <p class="setting-hint">• Wykresy: pasmo min/max pokazywane tylko dla pierwszej zaznaczonej serii i delikatniejsze — przy kilku seriach nic się już nie zlewa w tło. Legenda czyta się wyraźniej.</p>
+          <h2>0.6.114</h2>
+          <p class="setting-hint">• Wykresy: przy powiększeniu przebieg nie jest już „porwany" — wygładzanie łukami działa tylko przy gęstych danych, a historia rysowana jest wiernie. Dodany przycisk „CAŁY DZIEŃ" obok listy zakresu — jednym dotknięciem pokazuje pełny wybrany dzień.</p>
+          <h2>0.6.113</h2>
+          <p class="setting-hint">• Wykresy: naprawione przesuwanie palcem — gest nie jest już przerywany drobnym ruchem palca, a nakładka z komunikatem nie blokuje dotyku. Poprawiona też zmiana zakresu: okno trafia w ostatnie dane wybranego dnia, więc 60 min nie pokazuje pustki.</p>
+          <h2>0.6.112</h2>
+          <p class="setting-hint">• Wykresy: zmiana zakresu i przesuwanie palcem działają teraz w obrębie wybranego dnia. Wybranie 60 min nie przenosi już widoku „na teraz", tylko pokazuje wybrany okres wybranego dnia — i można go przewijać w jego granicach.</p>
+          <h2>0.6.111</h2>
+          <p class="setting-hint">• Wykresy: naprawione przesuwanie palcem i zmiana zakresu. Cały widok używa teraz jednego zegara, więc okno nie ucieka — przesuwanie działa w obie strony i zatrzymuje się na krańcach danych.</p>
+          <h2>0.6.110</h2>
+          <p class="setting-hint">• Wykresy: zmiana zakresu z listy i powiększanie palcami już nie gubią widoku. Okno zawsze trafia w dane, zatrzymuje się na krawędzi zamiast pokazywać pustkę, a po zmianie zakresu chronometraż jest liczony poprawnie.</p>
+          <h2>0.6.109</h2>
+          <p class="setting-hint">• Wykresy: przesuwanie i powiększanie gestem trzyma się danych — widok zatrzymuje się na krawędzi (jak suwak) i nie wychodzi poza czas, w którym są próbki.</p>
+          <h2>0.6.108</h2>
+          <p class="setting-hint">• Wykresy: brak możliwości zablokowania się na „Brak danych w tym zakresie". Widok zawsze wraca do zakresu z danymi — poprawka strażnika zakresu przy przypięciu oraz gestów przy braku próbek.</p>
+          <h2>0.6.107</h2>
+          <p class="setting-hint">• Poprawka wykresów: gest powiększania/przesuwania nie może już wypchnąć widoku poza dane. Zakres jest przycinany do dostępnych próbek, a przy trafieniu w pustkę widok wraca do poprzedniego zakresu.</p>
+          <h2>0.6.106</h2>
+          <p class="setting-hint">Ostatnie zmiany w aplikacji.</p>
+          <p class="setting-hint">• Nowa wersja graficzna logotypu i planszy startowej</p>
+          <p class="setting-hint">• Zakładka Wykresy startuje domyślnie z zakresu 24 h</p>
+          <p class="setting-hint">• Poprawki rysowania wykresów i zmian parametrów</p>
+          <p class="setting-hint">• Poprawki stabilności pracy z regulatorem</p>
+          <h2>0.6.10x</h2>
+          <p class="setting-hint">• Zapisywanie tripów z trasą na mapie i eksport do GPX</p>
+          <p class="setting-hint">• Tryb offline mapy i kolorowanie trasy wg prędkości</p>
+          <p class="setting-hint">• Próg niski oleju i alerty dźwiękowe/wibracyjne</p>
+          <p class="setting-hint">• Synchronizacja zegara regulatora z telefonem</p>
+          <p class="setting-hint">• Kopia zapasowa ustawień</p>
+          <p class="setting-hint">• Wysyłka danych do własnego systemu domowego (webhook, kolejka offline)</p>
+          <h2>0.6.0</h2>
+          <p class="setting-hint">• Pierwsza wersja natywnej aplikacji: HUD, ustawienia, połączenie bezprzewodowe</p>
+          <p class="setting-hint">• Wykresy historii, pomiar przechyłów, tryby smarowania</p>
+        </div>
+      </details>
+
+      <details class="settings-group">
+        <summary>👤 Autor</summary>
+        <h2>rumunn95</h2>
+        <p class="setting-hint">Pasjonat elektroniki i majsterkowania od dziecka — od najmłodszych lat rozbierał i składał wszystko, co wpadło mu w ręce, a pierwsze układy składał na płytce stykowej. Zawodowo elektryk, elektronikę rozwija samodzielnie jako zajawkę, metodą prób i własnych projektów. Woli coś zbudować od podstaw, niż kupić gotowe.</p>
+        <p class="setting-hint">Olejarka powstała z połączenia dwóch zajawk: elektroniki i motocykli. Sterownik, oprogramowanie i aplikację zaprojektował i wykonał sam — od pomysłu, przez prototyp, po dopracowaną wersję.</p>
+        <p class="setting-hint">DripTronic · wersja aplikacji 0.6.144</p>
+      </details>
+    </div>
+  </section>
+
+  <div id="crashOverlay" class="crash-overlay" hidden>
+    <div class="crash-box">
+      <div class="crash-icon">🚨</div>
+      <h1>WYKRYTO UPADEK</h1>
+      <p class="crash-why" id="crashWhy"></p>
+      <p class="crash-count-line">SMS do zapisanych numerów za <b id="crashCount">30</b> s</p>
+      <p class="crash-note">Wciśnij „JEST OK", jeśli wszystko w porządku — alarm zostanie anulowany.</p>
+      <button id="crashCancelBtn" class="crash-ok" type="button">✔ JEST OK — ANULUJ</button>
+    </div>
+  </div>
+
+  <div id="refuelPanel" class="confirm-dialog" hidden>
+    <div class="confirm-card refuel-card" role="dialog" aria-modal="true">
+      <div class="confirm-kicker">TANKOWANIA</div>
+      <h2>Historia tankowań</h2>
+      <div id="refuelList" class="refuel-list"></div>
+      <div class="confirm-actions">
+        <button id="refuelCloseBtn" type="button">ZAMKNIJ</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirmDialog" class="confirm-dialog" hidden>
+    <div class="confirm-card" id="confirmCard" role="dialog" aria-modal="true">
+      <div class="confirm-kicker">POTWIERDZENIE</div>
+      <h2 id="confirmTitle">Reset licznika</h2>
+      <p id="confirmMessage"></p>
+      <div class="confirm-actions" id="confirmActions">
+        <button id="confirmCancel" type="button">ANULUJ</button>
+        <button id="confirmOk" type="button">RESETUJ</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="maplibre-gl.min.js"></script>
+  <script src="leaflet.min.js"></script>
+  <script src="hud-gauge.js"></script>
+  <div id="modeToast" aria-hidden="true"></div>
+  <script src="native.js"></script>
+</body>
+</html>

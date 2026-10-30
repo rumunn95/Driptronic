@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\ALA\\.gradle\\daemon\\8.11.1\\pl.olejarka.app-mergeDebugResources-46:\\values-v31\\values-v31.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\ALA\\Desktop\\olejarka-android\\app\\src\\main\\res\\values-v31\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "322"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "pl.olejarka.app-mergeDebugResources-46:/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\ALA\\Desktop\\olejarka-android\\app\\src\\main\\res\\values-v31\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "334"
+                    }
+                }
+            ]
+        }
+    ]
+}
