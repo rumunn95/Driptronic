@@ -1,8 +1,12 @@
-# Olejarka TRK 702X — natywna aplikacja Android
+# DripTronic (Olejarka TRK 702X) — natywna aplikacja Android
 
-Natywna apka (Kotlin + Jetpack Compose) komunikująca się z olejarką **wyłącznie po BLE**:
+🌐 **Strona projektu, dokumentacja i interaktywne demo aplikacji:** [https://driptronic.pages.dev/](https://driptronic.pages.dev/)
+
+Natywna apka (Kotlin + Jetpack Compose) komunikująca się ze sterownikiem automatycznej olejarki łańcucha **wyłącznie po BLE**:
 HUD (pakiet stanu 50 B) + pełne ustawienia (pakiet config 22 B + `SET <klucz>`).
-WiFi pełni tylko rolę testu/fallbacku (tryb AP) oraz OTA firmware — nie jest potrzebna do pracy apki.
+WiFi pełni tylko rolę testu/fallbacku (tryb AP), integracji z Home Assistant oraz OTA firmware — nie jest potrzebna do pracy apki.
+
+> 📖 **Instrukcje PDF, schematy podłączenia, konfiguracja Home Assistant (YAML) oraz gotowe pliki APK** dostępne są na stronie projektu: [driptronic.pages.dev](https://driptronic.pages.dev/#pliki).
 
 ## Wymagania
 
